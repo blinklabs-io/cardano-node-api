@@ -1,0 +1,105 @@
+basePath: /api
+definitions:
+  api.responseApiError:
+    properties:
+      msg:
+        example: error message
+        type: string
+    type: object
+  api.responseLocalTxMonitorHasTx:
+    properties:
+      has_tx:
+        type: boolean
+    type: object
+  api.responseLocalTxMonitorSizes:
+    properties:
+      capacity:
+        type: integer
+      size:
+        type: integer
+      tx_count:
+        type: integer
+    type: object
+  api.responseLocalTxMonitorTxs:
+    properties:
+      tx_bytes:
+        example: <base64 encoded transaction bytes>
+        format: base64
+        type: string
+      tx_hash:
+        example: 96649a8b827a5a4d508cd4e98cd88832482f7b884d507a49466d1fb8c4b14978
+        format: base16
+        type: string
+    type: object
+host: localhost
+info:
+  contact:
+    email: support@blinklabs.io
+    name: Blink Labs
+    url: https://blinklabs.io
+  description: Cardano Node API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: cardano-node-api
+  version: "1.0"
+paths:
+  /localtxmonitor/has_tx/{tx_hash}:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.responseLocalTxMonitorHasTx'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+      summary: Check if a particular TX exists in the mempool
+      tags:
+      - localtxmonitor
+  /localtxmonitor/sizes:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.responseLocalTxMonitorSizes'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+      summary: Get mempool capacity, size, and TX count
+      tags:
+      - localtxmonitor
+  /localtxmonitor/txs:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/api.responseLocalTxMonitorTxs'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+      summary: List all transactions in the mempool
+      tags:
+      - localtxmonitor
+schemes:
+- http
+swagger: "2.0"
