@@ -37,7 +37,7 @@ jobs:
         with:
           images: |
             ${{ env.IMAGE_NAME }}
-            ghcr.io/${{ env.IMAGE_NAME }}
+            ghcr.io/${{ github.repository }}
           tags: |
             # Only version, no revision
             type=match,pattern=v(.*)-(.*),group=1
