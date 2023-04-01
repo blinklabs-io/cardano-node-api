@@ -1,9 +1,8 @@
-FROM golang:1.18 AS build
-
-WORKDIR /code
+FROM cgr.dev/chainguard/go:1.19
+WORKDIR /app
 COPY . .
 RUN make build
 
-FROM ubuntu:focal AS final
-COPY --from=build /code/cardano-node-api /usr/local/bin/
-ENTRYPOINT ["/usr/local/bin/cardano-node-api"]
+FROM cgr.dev/chainguard/glibc-dynamic
+COPY --from=0 /app/cardano-node-api /bin/
+ENTRYPOINT ["cardano-node-api"]
