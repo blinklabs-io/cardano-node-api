@@ -4,15 +4,15 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/blinklabs-io/cardano-node-api/internal/config"
+	"github.com/blinklabs-io/gouroboros"
 
-	"github.com/cloudstruct/go-ouroboros-network"
+	"github.com/blinklabs-io/cardano-node-api/internal/config"
 )
 
-func GetConnection() (*ouroboros.Ouroboros, error) {
+func GetConnection() (*ouroboros.Connection, error) {
 	cfg := config.GetConfig()
 	// Connect to cardano-node
-	oConn, err := ouroboros.New(
+	oConn, err := ouroboros.NewConnection(
 		ouroboros.WithNetworkMagic(uint32(cfg.Node.NetworkMagic)),
 		ouroboros.WithNodeToNode(false),
 	)
