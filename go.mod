@@ -1,6 +1,6 @@
 module github.com/blinklabs-io/cardano-node-api
 
-go 1.18
+go 1.20
 
 require (
 	github.com/blinklabs-io/gouroboros v0.53.0

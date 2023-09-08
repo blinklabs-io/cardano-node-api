@@ -7,7 +7,6 @@ on:
     tags:
       - v*
     branches:
-      - master
       - main
   pull_request:
 permissions:
@@ -18,7 +17,7 @@ jobs:
     name: lint
     strategy:
       matrix:
-        go-version: [1.19.x, 1.20.x]
+        go-version: [1.20.x, 1.21.x]
         platform: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.platform }}
     steps:
