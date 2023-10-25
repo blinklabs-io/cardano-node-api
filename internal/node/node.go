@@ -23,7 +23,10 @@ func GetConnection() (*ouroboros.Connection, error) {
 	if cfg.Node.Address != "" && cfg.Node.Port > 0 {
 		// Connect to TCP port
 		if err := oConn.Dial("tcp", fmt.Sprintf("%s:%d", cfg.Node.Address, cfg.Node.Port)); err != nil {
-			return nil, fmt.Errorf("failure connecting to node via TCP: %s", err)
+			return nil, fmt.Errorf(
+				"failure connecting to node via TCP: %s",
+				err,
+			)
 		}
 	} else if cfg.Node.SocketPath != "" {
 		// Check that node socket path exists
