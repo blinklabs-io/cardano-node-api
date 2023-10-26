@@ -130,7 +130,7 @@ func handleLocalTxMonitorHasTx(c *gin.Context) {
 }
 
 type responseLocalTxMonitorTxs struct {
-	TxHash  string `json:"tx_hash" swaggertype:"string" format:"base16" example:"96649a8b827a5a4d508cd4e98cd88832482f7b884d507a49466d1fb8c4b14978"`
+	TxHash  string `json:"tx_hash"  swaggertype:"string" format:"base16" example:"96649a8b827a5a4d508cd4e98cd88832482f7b884d507a49466d1fb8c4b14978"`
 	TxBytes []byte `json:"tx_bytes" swaggertype:"string" format:"base64" example:"<base64 encoded transaction bytes>"`
 }
 

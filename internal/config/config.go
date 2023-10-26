@@ -19,30 +19,30 @@ type Config struct {
 
 type LoggingConfig struct {
 	Healthchecks bool   `yaml:"healthchecks" envconfig:"LOGGING_HEALTHCHECKS"`
-	Level        string `yaml:"level" envconfig:"LOGGING_LEVEL"`
+	Level        string `yaml:"level"        envconfig:"LOGGING_LEVEL"`
 }
 
 type ApiConfig struct {
 	ListenAddress string `yaml:"address" envconfig:"API_LISTEN_ADDRESS"`
-	ListenPort    uint   `yaml:"port" envconfig:"API_LISTEN_PORT"`
+	ListenPort    uint   `yaml:"port"    envconfig:"API_LISTEN_PORT"`
 }
 
 type DebugConfig struct {
 	ListenAddress string `yaml:"address" envconfig:"DEBUG_ADDRESS"`
-	ListenPort    uint   `yaml:"port" envconfig:"DEBUG_PORT"`
+	ListenPort    uint   `yaml:"port"    envconfig:"DEBUG_PORT"`
 }
 
 type MetricsConfig struct {
 	ListenAddress string `yaml:"address" envconfig:"METRICS_LISTEN_ADDRESS"`
-	ListenPort    uint   `yaml:"port" envconfig:"METRICS_LISTEN_PORT"`
+	ListenPort    uint   `yaml:"port"    envconfig:"METRICS_LISTEN_PORT"`
 }
 
 type NodeConfig struct {
-	Network      string `yaml:"network" envconfig:"CARDANO_NETWORK"`
+	Network      string `yaml:"network"      envconfig:"CARDANO_NETWORK"`
 	NetworkMagic uint32 `yaml:"networkMagic" envconfig:"CARDANO_NODE_NETWORK_MAGIC"`
-	Address      string `yaml:"address" envconfig:"CARDANO_NODE_SOCKET_TCP_HOST"`
-	Port         uint   `yaml:"port" envconfig:"CARDANO_NODE_SOCKET_TCP_PORT"`
-	SocketPath   string `yaml:"socketPath" envconfig:"CARDANO_NODE_SOCKET_PATH"`
+	Address      string `yaml:"address"      envconfig:"CARDANO_NODE_SOCKET_TCP_HOST"`
+	Port         uint   `yaml:"port"         envconfig:"CARDANO_NODE_SOCKET_TCP_PORT"`
+	SocketPath   string `yaml:"socketPath"   envconfig:"CARDANO_NODE_SOCKET_PATH"`
 }
 
 // Singleton config instance with default values
@@ -92,7 +92,10 @@ func Load(configFile string) (*Config, error) {
 	if globalConfig.Node.Network != "" {
 		network := ouroboros.NetworkByName(globalConfig.Node.Network)
 		if network == ouroboros.NetworkInvalid {
-			return nil, fmt.Errorf("unknown network: %s", globalConfig.Node.Network)
+			return nil, fmt.Errorf(
+				"unknown network: %s",
+				globalConfig.Node.Network,
+			)
 		}
 		globalConfig.Node.NetworkMagic = network.NetworkMagic
 	}
