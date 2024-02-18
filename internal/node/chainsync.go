@@ -15,6 +15,7 @@
 package node
 
 import (
+	"encoding/hex"
 	"log"
 	"time"
 
@@ -50,6 +51,16 @@ func chainSyncRollForwardHandler(
 	switch v := blockData.(type) {
 	case ledger.Block:
 		block = v
+	case ledger.BlockHeader:
+		blockSlot := v.SlotNumber()
+		blockHash, _ := hex.DecodeString(v.Hash())
+		// Toss error since we're triggering from a good connection
+		oConn, _ := GetConnection(true)
+		var err error
+		block, err = oConn.BlockFetch().Client.GetBlock(common.NewPoint(blockSlot, blockHash))
+		if err != nil {
+			return err
+		}
 	}
 	// Display block info
 	switch blockType {

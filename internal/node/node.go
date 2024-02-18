@@ -23,7 +23,14 @@ import (
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
 )
 
-func GetConnection() (*ouroboros.Connection, error) {
+func GetConnection(ntn bool) (*ouroboros.Connection, error) {
+	if ntn {
+		return GetNodeToNodeConnection()
+	}
+	return GetNodeToClientConnection()
+}
+
+func GetNodeToClientConnection() (*ouroboros.Connection, error) {
 	cfg := config.GetConfig()
 	// Connect to cardano-node
 	oConn, err := ouroboros.NewConnection(
@@ -60,6 +67,32 @@ func GetConnection() (*ouroboros.Connection, error) {
 		}
 	} else {
 		return nil, fmt.Errorf("you must specify either the UNIX socket path or the address/port for your cardano-node")
+	}
+	return oConn, nil
+}
+
+func GetNodeToNodeConnection() (*ouroboros.Connection, error) {
+	cfg := config.GetConfig()
+	// Connect to cardano-node
+	oConn, err := ouroboros.NewConnection(
+		ouroboros.WithNetworkMagic(uint32(cfg.Node.NetworkMagic)),
+		ouroboros.WithNodeToNode(true),
+		ouroboros.WithKeepAlive(true),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("failure creating Ouroboros connection: %s", err)
+	}
+
+	if cfg.Node.Address != "" && cfg.Node.Port > 0 {
+		// Connect to TCP port
+		if err := oConn.Dial("tcp", fmt.Sprintf("%s:%d", cfg.Node.Address, cfg.Node.Port)); err != nil {
+			return nil, fmt.Errorf(
+				"failure connecting to node via TCP: %s",
+				err,
+			)
+		}
+	} else {
+		return nil, fmt.Errorf("you must specify the address/port for your cardano-node")
 	}
 	return oConn, nil
 }

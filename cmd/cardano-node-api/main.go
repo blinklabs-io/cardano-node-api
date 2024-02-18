@@ -21,10 +21,11 @@ import (
 	_ "net/http/pprof"
 	"os"
 
-	"github.com/blinklabs-io/cardano-node-api/internal/api"
+	// "github.com/blinklabs-io/cardano-node-api/internal/api"
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
 	"github.com/blinklabs-io/cardano-node-api/internal/logging"
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
+	"github.com/blinklabs-io/cardano-node-api/internal/utxorpc"
 	"github.com/blinklabs-io/cardano-node-api/internal/version"
 )
 
@@ -61,7 +62,7 @@ func main() {
 	}()
 
 	// Test node connection
-	if oConn, err := node.GetConnection(); err != nil {
+	if oConn, err := node.GetConnection(true); err != nil {
 		logger.Fatalf("failed to connect to node: %s", err)
 	} else {
 		oConn.Close()
@@ -97,7 +98,8 @@ func main() {
 		cfg.Api.ListenAddress,
 		cfg.Api.ListenPort,
 	)
-	if err := api.Start(cfg); err != nil {
+	// if err := api.Start(cfg); err != nil {
+	if err := utxorpc.Start(cfg); err != nil {
 		logger.Fatalf("failed to start API: %s", err)
 	}
 
