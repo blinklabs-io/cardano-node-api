@@ -3,7 +3,7 @@ module github.com/blinklabs-io/cardano-node-api
 go 1.20
 
 require (
-	github.com/blinklabs-io/gouroboros v0.70.1
+	github.com/blinklabs-io/gouroboros v0.71.0
 	github.com/fxamacker/cbor/v2 v2.6.0
 	github.com/gin-contrib/zap v0.2.0
 	github.com/gin-gonic/gin v1.9.1
