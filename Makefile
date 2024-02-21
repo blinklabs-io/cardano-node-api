@@ -7,6 +7,12 @@ GO_FILES=$(shell find $(ROOT_DIR) -name '*.go')
 # Gather list of expected binaries
 BINARIES=$(shell cd $(ROOT_DIR)/cmd && ls -1 | grep -v ^common)
 
+# Extract Go module name from go.mod
+GOMODULE=$(shell grep ^module $(ROOT_DIR)/go.mod | awk '{ print $$2 }')
+
+# Set version strings based on git tag and current ref
+GO_LDFLAGS=-ldflags "-s -w -X '$(GOMODULE)/internal/version.Version=$(shell git describe --tags --exact-match 2>/dev/null)' -X '$(GOMODULE)/internal/version.CommitHash=$(shell git rev-parse --short HEAD)'"
+
 .PHONY: build mod-tidy clean test swag-update
 
 # Alias for building program binary
@@ -19,13 +25,20 @@ mod-tidy:
 clean:
 	rm -f $(BINARIES)
 
+format: mod-tidy
+	go fmt ./...
+
 test:
 	go test -v ./...
 
-swag-update:
-	swag init -g internal/api/api.go
+swagger:
+	swag f -g internal/api/api.go
+	swag i -g internal/api/api.go
 
 # Build our program binaries
 # Depends on GO_FILES to determine when rebuild is needed
 $(BINARIES): mod-tidy $(GO_FILES)
-	go build -o $(@) ./cmd/$(@)
+	CGO_ENABLED=0 go build \
+		$(GO_LDFLAGS) \
+		-o $(@) \
+		./cmd/$(@)
