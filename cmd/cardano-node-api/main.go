@@ -17,13 +17,15 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
+	_ "net/http/pprof"
+	"os"
+
 	"github.com/blinklabs-io/cardano-node-api/internal/api"
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
 	"github.com/blinklabs-io/cardano-node-api/internal/logging"
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
-	"net/http"
-	_ "net/http/pprof"
-	"os"
+	"github.com/blinklabs-io/cardano-node-api/internal/version"
 )
 
 var cmdlineFlags struct {
@@ -64,6 +66,8 @@ func main() {
 	} else {
 		oConn.Close()
 	}
+
+	logger.Infof("starting cardano-node-api version %s", version.GetVersionString())
 
 	// Start debug listener
 	if cfg.Debug.ListenPort > 0 {
