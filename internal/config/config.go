@@ -57,6 +57,7 @@ type NodeConfig struct {
 	Address      string `yaml:"address"      envconfig:"CARDANO_NODE_SOCKET_TCP_HOST"`
 	Port         uint   `yaml:"port"         envconfig:"CARDANO_NODE_SOCKET_TCP_PORT"`
 	SocketPath   string `yaml:"socketPath"   envconfig:"CARDANO_NODE_SOCKET_PATH"`
+	Timeout      uint   `yaml:"timeout"      envconfig:"CARDANO_NODE_SOCKET_TIMEOUT"`
 }
 
 // Singleton config instance with default values
@@ -80,6 +81,7 @@ var globalConfig = &Config{
 	Node: NodeConfig{
 		Network:    "mainnet",
 		SocketPath: "/node-ipc/node.socket",
+		Timeout:    30,
 	},
 }
 
