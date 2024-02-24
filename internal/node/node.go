@@ -29,6 +29,8 @@ func GetConnection() (*ouroboros.Connection, error) {
 	oConn, err := ouroboros.NewConnection(
 		ouroboros.WithNetworkMagic(uint32(cfg.Node.NetworkMagic)),
 		ouroboros.WithNodeToNode(false),
+		ouroboros.WithKeepAlive(true),
+		ouroboros.WithLocalTxSubmissionConfig(buildLocalTxSubmissionConfig()),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("failure creating Ouroboros connection: %s", err)
