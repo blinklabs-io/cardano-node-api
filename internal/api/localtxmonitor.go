@@ -18,11 +18,11 @@ import (
 	"encoding/hex"
 	"net/http"
 
-	"github.com/blinklabs-io/cardano-node-api/internal/node"
-
 	"github.com/fxamacker/cbor/v2"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/blake2b"
+
+	"github.com/blinklabs-io/cardano-node-api/internal/node"
 )
 
 func configureLocalTxMonitorRoutes(apiGroup *gin.RouterGroup) {
@@ -39,13 +39,13 @@ type responseLocalTxMonitorSizes struct {
 }
 
 // handleLocalTxMonitorSizes godoc
-// @Summary      Get mempool capacity, size, and TX count
-// @Tags         localtxmonitor
-// @Accept       json
-// @Produce      json
-// @Success      200  {object}  responseLocalTxMonitorSizes
-// @Failure      500  {object}  responseApiError
-// @Router       /localtxmonitor/sizes [get]
+//	@Summary	Get mempool capacity, size, and TX count
+//	@Tags		localtxmonitor
+//	@Accept		json
+//	@Produce	json
+//	@Success	200	{object}	responseLocalTxMonitorSizes
+//	@Failure	500	{object}	responseApiError
+//	@Router		/localtxmonitor/sizes [get]
 func handleLocalTxMonitorSizes(c *gin.Context) {
 	// Connect to node
 	oConn, err := node.GetConnection()
@@ -91,13 +91,13 @@ type responseLocalTxMonitorHasTx struct {
 }
 
 // handleLocalTxMonitorHasTx godoc
-// @Summary      Check if a particular TX exists in the mempool
-// @Tags         localtxmonitor
-// @Accept       json
-// @Produce      json
-// @Success      200  {object}  responseLocalTxMonitorHasTx
-// @Failure      500  {object}  responseApiError
-// @Router       /localtxmonitor/has_tx/{tx_hash} [get]
+//	@Summary	Check if a particular TX exists in the mempool
+//	@Tags		localtxmonitor
+//	@Accept		json
+//	@Produce	json
+//	@Success	200	{object}	responseLocalTxMonitorHasTx
+//	@Failure	500	{object}	responseApiError
+//	@Router		/localtxmonitor/has_tx/{tx_hash} [get]
 func handleLocalTxMonitorHasTx(c *gin.Context) {
 	// Get parameters
 	var req requestLocalTxMonitorHasTx
@@ -149,13 +149,13 @@ type responseLocalTxMonitorTxs struct {
 }
 
 // handleLocalTxMonitorTxs godoc
-// @Summary      List all transactions in the mempool
-// @Tags         localtxmonitor
-// @Accept       json
-// @Produce      json
-// @Success      200  {object}  []responseLocalTxMonitorTxs
-// @Failure      500  {object}  responseApiError
-// @Router       /localtxmonitor/txs [get]
+//	@Summary	List all transactions in the mempool
+//	@Tags		localtxmonitor
+//	@Accept		json
+//	@Produce	json
+//	@Success	200	{object}	[]responseLocalTxMonitorTxs
+//	@Failure	500	{object}	responseApiError
+//	@Router		/localtxmonitor/txs [get]
 func handleLocalTxMonitorTxs(c *gin.Context) {
 	// Connect to node
 	oConn, err := node.GetConnection()
