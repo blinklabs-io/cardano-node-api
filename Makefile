@@ -13,7 +13,7 @@ GOMODULE=$(shell grep ^module $(ROOT_DIR)/go.mod | awk '{ print $$2 }')
 # Set version strings based on git tag and current ref
 GO_LDFLAGS=-ldflags "-s -w -X '$(GOMODULE)/internal/version.Version=$(shell git describe --tags --exact-match 2>/dev/null)' -X '$(GOMODULE)/internal/version.CommitHash=$(shell git rev-parse --short HEAD)'"
 
-.PHONY: build mod-tidy clean test swag-update
+.PHONY: build mod-tidy clean test swagger
 
 # Alias for building program binary
 build: $(BINARIES)
