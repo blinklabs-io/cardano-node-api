@@ -81,7 +81,7 @@ var globalConfig = &Config{
 	Node: NodeConfig{
 		Network:    "mainnet",
 		SocketPath: "/node-ipc/node.socket",
-		Timeout:    30,
+		Timeout:    180,
 	},
 }
 

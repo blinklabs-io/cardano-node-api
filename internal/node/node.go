@@ -30,6 +30,7 @@ func GetConnection() (*ouroboros.Connection, error) {
 		ouroboros.WithNetworkMagic(uint32(cfg.Node.NetworkMagic)),
 		ouroboros.WithNodeToNode(false),
 		ouroboros.WithKeepAlive(true),
+		ouroboros.WithChainSyncConfig(buildChainSyncConfig()),
 		ouroboros.WithLocalTxSubmissionConfig(buildLocalTxSubmissionConfig()),
 	)
 	if err != nil {
