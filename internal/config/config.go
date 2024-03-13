@@ -56,6 +56,7 @@ type NodeConfig struct {
 	NetworkMagic uint32 `yaml:"networkMagic" envconfig:"CARDANO_NODE_NETWORK_MAGIC"`
 	Address      string `yaml:"address"      envconfig:"CARDANO_NODE_SOCKET_TCP_HOST"`
 	Port         uint   `yaml:"port"         envconfig:"CARDANO_NODE_SOCKET_TCP_PORT"`
+	QueryTimeout uint   `yaml:"queryTimeout" envconfig:"CARDANO_NODE_SOCKET_QUERY_TIMEOUT"`
 	SocketPath   string `yaml:"socketPath"   envconfig:"CARDANO_NODE_SOCKET_PATH"`
 	Timeout      uint   `yaml:"timeout"      envconfig:"CARDANO_NODE_SOCKET_TIMEOUT"`
 }
@@ -79,9 +80,10 @@ var globalConfig = &Config{
 		ListenPort:    8081,
 	},
 	Node: NodeConfig{
-		Network:    "mainnet",
-		SocketPath: "/node-ipc/node.socket",
-		Timeout:    180,
+		Network:      "mainnet",
+		SocketPath:   "/node-ipc/node.socket",
+		QueryTimeout: 180,
+		Timeout:      5,
 	},
 }
 
