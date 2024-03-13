@@ -29,7 +29,7 @@ func buildLocalTxMonitorConfig() localtxmonitor.Config {
 			time.Duration(cfg.Node.Timeout) * time.Second,
 		),
 		localtxmonitor.WithQueryTimeout(
-			time.Duration(cfg.Node.Timeout) * time.Second,
+			time.Duration(cfg.Node.QueryTimeout) * time.Second,
 		),
 	)
 }

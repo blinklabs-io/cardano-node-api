@@ -26,7 +26,7 @@ func buildLocalTxSubmissionConfig() localtxsubmission.Config {
 	cfg := config.GetConfig()
 	return localtxsubmission.NewConfig(
 		localtxsubmission.WithTimeout(
-			time.Duration(cfg.Node.Timeout) * time.Second,
+			time.Duration(cfg.Node.QueryTimeout) * time.Second,
 		),
 	)
 }
