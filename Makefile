@@ -42,3 +42,7 @@ $(BINARIES): mod-tidy $(GO_FILES)
 		$(GO_LDFLAGS) \
 		-o $(@) \
 		./cmd/$(@)
+
+# Build docker image
+image: build
+	docker build -t $(BINARIES) .
