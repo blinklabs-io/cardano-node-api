@@ -15,6 +15,8 @@
 package node
 
 import (
+	"encoding/hex"
+	"fmt"
 	"log"
 	"time"
 
@@ -50,6 +52,19 @@ func chainSyncRollForwardHandler(
 	switch v := blockData.(type) {
 	case ledger.Block:
 		block = v
+	case ledger.BlockHeader:
+		blockSlot := v.SlotNumber()
+		blockHash, _ := hex.DecodeString(v.Hash())
+		oConn, err := GetConnection()
+		if err != nil {
+			return err
+		}
+		block, err = oConn.BlockFetch().Client.GetBlock(common.NewPoint(blockSlot, blockHash))
+		if err != nil {
+			return err
+		}
+	default:
+		return fmt.Errorf("unknown block data")
 	}
 	// Display block info
 	switch blockType {
