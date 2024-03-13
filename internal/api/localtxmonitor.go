@@ -18,9 +18,8 @@ import (
 	"encoding/hex"
 	"net/http"
 
-	"github.com/fxamacker/cbor/v2"
+	"github.com/blinklabs-io/gouroboros/ledger"
 	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/blake2b"
 
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
 )
@@ -180,32 +179,31 @@ func handleLocalTxMonitorTxs(c *gin.Context) {
 	// Collect TX hashes
 	resp := []responseLocalTxMonitorTxs{}
 	for {
-		tx, err := oConn.LocalTxMonitor().Client.NextTx()
+		txRawBytes, err := oConn.LocalTxMonitor().Client.NextTx()
 		if err != nil {
 			c.JSON(500, apiError(err.Error()))
 			return
 		}
-		if tx == nil {
+		if txRawBytes == nil {
 			break
 		}
-		// Unwrap raw transaction bytes into a CBOR array
-		var txUnwrap []cbor.RawMessage
-		if err := cbor.Unmarshal(tx, &txUnwrap); err != nil {
+		// Determine transaction type (era)
+		txType, err := ledger.DetermineTransactionType(txRawBytes)
+		if err != nil {
 			c.JSON(500, apiError(err.Error()))
 			return
 		}
-		// index 0 is the transaction body
-		txBody := txUnwrap[0]
-		// Hash the TX body with blake2b256 to get TX hash
-		txHash := blake2b.Sum256(txBody)
-		// Encode TX hash as hex
-		txHashHex := hex.EncodeToString(txHash[:])
+		tx, err := ledger.NewTransactionFromCbor(txType, txRawBytes)
+		if err != nil {
+			c.JSON(500, apiError(err.Error()))
+			return
+		}
 		// Add to response
 		resp = append(
 			resp,
 			responseLocalTxMonitorTxs{
-				TxHash:  txHashHex,
-				TxBytes: tx,
+				TxHash:  tx.Hash(),
+				TxBytes: txRawBytes,
 			},
 		)
 	}
