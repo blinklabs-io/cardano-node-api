@@ -76,6 +76,7 @@ func Start(cfg *config.Config) error {
 	// Configure API routes
 	apiGroup := router.Group("/api")
 	configureLocalTxMonitorRoutes(apiGroup)
+	configureLocalTxSubmissionRoutes(apiGroup)
 
 	// Metrics
 	metricsRouter := gin.New()
