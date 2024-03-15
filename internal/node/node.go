@@ -32,6 +32,7 @@ func GetConnection() (*ouroboros.Connection, error) {
 		ouroboros.WithKeepAlive(true),
 		ouroboros.WithChainSyncConfig(buildChainSyncConfig()),
 		ouroboros.WithLocalTxMonitorConfig(buildLocalTxMonitorConfig()),
+		ouroboros.WithLocalStateQueryConfig(buildLocalStateQueryConfig()),
 		ouroboros.WithLocalTxSubmissionConfig(buildLocalTxSubmissionConfig()),
 	)
 	if err != nil {
