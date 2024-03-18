@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/blinklabs-io/gouroboros v0.75.0
-	github.com/blinklabs-io/tx-submit-api v0.16.0
+	github.com/blinklabs-io/tx-submit-api v0.16.1
 	github.com/gin-contrib/zap v1.1.0
 	github.com/gin-gonic/gin v1.9.1
 	github.com/kelseyhightower/envconfig v1.4.0
