@@ -48,8 +48,8 @@ github.com/bits-and-blooms/bitset v1.2.0 h1:Kn4yilvwNtMACtf1eYDlG8H77R07mZSPbMjL
 github.com/bits-and-blooms/bitset v1.2.0/go.mod h1:gIdJ4wp64HaoK2YrL1Q5/N7Y16edYb8uY+O0FJTyyDA=
 github.com/blinklabs-io/gouroboros v0.75.0 h1:zM3Rmvuyzd40DFfckD26pmYNiZ9Vg6WaAVHA9habjLM=
 github.com/blinklabs-io/gouroboros v0.75.0/go.mod h1:d+OyO0y2OSUnj3y2CvG7YL9ACd8YVHsY0ndna/1RrIw=
-github.com/blinklabs-io/tx-submit-api v0.16.0 h1:dH1rBxJiaFc5cUspbDuXmwqB292pZCN7lJKIZea8Liw=
-github.com/blinklabs-io/tx-submit-api v0.16.0/go.mod h1:PS625MZbaZvgbKPf/rnBeFFK/OFxHblc643nzz1wm9g=
+github.com/blinklabs-io/tx-submit-api v0.16.1 h1:ZIsikeJw3+R5B0Bya/yI5PBezCCaIl3mngSPCDXtWWQ=
+github.com/blinklabs-io/tx-submit-api v0.16.1/go.mod h1:/LNMlTFyW6kYel0pJ9uaWHs0jEl482GfpDj4E+1RawM=
 github.com/bytedance/sonic v1.5.0/go.mod h1:ED5hyg4y6t3/9Ku1R6dU/4KyJ48DZ4jPhfY1O2AihPM=
 github.com/bytedance/sonic v1.10.0-rc/go.mod h1:ElCzW+ufi8qKqNW0FY314xriJhyJhuoJ3gFZdAHF7NM=
 github.com/bytedance/sonic v1.11.2 h1:ywfwo0a/3j9HR8wsYGWsIWl2mvRsI950HyoxiBERw5A=
