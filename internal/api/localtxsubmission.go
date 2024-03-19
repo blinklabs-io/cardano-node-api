@@ -64,8 +64,10 @@ func handleLocalSubmitTx(c *gin.Context) {
 		return
 	}
 	// Close request body after read
-	if err := c.Request.Body.Close(); err != nil {
-		logger.Errorf("failed to close request body: %s", err)
+	if c.Request.Body != nil {
+		if err = c.Request.Body.Close(); err != nil {
+			logger.Errorf("failed to close request body: %s", err)
+		}
 	}
 	// Send TX
 	errorChan := make(chan error)
