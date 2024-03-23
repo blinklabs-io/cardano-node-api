@@ -44,37 +44,6 @@ info:
   title: cardano-node-api
   version: "1.0"
 paths:
-  /api/localtxsubmission/tx:
-    post:
-      description: Submit an already serialized transaction to the network.
-      parameters:
-      - description: Content type
-        enum:
-        - application/cbor
-        in: header
-        name: Content-Type
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "202":
-          description: Ok
-          schema:
-            type: string
-        "400":
-          description: Bad Request
-          schema:
-            type: string
-        "415":
-          description: Unsupported Media Type
-          schema:
-            type: string
-        "500":
-          description: Server Error
-          schema:
-            type: string
-      summary: Submit Tx
   /localtxmonitor/has_tx/{tx_hash}:
     get:
       consumes:
@@ -131,6 +100,37 @@ paths:
       summary: List all transactions in the mempool
       tags:
       - localtxmonitor
+  /localtxsubmission/tx:
+    post:
+      description: Submit an already serialized transaction to the network.
+      parameters:
+      - description: Content type
+        enum:
+        - application/cbor
+        in: header
+        name: Content-Type
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Ok
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "415":
+          description: Unsupported Media Type
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Submit Tx
 schemes:
 - http
 swagger: "2.0"

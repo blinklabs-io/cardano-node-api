@@ -24,53 +24,6 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/localtxsubmission/tx": {
-            "post": {
-                "description": "Submit an already serialized transaction to the network.",
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "Submit Tx",
-                "parameters": [
-                    {
-                        "enum": [
-                            "application/cbor"
-                        ],
-                        "type": "string",
-                        "description": "Content type",
-                        "name": "Content-Type",
-                        "in": "header",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "202": {
-                        "description": "Ok",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "415": {
-                        "description": "Unsupported Media Type",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/localtxmonitor/has_tx/{tx_hash}": {
             "get": {
                 "consumes": [
@@ -153,6 +106,53 @@ const docTemplate = `{
                         "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/api.responseApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/localtxsubmission/tx": {
+            "post": {
+                "description": "Submit an already serialized transaction to the network.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Submit Tx",
+                "parameters": [
+                    {
+                        "enum": [
+                            "application/cbor"
+                        ],
+                        "type": "string",
+                        "description": "Content type",
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "415": {
+                        "description": "Unsupported Media Type",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }

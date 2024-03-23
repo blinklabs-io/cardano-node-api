@@ -38,6 +38,7 @@ type responseLocalTxMonitorSizes struct {
 }
 
 // handleLocalTxMonitorSizes godoc
+//
 //	@Summary	Get mempool capacity, size, and TX count
 //	@Tags		localtxmonitor
 //	@Accept		json
@@ -90,6 +91,7 @@ type responseLocalTxMonitorHasTx struct {
 }
 
 // handleLocalTxMonitorHasTx godoc
+//
 //	@Summary	Check if a particular TX exists in the mempool
 //	@Tags		localtxmonitor
 //	@Accept		json
@@ -148,6 +150,7 @@ type responseLocalTxMonitorTxs struct {
 }
 
 // handleLocalTxMonitorTxs godoc
+//
 //	@Summary	List all transactions in the mempool
 //	@Tags		localtxmonitor
 //	@Accept		json

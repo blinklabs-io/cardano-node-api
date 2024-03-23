@@ -1,4 +1,4 @@
-// Copyright 2023 Blink Labs Software
+// Copyright 2024 Blink Labs Software
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ func configureLocalTxSubmissionRoutes(apiGroup *gin.RouterGroup) {
 	group.POST("/tx", handleLocalSubmitTx)
 }
 
-// handleSubmitTx godoc
+// handleLocalSubmitTx godoc
 //
 //	@Summary		Submit Tx
 //	@Description	Submit an already serialized transaction to the network.
@@ -41,7 +41,7 @@ func configureLocalTxSubmissionRoutes(apiGroup *gin.RouterGroup) {
 //	@Failure		400				{object}	string	"Bad Request"
 //	@Failure		415				{object}	string	"Unsupported Media Type"
 //	@Failure		500				{object}	string	"Server Error"
-//	@Router			/api/localtxsubmission/tx [post]
+//	@Router			/localtxsubmission/tx [post]
 func handleLocalSubmitTx(c *gin.Context) {
 	// First, initialize our configuration and loggers
 	cfg := config.GetConfig()
