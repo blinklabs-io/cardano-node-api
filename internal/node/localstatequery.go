@@ -26,10 +26,10 @@ func buildLocalStateQueryConfig() localstatequery.Config {
 	cfg := config.GetConfig()
 	return localstatequery.NewConfig(
 		localstatequery.WithAcquireTimeout(
-			time.Duration(cfg.Node.Timeout) * time.Second,
+			time.Duration(cfg.Node.Timeout)*time.Second,
 		),
 		localstatequery.WithQueryTimeout(
-			time.Duration(cfg.Node.QueryTimeout) * time.Second,
+			time.Duration(cfg.Node.QueryTimeout)*time.Second,
 		),
 	)
 }

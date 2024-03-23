@@ -31,7 +31,7 @@ func buildChainSyncConfig() chainsync.Config {
 	cfg := config.GetConfig()
 	return chainsync.NewConfig(
 		chainsync.WithBlockTimeout(
-			time.Duration(cfg.Node.QueryTimeout) * time.Second,
+			time.Duration(cfg.Node.QueryTimeout)*time.Second,
 		),
 		chainsync.WithRollBackwardFunc(chainSyncRollBackwardHandler),
 		chainsync.WithRollForwardFunc(chainSyncRollForwardHandler),

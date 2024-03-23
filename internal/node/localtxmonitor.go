@@ -26,10 +26,10 @@ func buildLocalTxMonitorConfig() localtxmonitor.Config {
 	cfg := config.GetConfig()
 	return localtxmonitor.NewConfig(
 		localtxmonitor.WithAcquireTimeout(
-			time.Duration(cfg.Node.Timeout) * time.Second,
+			time.Duration(cfg.Node.Timeout)*time.Second,
 		),
 		localtxmonitor.WithQueryTimeout(
-			time.Duration(cfg.Node.QueryTimeout) * time.Second,
+			time.Duration(cfg.Node.QueryTimeout)*time.Second,
 		),
 	)
 }
