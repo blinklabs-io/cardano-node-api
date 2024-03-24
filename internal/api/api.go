@@ -36,11 +36,10 @@ import (
 //	@host			localhost
 //	@Schemes		http
 //	@BasePath		/api
-
 //	@contact.name	Blink Labs
 //	@contact.url	https://blinklabs.io
 //	@contact.email	support@blinklabs.io
-
+//
 //	@license.name	Apache 2.0
 //	@license.url	http://www.apache.org/licenses/LICENSE-2.0.html
 func Start(cfg *config.Config) error {
@@ -75,6 +74,7 @@ func Start(cfg *config.Config) error {
 
 	// Configure API routes
 	apiGroup := router.Group("/api")
+	configureLocalStateQueryRoutes(apiGroup)
 	configureLocalTxMonitorRoutes(apiGroup)
 	configureLocalTxSubmissionRoutes(apiGroup)
 

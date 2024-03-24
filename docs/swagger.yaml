@@ -6,6 +6,35 @@ definitions:
         example: error message
         type: string
     type: object
+  api.responseLocalStateQueryCurrentEra:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  api.responseLocalStateQuerySystemStart:
+    properties:
+      day:
+        type: integer
+      picoseconds:
+        type: integer
+      year:
+        type: integer
+    type: object
+  api.responseLocalStateQueryTip:
+    properties:
+      block_no:
+        type: integer
+      epoch_no:
+        type: integer
+      era:
+        type: string
+      hash:
+        type: string
+      slot_no:
+        type: integer
+    type: object
   api.responseLocalTxMonitorHasTx:
     properties:
       has_tx:
@@ -44,6 +73,54 @@ info:
   title: cardano-node-api
   version: "1.0"
 paths:
+  /localstatequery/current-era:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.responseLocalStateQueryCurrentEra'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+      summary: Query Current Era
+      tags:
+      - localstatequery
+  /localstatequery/system-start:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.responseLocalStateQuerySystemStart'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+      summary: Query System Start
+      tags:
+      - localstatequery
+  /localstatequery/tip:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.responseLocalStateQueryTip'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+      summary: Query Chain Tip
+      tags:
+      - localstatequery
   /localtxmonitor/has_tx/{tx_hash}:
     get:
       consumes:

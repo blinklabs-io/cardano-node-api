@@ -24,6 +24,81 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/localstatequery/current-era": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "localstatequery"
+                ],
+                "summary": "Query Current Era",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseLocalStateQueryCurrentEra"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/localstatequery/system-start": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "localstatequery"
+                ],
+                "summary": "Query System Start",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseLocalStateQuerySystemStart"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/localstatequery/tip": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "localstatequery"
+                ],
+                "summary": "Query Chain Tip",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseLocalStateQueryTip"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseApiError"
+                        }
+                    }
+                }
+            }
+        },
         "/localtxmonitor/has_tx/{tx_hash}": {
             "get": {
                 "consumes": [
@@ -166,6 +241,51 @@ const docTemplate = `{
                 "msg": {
                     "type": "string",
                     "example": "error message"
+                }
+            }
+        },
+        "api.responseLocalStateQueryCurrentEra": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.responseLocalStateQuerySystemStart": {
+            "type": "object",
+            "properties": {
+                "day": {
+                    "type": "integer"
+                },
+                "picoseconds": {
+                    "type": "integer"
+                },
+                "year": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.responseLocalStateQueryTip": {
+            "type": "object",
+            "properties": {
+                "block_no": {
+                    "type": "integer"
+                },
+                "epoch_no": {
+                    "type": "integer"
+                },
+                "era": {
+                    "type": "string"
+                },
+                "hash": {
+                    "type": "string"
+                },
+                "slot_no": {
+                    "type": "integer"
                 }
             }
         },
