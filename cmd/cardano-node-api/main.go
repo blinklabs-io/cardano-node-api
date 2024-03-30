@@ -25,6 +25,7 @@ import (
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
 	"github.com/blinklabs-io/cardano-node-api/internal/logging"
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
+	"github.com/blinklabs-io/cardano-node-api/internal/utxorpc"
 	"github.com/blinklabs-io/cardano-node-api/internal/version"
 )
 
@@ -99,6 +100,16 @@ func main() {
 	)
 	if err := api.Start(cfg); err != nil {
 		logger.Fatalf("failed to start API: %s", err)
+	}
+
+	// Start UTxO RPC gRPC listener
+	logger.Infof(
+		"starting gRPC listener on %s:%d",
+		cfg.Utxorpc.ListenAddress,
+		cfg.Utxorpc.ListenPort,
+	)
+	if err := utxorpc.Start(cfg); err != nil {
+		logger.Fatalf("failed to start gRPC: %s", err)
 	}
 
 	// Wait forever
