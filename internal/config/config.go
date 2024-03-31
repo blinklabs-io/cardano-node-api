@@ -29,6 +29,7 @@ type Config struct {
 	Metrics MetricsConfig `yaml:"metrics"`
 	Debug   DebugConfig   `yaml:"debug"`
 	Node    NodeConfig    `yaml:"node"`
+	Utxorpc UtxorpcConfig `yaml:"utxorpc"`
 }
 
 type LoggingConfig struct {
@@ -61,6 +62,11 @@ type NodeConfig struct {
 	Timeout      uint   `yaml:"timeout"      envconfig:"CARDANO_NODE_SOCKET_TIMEOUT"`
 }
 
+type UtxorpcConfig struct {
+	ListenAddress string `yaml:"address" envconfig:"GRPC_LISTEN_ADDRESS"`
+	ListenPort    uint   `yaml:"port"    envconfig:"GRPC_LISTEN_PORT"`
+}
+
 // Singleton config instance with default values
 var globalConfig = &Config{
 	Logging: LoggingConfig{
@@ -84,6 +90,10 @@ var globalConfig = &Config{
 		SocketPath:   "/node-ipc/node.socket",
 		QueryTimeout: 180,
 		Timeout:      5,
+	},
+	Utxorpc: UtxorpcConfig{
+		ListenAddress: "",
+		ListenPort:    9090,
 	},
 }
 
