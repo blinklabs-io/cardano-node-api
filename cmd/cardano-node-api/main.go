@@ -98,9 +98,11 @@ func main() {
 		cfg.Api.ListenAddress,
 		cfg.Api.ListenPort,
 	)
-	if err := api.Start(cfg); err != nil {
-		logger.Fatalf("failed to start API: %s", err)
-	}
+	go func() {
+		if err := api.Start(cfg); err != nil {
+			logger.Fatalf("failed to start API: %s", err)
+		}
+	}()
 
 	// Start UTxO RPC gRPC listener
 	logger.Infof(
