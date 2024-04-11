@@ -30,7 +30,7 @@ func Start(cfg *config.Config) error {
 	buildPath, buildHandler := buildconnect.NewLedgerStateServiceHandler(&ledgerStateServiceServer{})
 	mux.Handle(buildPath, buildHandler)
 	err := http.ListenAndServe(
-		fmt.Sprintf("%s:%d", cfg.Api.ListenAddress, cfg.Api.ListenPort),
+		fmt.Sprintf("%s:%d", cfg.Utxorpc.ListenAddress, cfg.Utxorpc.ListenPort),
 		// Use h2c so we can serve HTTP/2 without TLS
 		h2c.NewHandler(mux, &http2.Server{}),
 	)
