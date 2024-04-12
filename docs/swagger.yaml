@@ -13,6 +13,12 @@ definitions:
       name:
         type: string
     type: object
+  api.responseLocalStateQueryEraHistory:
+    type: object
+  api.responseLocalStateQueryGenesisConfig:
+    type: object
+  api.responseLocalStateQueryProtocolParams:
+    type: object
   api.responseLocalStateQuerySystemStart:
     properties:
       day:
@@ -87,6 +93,54 @@ paths:
           schema:
             $ref: '#/definitions/api.responseApiError'
       summary: Query Current Era
+      tags:
+      - localstatequery
+  /localstatequery/era-history:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.responseLocalStateQueryEraHistory'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+      summary: Query Era History
+      tags:
+      - localstatequery
+  /localstatequery/genesis-config:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.responseLocalStateQueryGenesisConfig'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+      summary: Query Genesis Config
+      tags:
+      - localstatequery
+  /localstatequery/protocol-params:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.responseLocalStateQueryProtocolParams'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+      summary: Query Current Protocol Parameters
       tags:
       - localstatequery
   /localstatequery/system-start:

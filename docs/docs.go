@@ -49,6 +49,81 @@ const docTemplate = `{
                 }
             }
         },
+        "/localstatequery/era-history": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "localstatequery"
+                ],
+                "summary": "Query Era History",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseLocalStateQueryEraHistory"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/localstatequery/genesis-config": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "localstatequery"
+                ],
+                "summary": "Query Genesis Config",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseLocalStateQueryGenesisConfig"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/localstatequery/protocol-params": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "localstatequery"
+                ],
+                "summary": "Query Current Protocol Parameters",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseLocalStateQueryProtocolParams"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseApiError"
+                        }
+                    }
+                }
+            }
+        },
         "/localstatequery/system-start": {
             "get": {
                 "produces": [
@@ -254,6 +329,15 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        },
+        "api.responseLocalStateQueryEraHistory": {
+            "type": "object"
+        },
+        "api.responseLocalStateQueryGenesisConfig": {
+            "type": "object"
+        },
+        "api.responseLocalStateQueryProtocolParams": {
+            "type": "object"
         },
         "api.responseLocalStateQuerySystemStart": {
             "type": "object",
