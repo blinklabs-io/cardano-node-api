@@ -28,6 +28,11 @@ func configureLocalStateQueryRoutes(apiGroup *gin.RouterGroup) {
 	group.GET("/current-era", handleLocalStateQueryCurrentEra)
 	group.GET("/system-start", handleLocalStateQuerySystemStart)
 	group.GET("/tip", handleLocalStateQueryTip)
+	group.GET("/era-history", handleLocalStateQueryEraHistory)
+	group.GET("/protocol-params", handleLocalStateQueryProtocolParams)
+	// TODO: uncomment after this is fixed:
+	// - https://github.com/blinklabs-io/gouroboros/issues/584
+	// group.GET("/genesis-config", handleLocalStateQueryGenesisConfig)
 }
 
 type responseLocalStateQueryCurrentEra struct {
@@ -209,4 +214,149 @@ func handleLocalStateQueryTip(c *gin.Context) {
 		Hash:    hex.EncodeToString(point.Hash),
 	}
 	c.JSON(200, resp)
+}
+
+//nolint:unused
+// TODO: fill this in
+type responseLocalStateQueryEraHistory struct {
+}
+
+// handleLocalStateQueryEraHistory godoc
+//
+//	@Summary	Query Era History
+//	@Tags		localstatequery
+//	@Produce	json
+//	@Success	200	{object}	responseLocalStateQueryEraHistory
+//	@Failure	500	{object}	responseApiError
+//	@Router		/localstatequery/era-history [get]
+func handleLocalStateQueryEraHistory(c *gin.Context) {
+	// Connect to node
+	oConn, err := node.GetConnection()
+	if err != nil {
+		c.JSON(500, apiError(err.Error()))
+		return
+	}
+	// Async error handler
+	go func() {
+		err, ok := <-oConn.ErrorChan()
+		if !ok {
+			return
+		}
+		c.JSON(500, apiError(err.Error()))
+	}()
+	defer func() {
+		// Close Ouroboros connection
+		oConn.Close()
+	}()
+	// Start client
+	oConn.LocalStateQuery().Client.Start()
+
+	// Get eraHistory
+	eraHistory, err := oConn.LocalStateQuery().Client.GetEraHistory()
+	if err != nil {
+		c.JSON(500, apiError(err.Error()))
+		return
+	}
+
+	// Create response
+	//resp := responseLocalStateQueryProtocolParams{
+	//}
+	c.JSON(200, eraHistory)
+}
+
+//nolint:unused
+// TODO: fill this in
+type responseLocalStateQueryProtocolParams struct {
+}
+
+// handleLocalStateQueryProtocolParams godoc
+//
+//	@Summary	Query Current Protocol Parameters
+//	@Tags		localstatequery
+//	@Produce	json
+//	@Success	200	{object}	responseLocalStateQueryProtocolParams
+//	@Failure	500	{object}	responseApiError
+//	@Router		/localstatequery/protocol-params [get]
+func handleLocalStateQueryProtocolParams(c *gin.Context) {
+	// Connect to node
+	oConn, err := node.GetConnection()
+	if err != nil {
+		c.JSON(500, apiError(err.Error()))
+		return
+	}
+	// Async error handler
+	go func() {
+		err, ok := <-oConn.ErrorChan()
+		if !ok {
+			return
+		}
+		c.JSON(500, apiError(err.Error()))
+	}()
+	defer func() {
+		// Close Ouroboros connection
+		oConn.Close()
+	}()
+	// Start client
+	oConn.LocalStateQuery().Client.Start()
+
+	// Get protoParams
+	protoParams, err := oConn.LocalStateQuery().Client.GetCurrentProtocolParams()
+	if err != nil {
+		c.JSON(500, apiError(err.Error()))
+		return
+	}
+
+	// Create response
+	//resp := responseLocalStateQueryProtocolParams{
+	//}
+	c.JSON(200, protoParams)
+}
+
+//nolint:unused
+// TODO: fill this in
+type responseLocalStateQueryGenesisConfig struct {
+}
+
+//nolint:unused
+// handleLocalStateQueryGenesisConfig godoc
+//
+//	@Summary	Query Genesis Config
+//	@Tags		localstatequery
+//	@Produce	json
+//	@Success	200	{object}	responseLocalStateQueryGenesisConfig
+//	@Failure	500	{object}	responseApiError
+//	@Router		/localstatequery/genesis-config [get]
+func handleLocalStateQueryGenesisConfig(c *gin.Context) {
+	// Connect to node
+	oConn, err := node.GetConnection()
+	if err != nil {
+		c.JSON(500, apiError(err.Error()))
+		return
+	}
+	// Async error handler
+	go func() {
+		err, ok := <-oConn.ErrorChan()
+		if !ok {
+			return
+		}
+		c.JSON(500, apiError(err.Error()))
+	}()
+	defer func() {
+		// Close Ouroboros connection
+		oConn.Close()
+	}()
+	// Start client
+	oConn.LocalStateQuery().Client.Start()
+
+	// Get genesisConfig
+	genesisConfig, err := oConn.LocalStateQuery().Client.GetGenesisConfig()
+	if err != nil {
+		c.JSON(500, apiError(err.Error()))
+		return
+	}
+
+	// Create response
+	//resp := responseLocalStateQueryGenesisConfig{
+	//}
+	c.JSON(200, genesisConfig)
 }
