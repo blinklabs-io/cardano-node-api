@@ -38,12 +38,17 @@ func buildChainSyncConfig() chainsync.Config {
 	)
 }
 
-func chainSyncRollBackwardHandler(point common.Point, tip chainsync.Tip) error {
+func chainSyncRollBackwardHandler(
+	ctx chainsync.CallbackContext,
+	point common.Point,
+	tip chainsync.Tip,
+) error {
 	log.Printf("roll backward: point = %#v, tip = %#v\n", point, tip)
 	return nil
 }
 
 func chainSyncRollForwardHandler(
+	ctx chainsync.CallbackContext,
 	blockType uint,
 	blockData interface{},
 	tip chainsync.Tip,

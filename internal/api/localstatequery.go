@@ -216,8 +216,9 @@ func handleLocalStateQueryTip(c *gin.Context) {
 	c.JSON(200, resp)
 }
 
-//nolint:unused
 // TODO: fill this in
+//
+//nolint:unused
 type responseLocalStateQueryEraHistory struct {
 }
 
@@ -264,8 +265,9 @@ func handleLocalStateQueryEraHistory(c *gin.Context) {
 	c.JSON(200, eraHistory)
 }
 
-//nolint:unused
 // TODO: fill this in
+//
+//nolint:unused
 type responseLocalStateQueryProtocolParams struct {
 }
 
@@ -312,12 +314,12 @@ func handleLocalStateQueryProtocolParams(c *gin.Context) {
 	c.JSON(200, protoParams)
 }
 
-//nolint:unused
 // TODO: fill this in
+//
+//nolint:unused
 type responseLocalStateQueryGenesisConfig struct {
 }
 
-//nolint:unused
 // handleLocalStateQueryGenesisConfig godoc
 //
 //	@Summary	Query Genesis Config
@@ -326,6 +328,8 @@ type responseLocalStateQueryGenesisConfig struct {
 //	@Success	200	{object}	responseLocalStateQueryGenesisConfig
 //	@Failure	500	{object}	responseApiError
 //	@Router		/localstatequery/genesis-config [get]
+//
+//nolint:unused
 func handleLocalStateQueryGenesisConfig(c *gin.Context) {
 	// Connect to node
 	oConn, err := node.GetConnection()
