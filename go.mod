@@ -7,7 +7,7 @@ toolchain go1.21.6
 require (
 	connectrpc.com/connect v1.16.0
 	github.com/blinklabs-io/gouroboros v0.78.0
-	github.com/blinklabs-io/tx-submit-api v0.16.1
+	github.com/blinklabs-io/tx-submit-api v0.16.2
 	github.com/gin-contrib/zap v1.1.1
 	github.com/gin-gonic/gin v1.9.1
 	github.com/kelseyhightower/envconfig v1.4.0
