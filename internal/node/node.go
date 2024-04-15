@@ -18,19 +18,28 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/blinklabs-io/gouroboros"
-
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
+
+	ouroboros "github.com/blinklabs-io/gouroboros"
+	"github.com/blinklabs-io/snek/event"
 )
 
-func GetConnection() (*ouroboros.Connection, error) {
+type ConnectionConfig struct {
+	ChainSyncEventChan chan event.Event
+}
+
+func GetConnection(connCfg *ConnectionConfig) (*ouroboros.Connection, error) {
+	// Make sure we always have a ConnectionConfig object
+	if connCfg == nil {
+		connCfg = &ConnectionConfig{}
+	}
 	cfg := config.GetConfig()
 	// Connect to cardano-node
 	oConn, err := ouroboros.NewConnection(
 		ouroboros.WithNetworkMagic(uint32(cfg.Node.NetworkMagic)),
 		ouroboros.WithNodeToNode(false),
 		ouroboros.WithKeepAlive(true),
-		ouroboros.WithChainSyncConfig(buildChainSyncConfig()),
+		ouroboros.WithChainSyncConfig(buildChainSyncConfig(*connCfg)),
 		ouroboros.WithLocalTxMonitorConfig(buildLocalTxMonitorConfig()),
 		ouroboros.WithLocalStateQueryConfig(buildLocalStateQueryConfig()),
 		ouroboros.WithLocalTxSubmissionConfig(buildLocalTxSubmissionConfig()),

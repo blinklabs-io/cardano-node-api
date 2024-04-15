@@ -38,7 +38,7 @@ func (s *ledgerStateServiceServer) GetChainTip(
 	log.Printf("Got a GetChainTip request")
 
 	// Connect to node
-	oConn, err := node.GetConnection()
+	oConn, err := node.GetConnection(nil)
 	if err != nil {
 		return nil, err
 	}

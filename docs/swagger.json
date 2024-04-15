@@ -20,6 +20,51 @@
     "host": "localhost",
     "basePath": "/api",
     "paths": {
+        "/chainsync/sync": {
+            "get": {
+                "tags": [
+                    "chainsync"
+                ],
+                "summary": "Start a chain-sync using a websocket for events",
+                "parameters": [
+                    {
+                        "type": "boolean",
+                        "description": "whether to start from the current tip",
+                        "name": "tip",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "slot to start sync at, should match hash",
+                        "name": "slot",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "block hash to start sync at, should match slot",
+                        "name": "hash",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "101": {
+                        "description": "Switching Protocols"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.responseApiError"
+                        }
+                    }
+                }
+            }
+        },
         "/localstatequery/current-era": {
             "get": {
                 "produces": [

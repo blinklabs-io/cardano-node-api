@@ -79,6 +79,35 @@ info:
   title: cardano-node-api
   version: "1.0"
 paths:
+  /chainsync/sync:
+    get:
+      parameters:
+      - description: whether to start from the current tip
+        in: query
+        name: tip
+        type: boolean
+      - description: slot to start sync at, should match hash
+        in: query
+        name: slot
+        type: integer
+      - description: block hash to start sync at, should match slot
+        in: query
+        name: hash
+        type: string
+      responses:
+        "101":
+          description: Switching Protocols
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+      summary: Start a chain-sync using a websocket for events
+      tags:
+      - chainsync
   /localstatequery/current-era:
     get:
       produces:
