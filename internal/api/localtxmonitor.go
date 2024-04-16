@@ -48,7 +48,7 @@ type responseLocalTxMonitorSizes struct {
 //	@Router		/localtxmonitor/sizes [get]
 func handleLocalTxMonitorSizes(c *gin.Context) {
 	// Connect to node
-	oConn, err := node.GetConnection()
+	oConn, err := node.GetConnection(nil)
 	if err != nil {
 		c.JSON(500, apiError(err.Error()))
 		return
@@ -107,7 +107,7 @@ func handleLocalTxMonitorHasTx(c *gin.Context) {
 		return
 	}
 	// Connect to node
-	oConn, err := node.GetConnection()
+	oConn, err := node.GetConnection(nil)
 	if err != nil {
 		c.JSON(500, apiError(err.Error()))
 		return
@@ -160,7 +160,7 @@ type responseLocalTxMonitorTxs struct {
 //	@Router		/localtxmonitor/txs [get]
 func handleLocalTxMonitorTxs(c *gin.Context) {
 	// Connect to node
-	oConn, err := node.GetConnection()
+	oConn, err := node.GetConnection(nil)
 	if err != nil {
 		c.JSON(500, apiError(err.Error()))
 		return

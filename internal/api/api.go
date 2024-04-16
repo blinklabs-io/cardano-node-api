@@ -30,18 +30,18 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"        // gin-swagger middleware
 )
 
-//	@title			cardano-node-api
-//	@version		1.0
-//	@description	Cardano Node API
-//	@host			localhost
-//	@Schemes		http
-//	@BasePath		/api
-//	@contact.name	Blink Labs
-//	@contact.url	https://blinklabs.io
-//	@contact.email	support@blinklabs.io
+// @title			cardano-node-api
+// @version		1.0
+// @description	Cardano Node API
+// @host			localhost
+// @Schemes		http
+// @BasePath		/api
+// @contact.name	Blink Labs
+// @contact.url	https://blinklabs.io
+// @contact.email	support@blinklabs.io
 //
-//	@license.name	Apache 2.0
-//	@license.url	http://www.apache.org/licenses/LICENSE-2.0.html
+// @license.name	Apache 2.0
+// @license.url	http://www.apache.org/licenses/LICENSE-2.0.html
 func Start(cfg *config.Config) error {
 	// Disable gin debug and color output
 	gin.SetMode(gin.ReleaseMode)
@@ -74,6 +74,7 @@ func Start(cfg *config.Config) error {
 
 	// Configure API routes
 	apiGroup := router.Group("/api")
+	configureChainSyncRoutes(apiGroup)
 	configureLocalStateQueryRoutes(apiGroup)
 	configureLocalTxMonitorRoutes(apiGroup)
 	configureLocalTxSubmissionRoutes(apiGroup)

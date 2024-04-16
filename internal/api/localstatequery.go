@@ -50,7 +50,7 @@ type responseLocalStateQueryCurrentEra struct {
 //	@Router		/localstatequery/current-era [get]
 func handleLocalStateQueryCurrentEra(c *gin.Context) {
 	// Connect to node
-	oConn, err := node.GetConnection()
+	oConn, err := node.GetConnection(nil)
 	if err != nil {
 		c.JSON(500, apiError(err.Error()))
 		return
@@ -102,7 +102,7 @@ type responseLocalStateQuerySystemStart struct {
 //	@Router		/localstatequery/system-start [get]
 func handleLocalStateQuerySystemStart(c *gin.Context) {
 	// Connect to node
-	oConn, err := node.GetConnection()
+	oConn, err := node.GetConnection(nil)
 	if err != nil {
 		c.JSON(500, apiError(err.Error()))
 		return
@@ -156,7 +156,7 @@ type responseLocalStateQueryTip struct {
 //	@Router		/localstatequery/tip [get]
 func handleLocalStateQueryTip(c *gin.Context) {
 	// Connect to node
-	oConn, err := node.GetConnection()
+	oConn, err := node.GetConnection(nil)
 	if err != nil {
 		c.JSON(500, apiError(err.Error()))
 		return
@@ -232,7 +232,7 @@ type responseLocalStateQueryEraHistory struct {
 //	@Router		/localstatequery/era-history [get]
 func handleLocalStateQueryEraHistory(c *gin.Context) {
 	// Connect to node
-	oConn, err := node.GetConnection()
+	oConn, err := node.GetConnection(nil)
 	if err != nil {
 		c.JSON(500, apiError(err.Error()))
 		return
@@ -281,7 +281,7 @@ type responseLocalStateQueryProtocolParams struct {
 //	@Router		/localstatequery/protocol-params [get]
 func handleLocalStateQueryProtocolParams(c *gin.Context) {
 	// Connect to node
-	oConn, err := node.GetConnection()
+	oConn, err := node.GetConnection(nil)
 	if err != nil {
 		c.JSON(500, apiError(err.Error()))
 		return
@@ -332,7 +332,7 @@ type responseLocalStateQueryGenesisConfig struct {
 //nolint:unused
 func handleLocalStateQueryGenesisConfig(c *gin.Context) {
 	// Connect to node
-	oConn, err := node.GetConnection()
+	oConn, err := node.GetConnection(nil)
 	if err != nil {
 		c.JSON(500, apiError(err.Error()))
 		return

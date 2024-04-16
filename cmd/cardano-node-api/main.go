@@ -62,7 +62,7 @@ func main() {
 	}()
 
 	// Test node connection
-	if oConn, err := node.GetConnection(); err != nil {
+	if oConn, err := node.GetConnection(nil); err != nil {
 		logger.Fatalf("failed to connect to node: %s", err)
 	} else {
 		oConn.Close()
