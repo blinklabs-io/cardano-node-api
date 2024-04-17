@@ -14,7 +14,10 @@ container images, coupled with Blink Labs container images for the Cardano
 Node.
 
 ```
-docker run -p 8080:8080 ghcr.io/blinklabs-io/cardano-node-api
+docker run -d \
+  -p 8080:8080 \
+  -v <mount for cardano-node IPC> \
+  ghcr.io/blinklabs-io/cardano-node-api:main
 ```
 
 Binaries can be executed directly and are available from
@@ -39,9 +42,12 @@ second set controls the connection to the Cardano node instance.
 Application configuration:
 - `API_LISTEN_ADDRESS` - Address to bind for API calls, all addresses if empty
     (default: empty)
-- `API_LISTEN_PORT` - Port to bind for API calls (default: 8090)
+- `API_LISTEN_PORT` - Port to bind for API calls (default: 8080)
 - `DEBUG_ADDRESS` - Address to bind for pprof debugging (default: localhost)
 - `DEBUG_PORT` - Port to bind for pprof debugging, disabled if 0 (default: 0)
+- `GRPC_LISTEN_ADDRESS` - Address to bind for UTxO RPC gRPC, all addresses if empty
+    (default: empty)
+- `GRPC_LISTEN_PORT` - Port to bind for gRPC calls (default: 9090)
 - `LOGGING_HEALTHCHECKS` - Log requests to `/healthcheck` endpoint (default: false)
 - `LOGGING_LEVEL` - Logging level for log output (default: info)
 - `METRICS_LISTEN_ADDRESS` - Address to bind for Prometheus format metrics, all
