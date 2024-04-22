@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.21.6
 
 require (
-	connectrpc.com/connect v1.16.0
+	connectrpc.com/connect v1.16.1
 	github.com/blinklabs-io/gouroboros v0.79.0
 	github.com/blinklabs-io/snek v0.17.4
 	github.com/blinklabs-io/tx-submit-api v0.17.0
