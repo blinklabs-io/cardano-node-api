@@ -54,8 +54,8 @@ github.com/blinklabs-io/ouroboros-mock v0.3.0 h1:6VRWyhAv0k7nQEgzFpuqhS/n8OM+OAa
 github.com/blinklabs-io/ouroboros-mock v0.3.0/go.mod h1:0dzTNEk/Kvqa7qYHDy7/Nn3OTt+EOosMknB37FRzI1k=
 github.com/blinklabs-io/snek v0.17.4 h1:/BoWqfJTZXSQsRkVRS3tLFhlrvjme82Xu6jYkEBtMJ4=
 github.com/blinklabs-io/snek v0.17.4/go.mod h1:EeH+8u94Jekws0WnDAKY4SeHD0ftp/t1UixLcu9qSts=
-github.com/blinklabs-io/tx-submit-api v0.16.2 h1:DQpsJxa8+RkrEKlqcFqpRQ1JrQoHURuQbpLb2DiBhww=
-github.com/blinklabs-io/tx-submit-api v0.16.2/go.mod h1:qAETl1MuvaAexBhFul1ztSJIT0ObH2orGLv8+v/zR1Y=
+github.com/blinklabs-io/tx-submit-api v0.17.0 h1:/wuNI0bvRPYokVjzl92zR/5h37dLMoZj7+vRZUQ1toc=
+github.com/blinklabs-io/tx-submit-api v0.17.0/go.mod h1:xEL8i72xsD4T+4sLuE9/uTN6Y86pAmCmd5dsP37LZ+A=
 github.com/bytedance/sonic v1.5.0/go.mod h1:ED5hyg4y6t3/9Ku1R6dU/4KyJ48DZ4jPhfY1O2AihPM=
 github.com/bytedance/sonic v1.10.0-rc/go.mod h1:ElCzW+ufi8qKqNW0FY314xriJhyJhuoJ3gFZdAHF7NM=
 github.com/bytedance/sonic v1.11.3 h1:jRN+yEjakWh8aK5FzrciUHG8OFXK+4/KrAX/ysEtHAA=
