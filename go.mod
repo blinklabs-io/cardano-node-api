@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.21.6
 
 require (
-	connectrpc.com/connect v1.16.0
+	connectrpc.com/connect v1.16.1
 	github.com/blinklabs-io/gouroboros v0.79.0
 	github.com/blinklabs-io/snek v0.17.4
 	github.com/blinklabs-io/tx-submit-api v0.17.0
@@ -17,7 +17,6 @@ require (
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0
 	github.com/swaggo/swag v1.16.3
-	github.com/utxorpc/go-codegen v0.4.4
 	go.uber.org/automaxprocs v1.5.3
 	go.uber.org/zap v1.27.0
 	golang.org/x/net v0.24.0
@@ -62,6 +61,7 @@ require (
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
+	github.com/utxorpc/go-codegen v0.5.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.7.0 // indirect
