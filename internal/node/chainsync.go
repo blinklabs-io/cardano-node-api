@@ -80,6 +80,7 @@ func chainSyncRollForwardHandler(
 	blockData interface{},
 	tip chainsync.Tip,
 ) error {
+	cfg := config.GetConfig()
 	if connCfg.ChainSyncEventChan != nil {
 		var block ledger.Block
 		switch v := blockData.(type) {
@@ -104,8 +105,8 @@ func chainSyncRollForwardHandler(
 		evt := event.New(
 			"chainsync.block",
 			time.Now(),
-			nil,
-			input_chainsync.NewBlockEvent(block, false),
+			input_chainsync.NewBlockContext(block, cfg.Node.NetworkMagic),
+			input_chainsync.NewBlockEvent(block, true),
 		)
 		connCfg.ChainSyncEventChan <- evt
 	}
