@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/build/buildconnect"
+	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/submit/submitconnect"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
@@ -27,8 +27,8 @@ import (
 
 func Start(cfg *config.Config) error {
 	mux := http.NewServeMux()
-	buildPath, buildHandler := buildconnect.NewLedgerStateServiceHandler(&ledgerStateServiceServer{})
-	mux.Handle(buildPath, buildHandler)
+	submitPath, submitHandler := submitconnect.NewSubmitServiceHandler(&submitServiceServer{})
+	mux.Handle(submitPath, submitHandler)
 	err := http.ListenAndServe(
 		fmt.Sprintf("%s:%d", cfg.Utxorpc.ListenAddress, cfg.Utxorpc.ListenPort),
 		// Use h2c so we can serve HTTP/2 without TLS
