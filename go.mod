@@ -6,7 +6,7 @@ toolchain go1.21.6
 
 require (
 	connectrpc.com/connect v1.16.1
-	github.com/blinklabs-io/gouroboros v0.79.0
+	github.com/blinklabs-io/gouroboros v0.81.0
 	github.com/blinklabs-io/snek v0.17.4
 	github.com/blinklabs-io/tx-submit-api v0.17.0
 	github.com/gin-contrib/zap v1.1.1
@@ -17,7 +17,7 @@ require (
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0
 	github.com/swaggo/swag v1.16.3
-	github.com/utxorpc/go-codegen v0.4.4
+	github.com/utxorpc/go-codegen v0.5.1
 	go.uber.org/automaxprocs v1.5.3
 	go.uber.org/zap v1.27.0
 	golang.org/x/net v0.24.0
