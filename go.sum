@@ -52,8 +52,8 @@ github.com/blinklabs-io/gouroboros v0.81.0 h1:9iuXxM+Dr6+V/FtZyleUgIWs15A36mheJW
 github.com/blinklabs-io/gouroboros v0.81.0/go.mod h1:uBExUfgZvhPqiur3N9ReoXv4LpqGmR9jSZjolr1nZ2w=
 github.com/blinklabs-io/ouroboros-mock v0.3.0 h1:6VRWyhAv0k7nQEgzFpuqhS/n8OM+OAaLN/sCT5K2Hbc=
 github.com/blinklabs-io/ouroboros-mock v0.3.0/go.mod h1:0dzTNEk/Kvqa7qYHDy7/Nn3OTt+EOosMknB37FRzI1k=
-github.com/blinklabs-io/snek v0.17.4 h1:/BoWqfJTZXSQsRkVRS3tLFhlrvjme82Xu6jYkEBtMJ4=
-github.com/blinklabs-io/snek v0.17.4/go.mod h1:EeH+8u94Jekws0WnDAKY4SeHD0ftp/t1UixLcu9qSts=
+github.com/blinklabs-io/snek v0.18.0 h1:uiitNw03EWCBaGGknZ3EQ3RDEvHcwF67t+DgBWCmdJw=
+github.com/blinklabs-io/snek v0.18.0/go.mod h1:71WM+abhoErwwFsjdLUwQ9BfVva5u5RKzu3vJWhUA9w=
 github.com/blinklabs-io/tx-submit-api v0.17.0 h1:/wuNI0bvRPYokVjzl92zR/5h37dLMoZj7+vRZUQ1toc=
 github.com/blinklabs-io/tx-submit-api v0.17.0/go.mod h1:xEL8i72xsD4T+4sLuE9/uTN6Y86pAmCmd5dsP37LZ+A=
 github.com/bytedance/sonic v1.5.0/go.mod h1:ED5hyg4y6t3/9Ku1R6dU/4KyJ48DZ4jPhfY1O2AihPM=
