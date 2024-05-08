@@ -20,11 +20,11 @@ import (
 
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
 
+	"github.com/blinklabs-io/adder/event"
+	input_chainsync "github.com/blinklabs-io/adder/input/chainsync"
 	"github.com/blinklabs-io/gouroboros/ledger"
 	"github.com/blinklabs-io/gouroboros/protocol/chainsync"
 	"github.com/blinklabs-io/gouroboros/protocol/common"
-	"github.com/blinklabs-io/snek/event"
-	input_chainsync "github.com/blinklabs-io/snek/input/chainsync"
 )
 
 func buildChainSyncConfig(connCfg ConnectionConfig) chainsync.Config {

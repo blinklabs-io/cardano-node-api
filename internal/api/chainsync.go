@@ -20,8 +20,8 @@ import (
 
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
 
+	"github.com/blinklabs-io/adder/event"
 	ocommon "github.com/blinklabs-io/gouroboros/protocol/common"
-	"github.com/blinklabs-io/snek/event"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 )

@@ -20,8 +20,8 @@ import (
 
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
 
+	"github.com/blinklabs-io/adder/event"
 	ouroboros "github.com/blinklabs-io/gouroboros"
-	"github.com/blinklabs-io/snek/event"
 )
 
 type ConnectionConfig struct {
