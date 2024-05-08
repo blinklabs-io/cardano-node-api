@@ -6,8 +6,8 @@ toolchain go1.21.6
 
 require (
 	connectrpc.com/connect v1.16.1
+	github.com/blinklabs-io/adder v0.19.0
 	github.com/blinklabs-io/gouroboros v0.81.0
-	github.com/blinklabs-io/snek v0.18.0
 	github.com/blinklabs-io/tx-submit-api v0.17.0
 	github.com/gin-contrib/zap v1.1.3
 	github.com/gin-gonic/gin v1.9.1
