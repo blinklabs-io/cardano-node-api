@@ -50,8 +50,8 @@ github.com/bits-and-blooms/bitset v1.2.0 h1:Kn4yilvwNtMACtf1eYDlG8H77R07mZSPbMjL
 github.com/bits-and-blooms/bitset v1.2.0/go.mod h1:gIdJ4wp64HaoK2YrL1Q5/N7Y16edYb8uY+O0FJTyyDA=
 github.com/blinklabs-io/adder v0.19.0 h1:f1i5GNlBXCxC6QqyoNbIh5Zlxel43p62GaQ7vIXCN/E=
 github.com/blinklabs-io/adder v0.19.0/go.mod h1:3IscUaVqLUDhXtvmvEu3NgLKs0+VDcQ1Tn9xGkD8uvY=
-github.com/blinklabs-io/gouroboros v0.81.0 h1:9iuXxM+Dr6+V/FtZyleUgIWs15A36mheJWHXJbzYGnU=
-github.com/blinklabs-io/gouroboros v0.81.0/go.mod h1:uBExUfgZvhPqiur3N9ReoXv4LpqGmR9jSZjolr1nZ2w=
+github.com/blinklabs-io/gouroboros v0.82.0 h1:bakuadyu8b9Rr7MX9WgZy3wgiopdZhoA7x8s1Rqnua0=
+github.com/blinklabs-io/gouroboros v0.82.0/go.mod h1:uBExUfgZvhPqiur3N9ReoXv4LpqGmR9jSZjolr1nZ2w=
 github.com/blinklabs-io/ouroboros-mock v0.3.0 h1:6VRWyhAv0k7nQEgzFpuqhS/n8OM+OAaLN/sCT5K2Hbc=
 github.com/blinklabs-io/ouroboros-mock v0.3.0/go.mod h1:0dzTNEk/Kvqa7qYHDy7/Nn3OTt+EOosMknB37FRzI1k=
 github.com/blinklabs-io/tx-submit-api v0.17.0 h1:/wuNI0bvRPYokVjzl92zR/5h37dLMoZj7+vRZUQ1toc=
