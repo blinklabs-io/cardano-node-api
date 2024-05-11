@@ -19,6 +19,7 @@ import (
 	"net/http"
 
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/submit/submitconnect"
+	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/sync/syncconnect"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/watch/watchconnect"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
@@ -29,8 +30,10 @@ import (
 func Start(cfg *config.Config) error {
 	mux := http.NewServeMux()
 	submitPath, submitHandler := submitconnect.NewSubmitServiceHandler(&submitServiceServer{})
+	syncPath, syncHandler := syncconnect.NewChainSyncServiceHandler(&chainSyncServiceServer{})
 	watchPath, watchHandler := watchconnect.NewWatchServiceHandler(&watchServiceServer{})
 	mux.Handle(submitPath, submitHandler)
+	mux.Handle(syncPath, syncHandler)
 	mux.Handle(watchPath, watchHandler)
 	err := http.ListenAndServe(
 		fmt.Sprintf("%s:%d", cfg.Utxorpc.ListenAddress, cfg.Utxorpc.ListenPort),
