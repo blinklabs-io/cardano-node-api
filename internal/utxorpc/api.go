@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/query/queryconnect"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/submit/submitconnect"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/sync/syncconnect"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/watch/watchconnect"
@@ -29,9 +30,11 @@ import (
 
 func Start(cfg *config.Config) error {
 	mux := http.NewServeMux()
+	queryPath, queryHandler := queryconnect.NewQueryServiceHandler(&queryServiceServer{})
 	submitPath, submitHandler := submitconnect.NewSubmitServiceHandler(&submitServiceServer{})
 	syncPath, syncHandler := syncconnect.NewChainSyncServiceHandler(&chainSyncServiceServer{})
 	watchPath, watchHandler := watchconnect.NewWatchServiceHandler(&watchServiceServer{})
+	mux.Handle(queryPath, queryHandler)
 	mux.Handle(submitPath, submitHandler)
 	mux.Handle(syncPath, syncHandler)
 	mux.Handle(watchPath, watchHandler)
