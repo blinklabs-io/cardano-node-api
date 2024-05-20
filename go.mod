@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.21.6
 
 require (
-	connectrpc.com/connect v1.16.1
+	connectrpc.com/connect v1.16.2
 	github.com/blinklabs-io/adder v0.21.0
 	github.com/blinklabs-io/gouroboros v0.85.0
 	github.com/blinklabs-io/tx-submit-api v0.17.0
