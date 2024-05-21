@@ -111,7 +111,7 @@ func (s *queryServiceServer) ReadUtxos(
 	for _, txo := range keys {
 		// txo.Hash, txo.Index
 		tmpTxIn := ledger.ShelleyTransactionInput{
-			TxId: ledger.Blake2b256(txo.Hash),
+			TxId:        ledger.Blake2b256(txo.Hash),
 			OutputIndex: uint32(txo.Index),
 		}
 		tmpTxIns = append(tmpTxIns, tmpTxIn)
@@ -137,7 +137,8 @@ func (s *queryServiceServer) ReadUtxos(
 			var audc query.AnyUtxoData_Cardano
 			aud.TxoRef = txo
 			txHash := hex.EncodeToString(txo.Hash)
-			if utxoId.Hash.String() == txHash && uint32(utxoId.Idx) == txo.Index {
+			if utxoId.Hash.String() == txHash &&
+				uint32(utxoId.Idx) == txo.Index {
 				aud.NativeBytes = utxo.Cbor()
 				audc.Cardano = utxo.Utxorpc()
 				aud.ParsedState = &audc

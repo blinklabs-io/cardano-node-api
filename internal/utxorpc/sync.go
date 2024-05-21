@@ -42,7 +42,11 @@ func (s *chainSyncServiceServer) FetchBlock(
 ) (*connect.Response[sync.FetchBlockResponse], error) {
 	ref := req.Msg.GetRef() // BlockRef
 	fieldMask := req.Msg.GetFieldMask()
-	log.Printf("Got a FetchBlock request with ref %v and fieldMask %v", ref, fieldMask)
+	log.Printf(
+		"Got a FetchBlock request with ref %v and fieldMask %v",
+		ref,
+		fieldMask,
+	)
 
 	// Connect to node
 	oConn, err := node.GetConnection(nil)
@@ -103,7 +107,12 @@ func (s *chainSyncServiceServer) DumpHistory(
 	startToken := req.Msg.GetStartToken() // BlockRef
 	maxItems := req.Msg.GetMaxItems()
 	fieldMask := req.Msg.GetFieldMask()
-	log.Printf("Got a DumpHistory request with token %v and maxItems %d and fieldMask %v", startToken, maxItems, fieldMask)
+	log.Printf(
+		"Got a DumpHistory request with token %v and maxItems %d and fieldMask %v",
+		startToken,
+		maxItems,
+		fieldMask,
+	)
 
 	// Connect to node
 	oConn, err := node.GetConnection(nil)
@@ -135,7 +144,11 @@ func (s *chainSyncServiceServer) DumpHistory(
 		}
 		startPoint = tip.Point
 	}
-	log.Printf("startPoint slot %d, hash %x\n", startPoint.Slot, startPoint.Hash)
+	log.Printf(
+		"startPoint slot %d, hash %x\n",
+		startPoint.Slot,
+		startPoint.Hash,
+	)
 	// TODO: why is this giving us 0?
 	start, end, err := oConn.ChainSync().Client.GetAvailableBlockRange(
 		[]ocommon.Point{startPoint},

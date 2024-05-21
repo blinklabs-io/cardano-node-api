@@ -75,7 +75,10 @@ func (s *submitServiceServer) SubmitTx(
 			continue
 		}
 		// Submit the transaction
-		err = oConn.LocalTxSubmission().Client.SubmitTx(uint16(txType), txRawBytes)
+		err = oConn.LocalTxSubmission().Client.SubmitTx(
+			uint16(txType),
+			txRawBytes,
+		)
 		if err != nil {
 			resp.Ref = append(resp.Ref, placeholderRef)
 			errorList[i] = fmt.Errorf("%s", err.Error())
