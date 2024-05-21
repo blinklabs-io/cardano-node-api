@@ -42,7 +42,11 @@ func (s *watchServiceServer) WatchTx(
 ) error {
 	predicate := req.Msg.GetPredicate() // Predicate
 	fieldMask := req.Msg.GetFieldMask()
-	log.Printf("Got a WatchTx request with predicate %v and fieldMask %v", predicate, fieldMask)
+	log.Printf(
+		"Got a WatchTx request with predicate %v and fieldMask %v",
+		predicate,
+		fieldMask,
+	)
 
 	// Setup event channel
 	eventChan := make(chan event.Event, 10)

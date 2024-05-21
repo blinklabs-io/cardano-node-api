@@ -61,7 +61,12 @@ func handleChainSyncSync(c *gin.Context) {
 		return
 	}
 	if !req.Tip && (req.Slot == 0 || req.Hash == "") {
-		c.JSON(http.StatusBadRequest, apiError("you must provide the 'slot' and 'hash' parameters or set 'tip' to True"))
+		c.JSON(
+			http.StatusBadRequest,
+			apiError(
+				"you must provide the 'slot' and 'hash' parameters or set 'tip' to True",
+			),
+		)
 		return
 	}
 	// Setup event channel

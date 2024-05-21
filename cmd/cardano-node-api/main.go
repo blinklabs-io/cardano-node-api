@@ -70,7 +70,10 @@ func main() {
 		oConn.Close()
 	}
 
-	logger.Infof("starting cardano-node-api version %s", version.GetVersionString())
+	logger.Infof(
+		"starting cardano-node-api version %s",
+		version.GetVersionString(),
+	)
 
 	// Start debug listener
 	if cfg.Debug.ListenPort > 0 {

@@ -30,10 +30,18 @@ import (
 
 func Start(cfg *config.Config) error {
 	mux := http.NewServeMux()
-	queryPath, queryHandler := queryconnect.NewQueryServiceHandler(&queryServiceServer{})
-	submitPath, submitHandler := submitconnect.NewSubmitServiceHandler(&submitServiceServer{})
-	syncPath, syncHandler := syncconnect.NewChainSyncServiceHandler(&chainSyncServiceServer{})
-	watchPath, watchHandler := watchconnect.NewWatchServiceHandler(&watchServiceServer{})
+	queryPath, queryHandler := queryconnect.NewQueryServiceHandler(
+		&queryServiceServer{},
+	)
+	submitPath, submitHandler := submitconnect.NewSubmitServiceHandler(
+		&submitServiceServer{},
+	)
+	syncPath, syncHandler := syncconnect.NewChainSyncServiceHandler(
+		&chainSyncServiceServer{},
+	)
+	watchPath, watchHandler := watchconnect.NewWatchServiceHandler(
+		&watchServiceServer{},
+	)
 	mux.Handle(queryPath, queryHandler)
 	mux.Handle(submitPath, submitHandler)
 	mux.Handle(syncPath, syncHandler)
