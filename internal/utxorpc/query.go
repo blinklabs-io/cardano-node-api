@@ -17,7 +17,7 @@ package utxorpc
 import (
 	"context"
 	"encoding/hex"
-	// "fmt"
+	"fmt"
 	"log"
 
 	connect "connectrpc.com/connect"
@@ -158,7 +158,72 @@ func (s *queryServiceServer) SearchUtxos(
 	ctx context.Context,
 	req *connect.Request[query.SearchUtxosRequest],
 ) (*connect.Response[query.SearchUtxosResponse], error) {
-	return nil, nil
+
+	predicate := req.Msg.GetPredicate() // UtxoPredicate
+	log.Printf("Got a SearchUtxos request with predicate %v", predicate)
+	resp := &query.SearchUtxosResponse{}
+
+	if predicate == nil {
+		return nil, fmt.Errorf("ERROR: empty predicate: %v", predicate)
+	}
+	addresses := []ledger.Address{}
+	addressPattern := predicate.GetMatch().GetCardano().GetAddress()
+	if addressPattern != nil {
+		if addressPattern.GetExactAddress() != nil {
+			address, err := ledger.NewAddress(
+				hex.EncodeToString(addressPattern.GetExactAddress()),
+			)
+			if err != nil {
+				return nil, err
+			}
+			addresses = append(addresses, address)
+		}
+		// TODO: GetPaymentPart() GetDelegationPart()
+	}
+
+	// Connect to node
+	oConn, err := node.GetConnection(nil)
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		// Close Ouroboros connection
+		oConn.Close()
+	}()
+	// Start client
+	oConn.LocalStateQuery().Client.Start()
+
+	// Get UTxOs
+	utxos, err := oConn.LocalStateQuery().Client.GetUTxOByAddress(addresses)
+	if err != nil {
+		log.Printf("ERROR: %s", err)
+		return nil, err
+	}
+
+	// Get chain point (slot and hash)
+	point, err := oConn.LocalStateQuery().Client.GetChainPoint()
+	if err != nil {
+		log.Printf("ERROR: %s", err)
+		return nil, err
+	}
+
+	for utxoId, utxo := range utxos.Results {
+		var aud query.AnyUtxoData
+		var audc query.AnyUtxoData_Cardano
+		aud.TxoRef = &query.TxoRef{
+			Hash:  utxoId.Hash.Bytes(),
+			Index: uint32(utxoId.Idx),
+		}
+		aud.NativeBytes = utxo.Cbor()
+		audc.Cardano = utxo.Utxorpc()
+		aud.ParsedState = &audc
+		resp.Items = append(resp.Items, &aud)
+	}
+	resp.LedgerTip = &query.ChainPoint{
+		Slot: point.Slot,
+		Hash: point.Hash,
+	}
+	return connect.NewResponse(resp), nil
 }
 
 // StreamUtxos
