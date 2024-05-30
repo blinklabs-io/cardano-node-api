@@ -21,9 +21,13 @@ import (
 	"log"
 
 	connect "connectrpc.com/connect"
+	"github.com/blinklabs-io/adder/event"
+	input_chainsync "github.com/blinklabs-io/adder/input/chainsync"
 	"github.com/blinklabs-io/gouroboros/ledger"
+	ocommon "github.com/blinklabs-io/gouroboros/protocol/common"
 	submit "github.com/utxorpc/go-codegen/utxorpc/v1alpha/submit"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/submit/submitconnect"
+	"golang.org/x/crypto/blake2b"
 
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
 )
@@ -101,6 +105,86 @@ func (s *submitServiceServer) SubmitTx(
 }
 
 // WaitForTx
+func (s *submitServiceServer) WaitForTx(
+	ctx context.Context,
+	req *connect.Request[submit.WaitForTxRequest],
+	stream *connect.ServerStream[submit.WaitForTxResponse],
+) error {
+
+	ref := req.Msg.GetRef() // [][]byte
+	log.Printf("Got a WaitForTx request with %d transactions", len(ref))
+
+	// Setup event channel
+	eventChan := make(chan event.Event, 10)
+	connCfg := node.ConnectionConfig{
+		ChainSyncEventChan: eventChan,
+	}
+	// Connect to node
+	oConn, err := node.GetConnection(&connCfg)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		// Close Ouroboros connection
+		oConn.Close()
+	}()
+
+	// Get our starting point
+	var point ocommon.Point
+	tip, err := oConn.ChainSync().Client.GetCurrentTip()
+	if err != nil {
+		log.Printf("ERROR: %s", err)
+		return err
+	}
+	point = tip.Point
+
+	// Start the sync with the node
+	err = oConn.ChainSync().Client.Sync([]ocommon.Point{point})
+	if err != nil {
+		log.Printf("ERROR: %s", err)
+		return err
+	}
+
+	// Wait for events
+	for {
+		evt, ok := <-eventChan
+		if !ok {
+			log.Printf("ERROR: channel closed")
+			return fmt.Errorf("ERROR: channel closed")
+		}
+
+		switch v := evt.Payload.(type) {
+		case input_chainsync.TransactionEvent:
+			for _, r := range ref {
+				resp := &submit.WaitForTxResponse{}
+				resp.Ref = r
+				resp.Stage = submit.Stage_STAGE_UNSPECIFIED
+				tc := evt.Context.(input_chainsync.TransactionContext)
+				// taken from gOuroboros generateTransactionHash
+				tmpHash, err := blake2b.New256(nil)
+				if err != nil {
+					return err
+				}
+				tmpHash.Write(r)
+				txHash := hex.EncodeToString(tmpHash.Sum(nil))
+				// Compare against our event's hash
+				if txHash == v.Transaction.Hash() {
+					resp.Stage = submit.Stage_STAGE_CONFIRMED
+					// Send it!
+					err = stream.Send(resp)
+					if err != nil {
+						return err
+					}
+					log.Printf(
+						"transaction: id: %d, hash: %s",
+						tc.TransactionIdx,
+						tc.TransactionHash,
+					)
+				}
+			}
+		}
+	}
+}
 
 // ReadMempool
 func (s *submitServiceServer) ReadMempool(
