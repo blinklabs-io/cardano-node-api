@@ -5,7 +5,8 @@ Cardano Node API
 An HTTP API for interfacing with a local Cardano Node and providing the node
 internal data for HTTP clients. This service communicates with a Cardano
 full node using the Ouroboros network protocol via a UNIX socket and exposes
-the underlying Node-to-Client (NtC) Ouroboros mini-protocols to clients.
+the underlying Node-to-Client (NtC) Ouroboros mini-protocols to clients via
+a REST API or UTxO RPC gRPC API.
 
 ## Usage
 
@@ -16,6 +17,7 @@ Node.
 ```
 docker run -d \
   -p 8080:8080 \
+  -p 9090:9090 \
   -v <mount for cardano-node IPC> \
   ghcr.io/blinklabs-io/cardano-node-api:main
 ```
@@ -65,7 +67,7 @@ shortcuts for known network magic configurations. Supported named networks are:
 You can set the network to an empty value and provide your own network magic to
 connect to unlisted networks.
 
-TCP connection to a Cardano node without using an intermediary like SOCAT is
+TCP connection to a Cardano Node without using an intermediary like SOCAT is
 possible using the node address and port. It is up to you to expose the node's
 NtC communication socket over TCP. TCP connections are preferred over socket
 within the application.
@@ -87,16 +89,16 @@ Cardano node configuration:
 
 You can connect to either a cardano-node running locally on the host or a
 container running either `inputoutput/cardano-node` or
-`blinklabs-io/cardano-node` by mapping in the correct paths and setting the
-environment variables or configuration options to match.
+`ghcr.io/blinklabs-io/cardano-node` by mapping in the correct paths and setting
+the environment variables or configuration options to match.
 
-#### Together with blinklabs-io/cardano-node in Docker
+#### Together with ghcr.io/blinklabs-io/cardano-node in Docker
 
 Use Docker to run both cardano-node and cardano-node-api with Docker
 volumes for blockchain storage and node-ipc.
 
 ```
-# Start node
+# Start mainnet node
 docker run --detach \
   --name cardano-node \
   -v node-data:/opt/cardano/data \
@@ -109,7 +111,8 @@ docker run --detach \
   --name cardano-node-api \
   -v node-ipc:/node-ipc \
   -p 8080:8080 \
-  ghcr.io/blinklabs-io/cardano-node-api
+  -p 9090:9090 \
+  ghcr.io/blinklabs-io/cardano-node-api:main
 ```
 
 #### Using a local cardano-node
@@ -123,7 +126,8 @@ docker run --detach \
   --name cardano-node-api \
   -v /opt/cardano/ipc:/node-ipc \
   -p 8080:8080 \
-  ghcr.io/blinklabs-io/cardano-node-api
+  -p 9090:9090 \
+  ghcr.io/blinklabs-io/cardano-node-api:main
 ```
 
 ## Development
