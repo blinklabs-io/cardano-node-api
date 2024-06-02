@@ -22,13 +22,13 @@ docker run -d \
   ghcr.io/blinklabs-io/cardano-node-api:main
 ```
 
-Binaries can be executed directly and are available from
+<!-- Binaries can be executed directly and are available from
 [Releases](https://github.com/blinklabs-io/cardano-node-api/releases).
 
 ```
 ./cardano-node-api
 ```
-
+-->
 ### Configuration
 
 Configuration can be done using either a `config.yaml` file or setting
