@@ -51,8 +51,8 @@ github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6r
 github.com/bits-and-blooms/bitset v1.2.0/go.mod h1:gIdJ4wp64HaoK2YrL1Q5/N7Y16edYb8uY+O0FJTyyDA=
 github.com/bits-and-blooms/bitset v1.8.0 h1:FD+XqgOZDUxxZ8hzoBFuV9+cGWY9CslN6d5MS5JVb4c=
 github.com/bits-and-blooms/bitset v1.8.0/go.mod h1:7hO7Gc7Pp1vODcmWvKMRA9BNmbv6a/7QIWpPxHddWR8=
-github.com/blinklabs-io/adder v0.21.0 h1:tAQNgK2v0oJRJis+ZGdS8Z4ufLqK2A6IACQGuQ8gC8E=
-github.com/blinklabs-io/adder v0.21.0/go.mod h1:E3YCNpnoaG3wmVmAUoI4r19W/xnencOVWKgqrAI4RQo=
+github.com/blinklabs-io/adder v0.22.0 h1:wriPTMNrJxrH9B1P1y7WFeEZ6SeHqauz+40kuddBjG8=
+github.com/blinklabs-io/adder v0.22.0/go.mod h1:E3YCNpnoaG3wmVmAUoI4r19W/xnencOVWKgqrAI4RQo=
 github.com/blinklabs-io/gouroboros v0.86.0 h1:sFlNr5NwekP0qCULZ/XxJB0pWA7lGK1MiTREud3kHVg=
 github.com/blinklabs-io/gouroboros v0.86.0/go.mod h1:fFaFQpbgFiRVGXKxSjuaf2lYnILS9xZVbO1V+Nkr+6Y=
 github.com/blinklabs-io/ouroboros-mock v0.3.1 h1:oQiMgH0VgsJIGy4lJGaySegObq5FsVgFTYXUO2PS2T8=
