@@ -96,8 +96,9 @@ type responseLocalTxMonitorHasTx struct {
 //	@Tags		localtxmonitor
 //	@Accept		json
 //	@Produce	json
-//	@Success	200	{object}	responseLocalTxMonitorHasTx
-//	@Failure	500	{object}	responseApiError
+//	@Param		tx_hash	path		string	true	"Transaction hash (hex string)"
+//	@Success	200		{object}	responseLocalTxMonitorHasTx
+//	@Failure	500		{object}	responseApiError
 //	@Router		/localtxmonitor/has_tx/{tx_hash} [get]
 func handleLocalTxMonitorHasTx(c *gin.Context) {
 	// Get parameters

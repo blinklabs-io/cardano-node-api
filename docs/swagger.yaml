@@ -208,6 +208,12 @@ paths:
     get:
       consumes:
       - application/json
+      parameters:
+      - description: Transaction hash (hex string)
+        in: path
+        name: tx_hash
+        required: true
+        type: string
       produces:
       - application/json
       responses:

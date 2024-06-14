@@ -231,6 +231,15 @@ const docTemplate = `{
                     "localtxmonitor"
                 ],
                 "summary": "Check if a particular TX exists in the mempool",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Transaction hash (hex string)",
+                        "name": "tx_hash",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
