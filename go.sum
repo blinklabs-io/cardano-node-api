@@ -53,8 +53,8 @@ github.com/bits-and-blooms/bitset v1.8.0 h1:FD+XqgOZDUxxZ8hzoBFuV9+cGWY9CslN6d5M
 github.com/bits-and-blooms/bitset v1.8.0/go.mod h1:7hO7Gc7Pp1vODcmWvKMRA9BNmbv6a/7QIWpPxHddWR8=
 github.com/blinklabs-io/adder v0.22.1 h1:AgH73hk9t+7FOzCGcCdefxRCFwq+6NrEWcSwuytXGMA=
 github.com/blinklabs-io/adder v0.22.1/go.mod h1:UA4zIi69MNW+gCqNUqW+eobnVn0X2CK6YmTme1NCSCI=
-github.com/blinklabs-io/gouroboros v0.89.0 h1:EGetVz7u7yrVN6oRP/YmwEQFRVK2I7yvF1GxRv/vlio=
-github.com/blinklabs-io/gouroboros v0.89.0/go.mod h1:1lxsmbJQQMbzta5np5TG0qmb0aNYAeMDvQXcoCwE7XU=
+github.com/blinklabs-io/gouroboros v0.89.1 h1:pcD9hc2EkiPkq915aMDBAbgQZTX4I73gUzZf2UUcggs=
+github.com/blinklabs-io/gouroboros v0.89.1/go.mod h1:l6G9mwAa/p0CBGCZBjK1W67815gWrRlmcGl6fccbt4U=
 github.com/blinklabs-io/ouroboros-mock v0.3.1 h1:oQiMgH0VgsJIGy4lJGaySegObq5FsVgFTYXUO2PS2T8=
 github.com/blinklabs-io/ouroboros-mock v0.3.1/go.mod h1:6DosKZuBZ4mmvky3hXUzGZqqb/KhbwOiKOldwAtNoxc=
 github.com/blinklabs-io/tx-submit-api v0.17.1 h1:ac6NjGvb2rDMfOkos/2sTs9gpuLtqd+MWTIMRpyhY1w=
@@ -86,8 +86,8 @@ github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymF
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
-github.com/fxamacker/cbor/v2 v2.6.0 h1:sU6J2usfADwWlYDAFhZBQ6TnLFBHxgesMrQfQgk1tWA=
-github.com/fxamacker/cbor/v2 v2.6.0/go.mod h1:pxXPTn3joSm21Gbwsv0w9OSA2y1HFR9qXEeXQVeNoDQ=
+github.com/fxamacker/cbor/v2 v2.7.0 h1:iM5WgngdRBanHcxugY4JySA0nk1wZorNOpTgCMedv5E=
+github.com/fxamacker/cbor/v2 v2.7.0/go.mod h1:pxXPTn3joSm21Gbwsv0w9OSA2y1HFR9qXEeXQVeNoDQ=
 github.com/gabriel-vasile/mimetype v1.4.3 h1:in2uUcidCuFcDKtdcBxlR0rJ1+fsokWf+uqxgUFjbI0=
 github.com/gabriel-vasile/mimetype v1.4.3/go.mod h1:d8uq/6HKRL6CGdk+aubisF/M5GcPfT7nKyLpA0lbSSk=
 github.com/gin-contrib/gzip v0.0.6 h1:NjcunTcGAj5CO1gn4N8jHOSIeRFHIbn51z6K+xaN4d4=
