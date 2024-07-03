@@ -7,7 +7,7 @@ toolchain go1.21.6
 require (
 	connectrpc.com/connect v1.16.2
 	github.com/blinklabs-io/adder v0.22.1
-	github.com/blinklabs-io/gouroboros v0.89.0
+	github.com/blinklabs-io/gouroboros v0.89.1
 	github.com/blinklabs-io/tx-submit-api v0.17.1
 	github.com/gin-contrib/zap v1.1.3
 	github.com/gin-gonic/gin v1.10.0
@@ -35,7 +35,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
 	github.com/cloudwego/iasm v0.2.0 // indirect
-	github.com/fxamacker/cbor/v2 v2.6.0 // indirect
+	github.com/fxamacker/cbor/v2 v2.7.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-openapi/jsonpointer v0.20.0 // indirect
