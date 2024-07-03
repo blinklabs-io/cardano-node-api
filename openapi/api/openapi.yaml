@@ -1,0 +1,354 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@blinklabs.io
+    name: Blink Labs
+    url: https://blinklabs.io
+  description: Cardano Node API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: cardano-node-api
+  version: "1.0"
+servers:
+- url: http://localhost/api
+paths:
+  /chainsync/sync:
+    get:
+      parameters:
+      - description: whether to start from the current tip
+        in: query
+        name: tip
+        schema:
+          type: boolean
+      - description: "slot to start sync at, should match hash"
+        in: query
+        name: slot
+        schema:
+          type: integer
+      - description: "block hash to start sync at, should match slot"
+        in: query
+        name: hash
+        schema:
+          type: string
+      responses:
+        "101":
+          content: {}
+          description: Switching Protocols
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/api.responseApiError'
+          description: Bad Request
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/api.responseApiError'
+          description: Internal Server Error
+      summary: Start a chain-sync using a websocket for events
+      tags:
+      - chainsync
+  /localstatequery/current-era:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseLocalStateQueryCurrentEra'
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseApiError'
+          description: Internal Server Error
+      summary: Query Current Era
+      tags:
+      - localstatequery
+  /localstatequery/era-history:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseLocalStateQueryEraHistory'
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseApiError'
+          description: Internal Server Error
+      summary: Query Era History
+      tags:
+      - localstatequery
+  /localstatequery/genesis-config:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseLocalStateQueryGenesisConfig'
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseApiError'
+          description: Internal Server Error
+      summary: Query Genesis Config
+      tags:
+      - localstatequery
+  /localstatequery/protocol-params:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseLocalStateQueryProtocolParams'
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseApiError'
+          description: Internal Server Error
+      summary: Query Current Protocol Parameters
+      tags:
+      - localstatequery
+  /localstatequery/system-start:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseLocalStateQuerySystemStart'
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseApiError'
+          description: Internal Server Error
+      summary: Query System Start
+      tags:
+      - localstatequery
+  /localstatequery/tip:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseLocalStateQueryTip'
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseApiError'
+          description: Internal Server Error
+      summary: Query Chain Tip
+      tags:
+      - localstatequery
+  /localtxmonitor/has_tx/{tx_hash}:
+    get:
+      parameters:
+      - description: Transaction hash (hex string)
+        in: path
+        name: tx_hash
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseLocalTxMonitorHasTx'
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseApiError'
+          description: Internal Server Error
+      summary: Check if a particular TX exists in the mempool
+      tags:
+      - localtxmonitor
+  /localtxmonitor/sizes:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseLocalTxMonitorSizes'
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseApiError'
+          description: Internal Server Error
+      summary: "Get mempool capacity, size, and TX count"
+      tags:
+      - localtxmonitor
+  /localtxmonitor/txs:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/api.responseLocalTxMonitorTxs'
+                type: array
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.responseApiError'
+          description: Internal Server Error
+      summary: List all transactions in the mempool
+      tags:
+      - localtxmonitor
+  /localtxsubmission/tx:
+    post:
+      description: Submit an already serialized transaction to the network.
+      parameters:
+      - description: Content type
+        in: header
+        name: Content-Type
+        required: true
+        schema:
+          enum:
+          - application/cbor
+          type: string
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Ok
+        "400":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Bad Request
+        "415":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unsupported Media Type
+        "500":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Server Error
+      summary: Submit Tx
+components:
+  schemas:
+    api.responseApiError:
+      example:
+        msg: error message
+      properties:
+        msg:
+          example: error message
+          type: string
+      type: object
+    api.responseLocalStateQueryCurrentEra:
+      example:
+        name: name
+        id: 0
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      type: object
+    api.responseLocalStateQueryEraHistory:
+      type: object
+    api.responseLocalStateQueryGenesisConfig:
+      type: object
+    api.responseLocalStateQueryProtocolParams:
+      type: object
+    api.responseLocalStateQuerySystemStart:
+      example:
+        year: 1
+        day: 0
+        picoseconds: 6
+      properties:
+        day:
+          type: integer
+        picoseconds:
+          type: integer
+        year:
+          type: integer
+      type: object
+    api.responseLocalStateQueryTip:
+      example:
+        block_no: 0
+        era: era
+        slot_no: 1
+        epoch_no: 6
+        hash: hash
+      properties:
+        block_no:
+          type: integer
+        epoch_no:
+          type: integer
+        era:
+          type: string
+        hash:
+          type: string
+        slot_no:
+          type: integer
+      type: object
+    api.responseLocalTxMonitorHasTx:
+      example:
+        has_tx: true
+      properties:
+        has_tx:
+          type: boolean
+      type: object
+    api.responseLocalTxMonitorSizes:
+      example:
+        tx_count: 1
+        size: 6
+        capacity: 0
+      properties:
+        capacity:
+          type: integer
+        size:
+          type: integer
+        tx_count:
+          type: integer
+      type: object
+    api.responseLocalTxMonitorTxs:
+      example:
+        tx_hash: 96649a8b827a5a4d508cd4e98cd88832482f7b884d507a49466d1fb8c4b14978
+        tx_bytes: <base64 encoded transaction bytes>
+      properties:
+        tx_bytes:
+          example: <base64 encoded transaction bytes>
+          format: base64
+          type: string
+        tx_hash:
+          example: 96649a8b827a5a4d508cd4e98cd88832482f7b884d507a49466d1fb8c4b14978
+          format: base16
+          type: string
+      type: object
+x-original-swagger-version: "2.0"
