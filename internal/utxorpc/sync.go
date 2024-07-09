@@ -32,7 +32,7 @@ import (
 
 // chainSyncServiceServer implements the ChainSyncService API
 type chainSyncServiceServer struct {
-	syncconnect.UnimplementedChainSyncServiceHandler
+	syncconnect.UnimplementedSyncServiceHandler
 }
 
 // FetchBlock
