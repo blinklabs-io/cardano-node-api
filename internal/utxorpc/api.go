@@ -36,7 +36,7 @@ func Start(cfg *config.Config) error {
 	submitPath, submitHandler := submitconnect.NewSubmitServiceHandler(
 		&submitServiceServer{},
 	)
-	syncPath, syncHandler := syncconnect.NewChainSyncServiceHandler(
+	syncPath, syncHandler := syncconnect.NewSyncServiceHandler(
 		&chainSyncServiceServer{},
 	)
 	watchPath, watchHandler := watchconnect.NewWatchServiceHandler(

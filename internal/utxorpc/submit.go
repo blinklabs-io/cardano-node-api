@@ -192,8 +192,7 @@ func (s *submitServiceServer) ReadMempool(
 	req *connect.Request[submit.ReadMempoolRequest],
 ) (*connect.Response[submit.ReadMempoolResponse], error) {
 
-	// This is GetTxs until https://github.com/utxorpc/spec/pull/95
-	txim := req.Msg.GetTxs() // []*TxInMempool
+	txim := req.Msg.GetTx() // []*TxInMempool
 	log.Printf("Got a ReadMempool request with %d transactions", len(txim))
 	resp := &submit.ReadMempoolResponse{}
 
