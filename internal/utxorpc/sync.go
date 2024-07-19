@@ -202,11 +202,24 @@ func (s *chainSyncServiceServer) FollowTip(
 		point = tip.Point
 	}
 
-	// Start the sync with the node
+	// Start the sync with the node with the provided point
 	err = oConn.ChainSync().Client.Sync([]ocommon.Point{point})
 	if err != nil {
-		log.Printf("ERROR: %s", err)
-		return err
+		log.Printf("ERROR syncing with provided point: %s", err)
+		// Get the current tip
+		tip, err := oConn.ChainSync().Client.GetCurrentTip()
+		if err != nil {
+			log.Printf("ERROR: getting current tip: %s", err)
+			return err
+		}
+		point = tip.Point
+
+		// Attempt to sync with the current tip
+		err = oConn.ChainSync().Client.Sync([]ocommon.Point{point})
+		if err != nil {
+			log.Printf("ERROR: syncing with current tip: %s", err)
+			return err
+		}
 	}
 
 	// Wait for events
