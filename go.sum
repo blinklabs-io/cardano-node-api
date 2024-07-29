@@ -57,8 +57,8 @@ github.com/blinklabs-io/gouroboros v0.90.0 h1:PReNJ9JY+6nU6w/gHxRhSg52O6VcEpoDai
 github.com/blinklabs-io/gouroboros v0.90.0/go.mod h1:tIRw2LWdjjf4UUkKk4EiC7xlZ48r4c+AV8lLf4DMZ2Y=
 github.com/blinklabs-io/ouroboros-mock v0.3.1 h1:oQiMgH0VgsJIGy4lJGaySegObq5FsVgFTYXUO2PS2T8=
 github.com/blinklabs-io/ouroboros-mock v0.3.1/go.mod h1:6DosKZuBZ4mmvky3hXUzGZqqb/KhbwOiKOldwAtNoxc=
-github.com/blinklabs-io/tx-submit-api v0.17.2 h1:LiFywyefilULh+UDYO8QfWfOET8fcsLLOhELtUdlDMA=
-github.com/blinklabs-io/tx-submit-api v0.17.2/go.mod h1:ujfJsQWOTxf4Xlw1D9iLA0czE9I+TdWMaA0R9pNzb1k=
+github.com/blinklabs-io/tx-submit-api v0.17.3 h1:hPfsGmg92klWoJ8ynPNHJK7n9z+K0FiDL85eCybA82I=
+github.com/blinklabs-io/tx-submit-api v0.17.3/go.mod h1:YumKFzu0ZxPq0GpamdZQ0NZ6Wff1TN5KgzWbIlmjzho=
 github.com/bytedance/sonic v1.11.6 h1:oUp34TzMlL+OY1OUWxHqsdkgC/Zfc85zGqw9siXjrc0=
 github.com/bytedance/sonic v1.11.6/go.mod h1:LysEHSvpvDySVdC2f87zGWf6CIKJcAvqab1ZaiQtds4=
 github.com/bytedance/sonic/loader v0.1.1 h1:c+e5Pt1k/cy5wMveRDyk2X4B9hF4g7an8N3zCYjJFNM=
