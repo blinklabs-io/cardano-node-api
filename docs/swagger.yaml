@@ -66,7 +66,6 @@ definitions:
         format: base16
         type: string
     type: object
-host: localhost
 info:
   contact:
     email: support@blinklabs.io
