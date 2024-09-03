@@ -46,10 +46,19 @@ func Start(cfg *config.Config) error {
 	mux.Handle(submitPath, submitHandler)
 	mux.Handle(syncPath, syncHandler)
 	mux.Handle(watchPath, watchHandler)
-	err := http.ListenAndServe(
-		fmt.Sprintf("%s:%d", cfg.Utxorpc.ListenAddress, cfg.Utxorpc.ListenPort),
-		// Use h2c so we can serve HTTP/2 without TLS
-		h2c.NewHandler(mux, &http2.Server{}),
-	)
-	return err
+	if cfg.Tls.CertFilePath != "" && cfg.Tls.KeyFilePath != "" {
+		err := http.ListenAndServeTLS(fmt.Sprintf("%s:%d", cfg.Utxorpc.ListenAddress, cfg.Utxorpc.ListenPort),
+			cfg.Tls.CertFilePath,
+			cfg.Tls.KeyFilePath,
+			nil,
+		)
+		return err
+	} else {
+		err := http.ListenAndServe(
+			fmt.Sprintf("%s:%d", cfg.Utxorpc.ListenAddress, cfg.Utxorpc.ListenPort),
+			// Use h2c so we can serve HTTP/2 without TLS
+			h2c.NewHandler(mux, &http2.Server{}),
+		)
+		return err
+	}
 }
