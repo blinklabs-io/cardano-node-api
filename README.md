@@ -55,6 +55,12 @@ Application configuration:
 - `METRICS_LISTEN_ADDRESS` - Address to bind for Prometheus format metrics, all
     addresses if empty (default: empty)
 - `METRICS_LISTEN_PORT` - Port to bind for metrics (default: 8081)
+- `TLS_CERT_FILE_PATH` - SSL certificate to use, requires `TLS_KEY_FILE_PATH`
+    (default: empty)
+- `TLS_KEY_FILE_PATH` - SSL certificate key to use (default: empty)
+
+Configuring the TLS certificate and key paths will enable TLS on both the REST
+API and the gRPC interface.
 
 Connection to the Cardano node can be performed using specific named network
 shortcuts for known network magic configurations. Supported named networks are:
