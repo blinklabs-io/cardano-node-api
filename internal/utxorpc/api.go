@@ -54,20 +54,85 @@ func Start(cfg *config.Config) error {
 	mux.Handle(submitPath, submitHandler)
 	mux.Handle(syncPath, syncHandler)
 	mux.Handle(watchPath, watchHandler)
-	mux.Handle(grpchealth.NewHandler(grpchealth.NewStaticChecker(queryconnect.QueryServiceName), compress1KB))
-	mux.Handle(grpchealth.NewHandler(grpchealth.NewStaticChecker(submitconnect.SubmitServiceName), compress1KB))
-	mux.Handle(grpchealth.NewHandler(grpchealth.NewStaticChecker(syncconnect.SyncServiceName), compress1KB))
-	mux.Handle(grpchealth.NewHandler(grpchealth.NewStaticChecker(watchconnect.WatchServiceName), compress1KB))
-	mux.Handle(grpcreflect.NewHandlerV1(grpcreflect.NewStaticReflector(queryconnect.QueryServiceName), compress1KB))
-	mux.Handle(grpcreflect.NewHandlerV1(grpcreflect.NewStaticReflector(submitconnect.SubmitServiceName), compress1KB))
-	mux.Handle(grpcreflect.NewHandlerV1(grpcreflect.NewStaticReflector(syncconnect.SyncServiceName), compress1KB))
-	mux.Handle(grpcreflect.NewHandlerV1(grpcreflect.NewStaticReflector(watchconnect.WatchServiceName), compress1KB))
-	mux.Handle(grpcreflect.NewHandlerV1Alpha(grpcreflect.NewStaticReflector(queryconnect.QueryServiceName), compress1KB))
-	mux.Handle(grpcreflect.NewHandlerV1Alpha(grpcreflect.NewStaticReflector(submitconnect.SubmitServiceName), compress1KB))
-	mux.Handle(grpcreflect.NewHandlerV1Alpha(grpcreflect.NewStaticReflector(syncconnect.SyncServiceName), compress1KB))
-	mux.Handle(grpcreflect.NewHandlerV1Alpha(grpcreflect.NewStaticReflector(watchconnect.WatchServiceName), compress1KB))
+	mux.Handle(
+		grpchealth.NewHandler(
+			grpchealth.NewStaticChecker(queryconnect.QueryServiceName),
+			compress1KB,
+		),
+	)
+	mux.Handle(
+		grpchealth.NewHandler(
+			grpchealth.NewStaticChecker(submitconnect.SubmitServiceName),
+			compress1KB,
+		),
+	)
+	mux.Handle(
+		grpchealth.NewHandler(
+			grpchealth.NewStaticChecker(syncconnect.SyncServiceName),
+			compress1KB,
+		),
+	)
+	mux.Handle(
+		grpchealth.NewHandler(
+			grpchealth.NewStaticChecker(watchconnect.WatchServiceName),
+			compress1KB,
+		),
+	)
+	mux.Handle(
+		grpcreflect.NewHandlerV1(
+			grpcreflect.NewStaticReflector(queryconnect.QueryServiceName),
+			compress1KB,
+		),
+	)
+	mux.Handle(
+		grpcreflect.NewHandlerV1(
+			grpcreflect.NewStaticReflector(submitconnect.SubmitServiceName),
+			compress1KB,
+		),
+	)
+	mux.Handle(
+		grpcreflect.NewHandlerV1(
+			grpcreflect.NewStaticReflector(syncconnect.SyncServiceName),
+			compress1KB,
+		),
+	)
+	mux.Handle(
+		grpcreflect.NewHandlerV1(
+			grpcreflect.NewStaticReflector(watchconnect.WatchServiceName),
+			compress1KB,
+		),
+	)
+	mux.Handle(
+		grpcreflect.NewHandlerV1Alpha(
+			grpcreflect.NewStaticReflector(queryconnect.QueryServiceName),
+			compress1KB,
+		),
+	)
+	mux.Handle(
+		grpcreflect.NewHandlerV1Alpha(
+			grpcreflect.NewStaticReflector(submitconnect.SubmitServiceName),
+			compress1KB,
+		),
+	)
+	mux.Handle(
+		grpcreflect.NewHandlerV1Alpha(
+			grpcreflect.NewStaticReflector(syncconnect.SyncServiceName),
+			compress1KB,
+		),
+	)
+	mux.Handle(
+		grpcreflect.NewHandlerV1Alpha(
+			grpcreflect.NewStaticReflector(watchconnect.WatchServiceName),
+			compress1KB,
+		),
+	)
 	if cfg.Tls.CertFilePath != "" && cfg.Tls.KeyFilePath != "" {
-		err := http.ListenAndServeTLS(fmt.Sprintf("%s:%d", cfg.Utxorpc.ListenAddress, cfg.Utxorpc.ListenPort),
+		err := http.ListenAndServeTLS(
+			fmt.Sprintf(
+				"%s:%d",
+				cfg.Utxorpc.ListenAddress,
+				cfg.Utxorpc.ListenPort,
+			),
 			cfg.Tls.CertFilePath,
 			cfg.Tls.KeyFilePath,
 			nil,

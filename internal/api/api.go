@@ -105,7 +105,8 @@ func Start(cfg *config.Config) error {
 
 	// Start API listener
 	if cfg.Tls.CertFilePath != "" && cfg.Tls.KeyFilePath != "" {
-		err := router.RunTLS(fmt.Sprintf("%s:%d", cfg.Api.ListenAddress, cfg.Api.ListenPort),
+		err := router.RunTLS(
+			fmt.Sprintf("%s:%d", cfg.Api.ListenAddress, cfg.Api.ListenPort),
 			cfg.Tls.CertFilePath,
 			cfg.Tls.KeyFilePath,
 		)
