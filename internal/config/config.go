@@ -29,6 +29,7 @@ type Config struct {
 	Metrics MetricsConfig `yaml:"metrics"`
 	Debug   DebugConfig   `yaml:"debug"`
 	Node    NodeConfig    `yaml:"node"`
+	Tls     TlsConfig     `yaml:"tls"`
 	Utxorpc UtxorpcConfig `yaml:"utxorpc"`
 }
 
@@ -65,6 +66,11 @@ type NodeConfig struct {
 type UtxorpcConfig struct {
 	ListenAddress string `yaml:"address" envconfig:"GRPC_LISTEN_ADDRESS"`
 	ListenPort    uint   `yaml:"port"    envconfig:"GRPC_LISTEN_PORT"`
+}
+
+type TlsConfig struct {
+	CertFilePath string `yaml:"certFilePath" envconfig:"TLS_CERT_FILE_PATH"`
+	KeyFilePath  string `yaml:"keyFilePath"  envconfig:"TLS_KEY_FILE_PATH"`
 }
 
 // Singleton config instance with default values
