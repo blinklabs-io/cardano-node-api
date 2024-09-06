@@ -29,9 +29,25 @@ import (
 	"golang.org/x/net/http2/h2c"
 
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
+	"github.com/blinklabs-io/cardano-node-api/internal/logging"
 )
 
 func Start(cfg *config.Config) error {
+	// Standard logging
+	logger := logging.GetLogger()
+	if cfg.Tls.CertFilePath != "" && cfg.Tls.KeyFilePath != "" {
+		logger.Infof(
+			"starting gRPC TLS listener on %s:%d",
+			cfg.Utxorpc.ListenAddress,
+			cfg.Utxorpc.ListenPort,
+		)
+	} else {
+		logger.Infof(
+			"starting gRPC listener on %s:%d",
+			cfg.Utxorpc.ListenAddress,
+			cfg.Utxorpc.ListenPort,
+		)
+	}
 	mux := http.NewServeMux()
 	compress1KB := connect.WithCompressMinBytes(1024)
 	queryPath, queryHandler := queryconnect.NewQueryServiceHandler(

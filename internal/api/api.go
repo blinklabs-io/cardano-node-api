@@ -42,6 +42,21 @@ import (
 // @license.name	Apache 2.0
 // @license.url	http://www.apache.org/licenses/LICENSE-2.0.html
 func Start(cfg *config.Config) error {
+	// Standard logging
+	logger := logging.GetLogger()
+	if cfg.Tls.CertFilePath != "" && cfg.Tls.KeyFilePath != "" {
+		logger.Infof(
+			"starting API TLS listener on %s:%d",
+			cfg.Api.ListenAddress,
+			cfg.Api.ListenPort,
+		)
+	} else {
+		logger.Infof(
+			"starting API listener on %s:%d",
+			cfg.Api.ListenAddress,
+			cfg.Api.ListenPort,
+		)
+	}
 	// Disable gin debug and color output
 	gin.SetMode(gin.ReleaseMode)
 	gin.DisableConsoleColor()
@@ -50,8 +65,6 @@ func Start(cfg *config.Config) error {
 	router := gin.New()
 	// Catch panics and return a 500
 	router.Use(gin.Recovery())
-	// Standard logging
-	logger := logging.GetLogger()
 	// Access logging
 	accessLogger := logging.GetAccessLogger()
 	skipPaths := []string{}
