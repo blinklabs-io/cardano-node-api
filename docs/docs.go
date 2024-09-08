@@ -472,7 +472,7 @@ var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "",
 	BasePath:         "/api",
-	Schemes:          []string{"http"},
+	Schemes:          []string{},
 	Title:            "cardano-node-api",
 	Description:      "Cardano Node API",
 	InfoInstanceName: "swagger",
