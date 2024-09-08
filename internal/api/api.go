@@ -33,7 +33,6 @@ import (
 // @title			cardano-node-api
 // @version		1.0
 // @description	Cardano Node API
-// @Schemes		http
 // @BasePath		/api
 // @contact.name	Blink Labs
 // @contact.url	https://blinklabs.io

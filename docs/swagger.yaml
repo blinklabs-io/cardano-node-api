@@ -296,6 +296,4 @@ paths:
           schema:
             type: string
       summary: Submit Tx
-schemes:
-- http
 swagger: "2.0"
