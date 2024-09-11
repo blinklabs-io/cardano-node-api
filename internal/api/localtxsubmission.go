@@ -34,6 +34,7 @@ func configureLocalTxSubmissionRoutes(apiGroup *gin.RouterGroup) {
 // handleLocalSubmitTx godoc
 //
 //	@Summary		Submit Tx
+//	@Tags			localtxsubmission
 //	@Description	Submit an already serialized transaction to the network.
 //	@Produce		json
 //	@Param			Content-Type	header		string	true	"Content type"	Enums(application/cbor)
