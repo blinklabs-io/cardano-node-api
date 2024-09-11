@@ -321,6 +321,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "localtxsubmission"
+                ],
                 "summary": "Submit Tx",
                 "parameters": [
                     {

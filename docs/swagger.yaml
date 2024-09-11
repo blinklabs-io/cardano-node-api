@@ -296,4 +296,6 @@ paths:
           schema:
             type: string
       summary: Submit Tx
+      tags:
+      - localtxsubmission
 swagger: "2.0"
