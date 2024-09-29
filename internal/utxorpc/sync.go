@@ -191,9 +191,8 @@ func (s *chainSyncServiceServer) FollowTip(
 			blockIdx := blockRef.GetIndex()
 			blockHash := blockRef.GetHash()
 			log.Printf("BlockRef: idx: %d, hash: %x", blockIdx, blockHash)
-			hash, _ := hex.DecodeString(string(blockHash))
 			slot := uint64(blockIdx)
-			point = ocommon.NewPoint(slot, hash)
+			point = ocommon.NewPoint(slot, blockHash)
 		}
 	} else {
 		tip, _ := oConn.ChainSync().Client.GetCurrentTip()
