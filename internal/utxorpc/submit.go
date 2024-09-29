@@ -191,9 +191,7 @@ func (s *submitServiceServer) ReadMempool(
 	ctx context.Context,
 	req *connect.Request[submit.ReadMempoolRequest],
 ) (*connect.Response[submit.ReadMempoolResponse], error) {
-
-	txim := req.Msg.GetTx() // []*TxInMempool
-	log.Printf("Got a ReadMempool request with %d transactions", len(txim))
+	log.Printf("Got a ReadMempool request")
 	resp := &submit.ReadMempoolResponse{}
 
 	// Connect to node
@@ -221,30 +219,15 @@ func (s *submitServiceServer) ReadMempool(
 		if txRawBytes == nil {
 			break
 		}
-		var act submit.AnyChainTx
-		var actr submit.AnyChainTx_Raw
-		actr.Raw = txRawBytes
-		act.Type = &actr
+
 		record := &submit.TxInMempool{
-			Tx:    &act,
-			Stage: submit.Stage_STAGE_MEMPOOL,
+			NativeBytes: txRawBytes,
+			Stage:       submit.Stage_STAGE_MEMPOOL,
 		}
 		mempool = append(mempool, record)
 	}
 
-	// Check each requested Tx against our mempool
-	for _, txi := range txim {
-		txi.Stage = submit.Stage_STAGE_UNSPECIFIED
-		for _, tx := range mempool {
-			if txi.Stage == submit.Stage_STAGE_MEMPOOL {
-				break
-			}
-			if txi.Tx.String() == tx.Tx.String() {
-				txi.Stage = submit.Stage_STAGE_MEMPOOL
-			}
-		}
-		resp.Stage = append(resp.Stage, txi.Stage)
-	}
+	resp.Items = mempool
 	return connect.NewResponse(resp), nil
 }
 
@@ -312,16 +295,12 @@ func (s *submitServiceServer) WatchMempool(
 		}
 		cTx := tx.Utxorpc() // *cardano.Tx
 		resp := &submit.WatchMempoolResponse{}
-		var act submit.AnyChainTx
-		var actr submit.AnyChainTx_Raw
-		actr.Raw = txRawBytes
-		act.Type = &actr
 		record := &submit.TxInMempool{
-			Tx:    &act,
-			Stage: submit.Stage_STAGE_MEMPOOL,
+			NativeBytes: txRawBytes,
+			Stage:       submit.Stage_STAGE_MEMPOOL,
 		}
 		resp.Tx = record
-		if record.Tx.String() == cTx.String() {
+		if string(record.NativeBytes) == cTx.String() {
 			if predicate == nil {
 				err := stream.Send(resp)
 				if err != nil {
