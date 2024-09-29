@@ -65,9 +65,8 @@ func (s *chainSyncServiceServer) FetchBlock(
 		for _, blockRef := range ref {
 			blockIdx := blockRef.GetIndex()
 			blockHash := blockRef.GetHash()
-			hash, _ := hex.DecodeString(string(blockHash))
 			slot := uint64(blockIdx)
-			point := ocommon.NewPoint(slot, hash)
+			point := ocommon.NewPoint(slot, blockHash)
 			points = append(points, point)
 		}
 	} else {
@@ -133,9 +132,8 @@ func (s *chainSyncServiceServer) DumpHistory(
 		blockRef := startToken
 		blockIdx := blockRef.GetIndex()
 		blockHash := blockRef.GetHash()
-		hash, _ := hex.DecodeString(string(blockHash))
 		slot := uint64(blockIdx)
-		startPoint = ocommon.NewPoint(slot, hash)
+		startPoint = ocommon.NewPoint(slot, blockHash)
 	} else {
 		log.Printf("getting tip\n")
 		tip, err := oConn.ChainSync().Client.GetCurrentTip()
