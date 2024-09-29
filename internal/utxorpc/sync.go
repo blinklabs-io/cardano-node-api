@@ -16,7 +16,6 @@ package utxorpc
 
 import (
 	"context"
-	"encoding/hex"
 	"fmt"
 	"log"
 
