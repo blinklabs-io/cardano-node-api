@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/blinklabs-io/gouroboros"
+	ouroboros "github.com/blinklabs-io/gouroboros"
 	"github.com/kelseyhightower/envconfig"
 	"gopkg.in/yaml.v2"
 )
@@ -124,8 +124,8 @@ func Load(configFile string) (*Config, error) {
 	}
 	// Populate network magic value from network name
 	if globalConfig.Node.Network != "" {
-		network := ouroboros.NetworkByName(globalConfig.Node.Network)
-		if network == ouroboros.NetworkInvalid {
+		network, ok := ouroboros.NetworkByName(globalConfig.Node.Network)
+		if !ok {
 			return nil, fmt.Errorf(
 				"unknown network: %s",
 				globalConfig.Node.Network,
