@@ -112,7 +112,7 @@ func Start(cfg *config.Config) error {
 			),
 			cfg.Tls.CertFilePath,
 			cfg.Tls.KeyFilePath,
-			nil,
+			mux,
 		)
 		return err
 	} else {
