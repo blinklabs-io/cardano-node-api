@@ -22,6 +22,7 @@ import (
 
 	connect "connectrpc.com/connect"
 	"github.com/blinklabs-io/gouroboros/ledger"
+
 	// ocommon "github.com/blinklabs-io/gouroboros/protocol/common"
 	query "github.com/utxorpc/go-codegen/utxorpc/v1alpha/query"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/query/queryconnect"
@@ -59,14 +60,12 @@ func (s *queryServiceServer) ReadParams(
 	// Get protoParams
 	protoParams, err := oConn.LocalStateQuery().Client.GetCurrentProtocolParams()
 	if err != nil {
-		log.Printf("ERROR: %s", err)
 		return nil, err
 	}
 
 	// Get chain point (slot and hash)
 	point, err := oConn.LocalStateQuery().Client.GetChainPoint()
 	if err != nil {
-		log.Printf("ERROR: %s", err)
 		return nil, err
 	}
 	var acp query.AnyChainParams
@@ -89,7 +88,6 @@ func (s *queryServiceServer) ReadUtxos(
 	ctx context.Context,
 	req *connect.Request[query.ReadUtxosRequest],
 ) (*connect.Response[query.ReadUtxosResponse], error) {
-
 	keys := req.Msg.GetKeys() // []*TxoRef
 	log.Printf("Got a ReadUtxos request with keys %v", keys)
 	resp := &query.ReadUtxosResponse{}
@@ -120,14 +118,12 @@ func (s *queryServiceServer) ReadUtxos(
 	// Get UTxOs
 	utxos, err := oConn.LocalStateQuery().Client.GetUTxOByTxIn(tmpTxIns)
 	if err != nil {
-		log.Printf("ERROR: %s", err)
 		return nil, err
 	}
 
 	// Get chain point (slot and hash)
 	point, err := oConn.LocalStateQuery().Client.GetChainPoint()
 	if err != nil {
-		log.Printf("ERROR: %s", err)
 		return nil, err
 	}
 
@@ -141,6 +137,23 @@ func (s *queryServiceServer) ReadUtxos(
 				uint32(utxoId.Idx) == txo.Index {
 				aud.NativeBytes = utxo.Cbor()
 				audc.Cardano = utxo.Utxorpc()
+				if audc.Cardano.Datum != nil {
+					// Check if Datum.Hash is all zeroes
+					isAllZeroes := true
+					for _, b := range audc.Cardano.Datum.Hash {
+						if b != 0 {
+							isAllZeroes = false
+							break
+						}
+					}
+					if isAllZeroes {
+						// No actual datum; set Datum to nil to omit it
+						audc.Cardano.Datum = nil
+						log.Print("Datum Hash is all zeroes; setting Datum to nil")
+					} else {
+						log.Printf("Datum Hash present: %x", audc.Cardano.Datum.Hash)
+					}
+				}
 				aud.ParsedState = &audc
 			}
 			resp.Items = append(resp.Items, &aud)
@@ -150,6 +163,8 @@ func (s *queryServiceServer) ReadUtxos(
 		Slot: point.Slot,
 		Hash: point.Hash,
 	}
+	log.Printf("Prepared response with LedgerTip: Slot=%v, Hash=%v", resp.LedgerTip.Slot, resp.LedgerTip.Hash)
+	log.Printf("Final response: %v", resp)
 	return connect.NewResponse(resp), nil
 }
 
