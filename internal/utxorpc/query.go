@@ -24,6 +24,7 @@ import (
 	"github.com/blinklabs-io/gouroboros/ledger"
 
 	// ocommon "github.com/blinklabs-io/gouroboros/protocol/common"
+
 	query "github.com/utxorpc/go-codegen/utxorpc/v1alpha/query"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/query/queryconnect"
 
@@ -68,18 +69,20 @@ func (s *queryServiceServer) ReadParams(
 	if err != nil {
 		return nil, err
 	}
-	var acp query.AnyChainParams
-	// var acpc query.AnyChainParams_Cardano
-	acpc := &query.AnyChainParams_Cardano{}
-	log.Printf("protocol parameters: %v", protoParams)
-	// acpc.Cardano = protoParams.Utxorpc()
+
+	// Set up response parameters
+	acpc := &query.AnyChainParams_Cardano{
+		Cardano: protoParams.Utxorpc(),
+	}
+
 	resp.LedgerTip = &query.ChainPoint{
 		Slot: point.Slot,
 		Hash: point.Hash,
 	}
-	// acp.Params = &acpc
-	acp.Params = acpc
-	resp.Values = &acp
+	resp.Values = &query.AnyChainParams{
+		Params: acpc,
+	}
+
 	return connect.NewResponse(resp), nil
 }
 
