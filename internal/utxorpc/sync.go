@@ -194,8 +194,13 @@ func (s *chainSyncServiceServer) FollowTip(
 			point = ocommon.NewPoint(slot, blockHash)
 		}
 	} else {
-		tip, _ := oConn.ChainSync().Client.GetCurrentTip()
-		point = tip.Point
+		tip, err := oConn.ChainSync().Client.GetCurrentTip()
+		if err != nil {
+			return fmt.Errorf("failed to get tip: %s", err)
+		}
+		if tip != nil {
+			point = tip.Point
+		}
 	}
 
 	// Start the sync with the node
