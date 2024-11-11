@@ -9,7 +9,7 @@ require (
 	connectrpc.com/grpchealth v1.3.0
 	connectrpc.com/grpcreflect v1.2.0
 	github.com/blinklabs-io/adder v0.25.0
-	github.com/blinklabs-io/gouroboros v0.103.2
+	github.com/blinklabs-io/gouroboros v0.103.6
 	github.com/blinklabs-io/tx-submit-api v0.20.1
 	github.com/gin-contrib/zap v1.1.4
 	github.com/gin-gonic/gin v1.10.0
@@ -19,7 +19,7 @@ require (
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0
 	github.com/swaggo/swag v1.16.4
-	github.com/utxorpc/go-codegen v0.11.0
+	github.com/utxorpc/go-codegen v0.12.0
 	go.uber.org/automaxprocs v1.6.0
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.29.0
