@@ -8,7 +8,7 @@ require (
 	connectrpc.com/connect v1.17.0
 	connectrpc.com/grpchealth v1.3.0
 	connectrpc.com/grpcreflect v1.2.0
-	github.com/blinklabs-io/adder v0.25.0
+	github.com/blinklabs-io/adder v0.25.1
 	github.com/blinklabs-io/gouroboros v0.103.6
 	github.com/blinklabs-io/tx-submit-api v0.20.1
 	github.com/gin-contrib/zap v1.1.4
