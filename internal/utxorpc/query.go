@@ -22,6 +22,7 @@ import (
 
 	connect "connectrpc.com/connect"
 	"github.com/blinklabs-io/gouroboros/ledger"
+	"github.com/blinklabs-io/gouroboros/ledger/common"
 
 	// ocommon "github.com/blinklabs-io/gouroboros/protocol/common"
 
@@ -184,19 +185,44 @@ func (s *queryServiceServer) SearchUtxos(
 	if predicate == nil {
 		return nil, fmt.Errorf("ERROR: empty predicate: %v", predicate)
 	}
-	addresses := []ledger.Address{}
+
+	var addresses []common.Address
 	addressPattern := predicate.GetMatch().GetCardano().GetAddress()
 	if addressPattern != nil {
-		if addressPattern.GetExactAddress() != nil {
-			address, err := ledger.NewAddress(
-				hex.EncodeToString(addressPattern.GetExactAddress()),
-			)
+		// Handle Exact Address
+		exactAddressBytes := addressPattern.GetExactAddress()
+		if exactAddressBytes != nil {
+			var addr common.Address
+			err := addr.UnmarshalCBOR(exactAddressBytes)
 			if err != nil {
-				return nil, err
+				return nil, fmt.Errorf("failed to decode exact address: %w", err)
 			}
-			addresses = append(addresses, address)
+			addresses = append(addresses, addr)
 		}
-		// TODO: GetPaymentPart() GetDelegationPart()
+
+		// Handle Payment Part
+		paymentPart := addressPattern.GetPaymentPart()
+		if paymentPart != nil {
+			log.Printf("PaymentPart is present, decoding...")
+			var paymentAddr common.Address
+			err := paymentAddr.UnmarshalCBOR(paymentPart)
+			if err != nil {
+				return nil, fmt.Errorf("failed to decode payment part: %w", err)
+			}
+			addresses = append(addresses, paymentAddr)
+		}
+
+		// Handle Delegation Part
+		delegationPart := addressPattern.GetDelegationPart()
+		if delegationPart != nil {
+			log.Printf("DelegationPart is present, decoding...")
+			var delegationAddr common.Address
+			err := delegationAddr.UnmarshalCBOR(delegationPart)
+			if err != nil {
+				return nil, fmt.Errorf("failed to decode delegation part: %w", err)
+			}
+			addresses = append(addresses, delegationAddr)
+		}
 	}
 
 	// Connect to node
