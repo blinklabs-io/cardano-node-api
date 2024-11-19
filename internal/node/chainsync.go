@@ -82,10 +82,31 @@ func chainSyncRollForwardHandler(
 ) error {
 	cfg := config.GetConfig()
 	if connCfg.ChainSyncEventChan != nil {
-		var block ledger.Block
 		switch v := blockData.(type) {
 		case ledger.Block:
-			block = v
+			// Emit block-level event
+			blockEvt := event.New(
+				"chainsync.block",
+				time.Now(),
+				input_chainsync.NewBlockContext(v, cfg.Node.NetworkMagic),
+				input_chainsync.NewBlockEvent(v, true),
+			)
+			connCfg.ChainSyncEventChan <- blockEvt
+			// Emit transaction-level events
+			for t, transaction := range v.Transactions() {
+				// TODO: do we need to resolve inputs?
+				// resolvedInputs, err := resolveTransactionInputs(transaction, connCfg)
+				// if err != nil {
+				// 	return fmt.Errorf("failed to resolve inputs for transaction: %w", err)
+				// }
+				txEvt := event.New(
+					"chainsync.transaction",
+					time.Now(),
+					input_chainsync.NewTransactionContext(v, transaction, uint32(t), cfg.Node.NetworkMagic),
+					input_chainsync.NewTransactionEvent(v, transaction, true, nil),
+				)
+				connCfg.ChainSyncEventChan <- txEvt
+			}
 		/*
 			case ledger.BlockHeader:
 				blockSlot := v.SlotNumber()
@@ -102,13 +123,6 @@ func chainSyncRollForwardHandler(
 		default:
 			return fmt.Errorf("unknown block data")
 		}
-		evt := event.New(
-			"chainsync.block",
-			time.Now(),
-			input_chainsync.NewBlockContext(block, cfg.Node.NetworkMagic),
-			input_chainsync.NewBlockEvent(block, true),
-		)
-		connCfg.ChainSyncEventChan <- evt
 	}
 	return nil
 }
