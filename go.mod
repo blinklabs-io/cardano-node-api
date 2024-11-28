@@ -9,7 +9,7 @@ require (
 	connectrpc.com/grpchealth v1.3.0
 	connectrpc.com/grpcreflect v1.2.0
 	github.com/blinklabs-io/adder v0.25.1
-	github.com/blinklabs-io/gouroboros v0.104.1
+	github.com/blinklabs-io/gouroboros v0.105.0
 	github.com/blinklabs-io/tx-submit-api v0.20.3
 	github.com/gin-contrib/zap v1.1.4
 	github.com/gin-gonic/gin v1.10.0
@@ -22,7 +22,6 @@ require (
 	github.com/utxorpc/go-codegen v0.12.0
 	go.uber.org/automaxprocs v1.6.0
 	go.uber.org/zap v1.27.0
-	golang.org/x/crypto v0.29.0
 	golang.org/x/net v0.31.0
 	gopkg.in/yaml.v2 v2.4.0
 )
@@ -73,6 +72,7 @@ require (
 	github.com/x448/float16 v0.8.4 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.9.0 // indirect
+	golang.org/x/crypto v0.29.0 // indirect
 	golang.org/x/sync v0.9.0 // indirect
 	golang.org/x/sys v0.27.0 // indirect
 	golang.org/x/text v0.20.0 // indirect
