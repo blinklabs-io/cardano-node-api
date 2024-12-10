@@ -64,10 +64,14 @@ func main() {
 	}()
 
 	// Test node connection
-	if oConn, err := node.GetConnection(nil); err != nil {
-		logger.Fatalf("failed to connect to node: %s", err)
+	if cfg.Node.SkipCheck {
+		logger.Debugf("skipping node check")
 	} else {
-		oConn.Close()
+		if oConn, err := node.GetConnection(nil); err != nil {
+			logger.Fatalf("failed to connect to node: %s", err)
+		} else {
+			oConn.Close()
+		}
 	}
 
 	logger.Infof(

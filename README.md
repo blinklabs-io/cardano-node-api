@@ -82,6 +82,8 @@ Cardano node configuration:
 - `CARDANO_NETWORK` - Use a named Cardano network (default: mainnet)
 - `CARDANO_NODE_NETWORK_MAGIC` - Cardano network magic (default: automatically
     determined from named network)
+- `CARDANO_NODE_SKIP_CHECK` - Skip the connection test to Cardano Node on start
+    (default: false)
 - `CARDANO_NODE_SOCKET_PATH` - Socket path to Cardano node NtC via UNIX socket
     (default: /node-ipc/node.socket)
 - `CARDANO_NODE_SOCKET_TCP_HOST` - Address to Cardano node NtC via TCP
