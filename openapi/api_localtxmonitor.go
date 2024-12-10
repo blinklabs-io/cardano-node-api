@@ -35,7 +35,7 @@ type LocaltxmonitorAPI interface {
 	) LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest
 
 	// LocaltxmonitorHasTxTxHashGetExecute executes the request
-	//  @return ApiResponseLocalTxMonitorHasTx
+	//	@return	ApiResponseLocalTxMonitorHasTx
 	LocaltxmonitorHasTxTxHashGetExecute(
 		r LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest,
 	) (*ApiResponseLocalTxMonitorHasTx, *http.Response, error)
@@ -51,7 +51,7 @@ type LocaltxmonitorAPI interface {
 	) LocaltxmonitorAPILocaltxmonitorSizesGetRequest
 
 	// LocaltxmonitorSizesGetExecute executes the request
-	//  @return ApiResponseLocalTxMonitorSizes
+	//	@return	ApiResponseLocalTxMonitorSizes
 	LocaltxmonitorSizesGetExecute(
 		r LocaltxmonitorAPILocaltxmonitorSizesGetRequest,
 	) (*ApiResponseLocalTxMonitorSizes, *http.Response, error)
@@ -67,7 +67,7 @@ type LocaltxmonitorAPI interface {
 	) LocaltxmonitorAPILocaltxmonitorTxsGetRequest
 
 	// LocaltxmonitorTxsGetExecute executes the request
-	//  @return []ApiResponseLocalTxMonitorTxs
+	//	@return	[]ApiResponseLocalTxMonitorTxs
 	LocaltxmonitorTxsGetExecute(
 		r LocaltxmonitorAPILocaltxmonitorTxsGetRequest,
 	) ([]ApiResponseLocalTxMonitorTxs, *http.Response, error)
@@ -106,7 +106,7 @@ func (a *LocaltxmonitorAPIService) LocaltxmonitorHasTxTxHashGet(
 
 // Execute executes the request
 //
-//	@return ApiResponseLocalTxMonitorHasTx
+//	@return	ApiResponseLocalTxMonitorHasTx
 func (a *LocaltxmonitorAPIService) LocaltxmonitorHasTxTxHashGetExecute(
 	r LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest,
 ) (*ApiResponseLocalTxMonitorHasTx, *http.Response, error) {
@@ -246,7 +246,7 @@ func (a *LocaltxmonitorAPIService) LocaltxmonitorSizesGet(
 
 // Execute executes the request
 //
-//	@return ApiResponseLocalTxMonitorSizes
+//	@return	ApiResponseLocalTxMonitorSizes
 func (a *LocaltxmonitorAPIService) LocaltxmonitorSizesGetExecute(
 	r LocaltxmonitorAPILocaltxmonitorSizesGetRequest,
 ) (*ApiResponseLocalTxMonitorSizes, *http.Response, error) {
@@ -380,7 +380,7 @@ func (a *LocaltxmonitorAPIService) LocaltxmonitorTxsGet(
 
 // Execute executes the request
 //
-//	@return []ApiResponseLocalTxMonitorTxs
+//	@return	[]ApiResponseLocalTxMonitorTxs
 func (a *LocaltxmonitorAPIService) LocaltxmonitorTxsGetExecute(
 	r LocaltxmonitorAPILocaltxmonitorTxsGetRequest,
 ) ([]ApiResponseLocalTxMonitorTxs, *http.Response, error) {
