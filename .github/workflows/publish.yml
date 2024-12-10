@@ -44,10 +44,6 @@ jobs:
         os: [linux, darwin, freebsd, windows]
         arch: [amd64, arm64]
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-      attestations: write
     needs: [create-draft-release]
     steps:
       - run: "echo \"RELEASE_TAG=${GITHUB_REF#refs/tags/}\" >> $GITHUB_ENV"
@@ -79,11 +75,6 @@ jobs:
 
   build-images:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-      attestations: write
-      packages: write
     needs: [create-draft-release]
     steps:
       - run: "echo \"RELEASE_TAG=${GITHUB_REF#refs/tags/}\" >> $GITHUB_ENV"
