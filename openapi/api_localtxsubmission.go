@@ -19,7 +19,7 @@ import (
 	"net/url"
 )
 
-type DefaultAPI interface {
+type LocaltxsubmissionAPI interface {
 
 	/*
 		LocaltxsubmissionTxPost Submit Tx
@@ -27,37 +27,37 @@ type DefaultAPI interface {
 		Submit an already serialized transaction to the network.
 
 		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return DefaultAPILocaltxsubmissionTxPostRequest
+		@return LocaltxsubmissionAPILocaltxsubmissionTxPostRequest
 	*/
 	LocaltxsubmissionTxPost(
 		ctx context.Context,
-	) DefaultAPILocaltxsubmissionTxPostRequest
+	) LocaltxsubmissionAPILocaltxsubmissionTxPostRequest
 
 	// LocaltxsubmissionTxPostExecute executes the request
 	//  @return string
 	LocaltxsubmissionTxPostExecute(
-		r DefaultAPILocaltxsubmissionTxPostRequest,
+		r LocaltxsubmissionAPILocaltxsubmissionTxPostRequest,
 	) (string, *http.Response, error)
 }
 
-// DefaultAPIService DefaultAPI service
-type DefaultAPIService service
+// LocaltxsubmissionAPIService LocaltxsubmissionAPI service
+type LocaltxsubmissionAPIService service
 
-type DefaultAPILocaltxsubmissionTxPostRequest struct {
+type LocaltxsubmissionAPILocaltxsubmissionTxPostRequest struct {
 	ctx         context.Context
-	ApiService  DefaultAPI
+	ApiService  LocaltxsubmissionAPI
 	contentType *string
 }
 
 // Content type
-func (r DefaultAPILocaltxsubmissionTxPostRequest) ContentType(
+func (r LocaltxsubmissionAPILocaltxsubmissionTxPostRequest) ContentType(
 	contentType string,
-) DefaultAPILocaltxsubmissionTxPostRequest {
+) LocaltxsubmissionAPILocaltxsubmissionTxPostRequest {
 	r.contentType = &contentType
 	return r
 }
 
-func (r DefaultAPILocaltxsubmissionTxPostRequest) Execute() (string, *http.Response, error) {
+func (r LocaltxsubmissionAPILocaltxsubmissionTxPostRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.LocaltxsubmissionTxPostExecute(r)
 }
 
@@ -67,12 +67,12 @@ LocaltxsubmissionTxPost Submit Tx
 Submit an already serialized transaction to the network.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return DefaultAPILocaltxsubmissionTxPostRequest
+	@return LocaltxsubmissionAPILocaltxsubmissionTxPostRequest
 */
-func (a *DefaultAPIService) LocaltxsubmissionTxPost(
+func (a *LocaltxsubmissionAPIService) LocaltxsubmissionTxPost(
 	ctx context.Context,
-) DefaultAPILocaltxsubmissionTxPostRequest {
-	return DefaultAPILocaltxsubmissionTxPostRequest{
+) LocaltxsubmissionAPILocaltxsubmissionTxPostRequest {
+	return LocaltxsubmissionAPILocaltxsubmissionTxPostRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -81,8 +81,8 @@ func (a *DefaultAPIService) LocaltxsubmissionTxPost(
 // Execute executes the request
 //
 //	@return string
-func (a *DefaultAPIService) LocaltxsubmissionTxPostExecute(
-	r DefaultAPILocaltxsubmissionTxPostRequest,
+func (a *LocaltxsubmissionAPIService) LocaltxsubmissionTxPostExecute(
+	r LocaltxsubmissionAPILocaltxsubmissionTxPostRequest,
 ) (string, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -93,7 +93,7 @@ func (a *DefaultAPIService) LocaltxsubmissionTxPostExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DefaultAPIService.LocaltxsubmissionTxPost",
+		"LocaltxsubmissionAPIService.LocaltxsubmissionTxPost",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{
@@ -133,6 +133,7 @@ func (a *DefaultAPIService) LocaltxsubmissionTxPostExecute(
 		localVarHeaderParams,
 		"Content-Type",
 		r.contentType,
+		"",
 		"",
 	)
 	req, err := a.client.prepareRequest(

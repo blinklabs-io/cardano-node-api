@@ -19,87 +19,110 @@ import (
 	"net/url"
 )
 
-
 type LocalstatequeryAPI interface {
 
 	/*
-	LocalstatequeryCurrentEraGet Query Current Era
+		LocalstatequeryCurrentEraGet Query Current Era
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return LocalstatequeryAPILocalstatequeryCurrentEraGetRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return LocalstatequeryAPILocalstatequeryCurrentEraGetRequest
 	*/
-	LocalstatequeryCurrentEraGet(ctx context.Context) LocalstatequeryAPILocalstatequeryCurrentEraGetRequest
+	LocalstatequeryCurrentEraGet(
+		ctx context.Context,
+	) LocalstatequeryAPILocalstatequeryCurrentEraGetRequest
 
 	// LocalstatequeryCurrentEraGetExecute executes the request
 	//  @return ApiResponseLocalStateQueryCurrentEra
-	LocalstatequeryCurrentEraGetExecute(r LocalstatequeryAPILocalstatequeryCurrentEraGetRequest) (*ApiResponseLocalStateQueryCurrentEra, *http.Response, error)
+	LocalstatequeryCurrentEraGetExecute(
+		r LocalstatequeryAPILocalstatequeryCurrentEraGetRequest,
+	) (*ApiResponseLocalStateQueryCurrentEra, *http.Response, error)
 
 	/*
-	LocalstatequeryEraHistoryGet Query Era History
+		LocalstatequeryEraHistoryGet Query Era History
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return LocalstatequeryAPILocalstatequeryEraHistoryGetRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return LocalstatequeryAPILocalstatequeryEraHistoryGetRequest
 	*/
-	LocalstatequeryEraHistoryGet(ctx context.Context) LocalstatequeryAPILocalstatequeryEraHistoryGetRequest
+	LocalstatequeryEraHistoryGet(
+		ctx context.Context,
+	) LocalstatequeryAPILocalstatequeryEraHistoryGetRequest
 
 	// LocalstatequeryEraHistoryGetExecute executes the request
 	//  @return map[string]interface{}
-	LocalstatequeryEraHistoryGetExecute(r LocalstatequeryAPILocalstatequeryEraHistoryGetRequest) (map[string]interface{}, *http.Response, error)
+	LocalstatequeryEraHistoryGetExecute(
+		r LocalstatequeryAPILocalstatequeryEraHistoryGetRequest,
+	) (map[string]interface{}, *http.Response, error)
 
 	/*
-	LocalstatequeryGenesisConfigGet Query Genesis Config
+		LocalstatequeryGenesisConfigGet Query Genesis Config
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest
 	*/
-	LocalstatequeryGenesisConfigGet(ctx context.Context) LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest
+	LocalstatequeryGenesisConfigGet(
+		ctx context.Context,
+	) LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest
 
 	// LocalstatequeryGenesisConfigGetExecute executes the request
 	//  @return map[string]interface{}
-	LocalstatequeryGenesisConfigGetExecute(r LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest) (map[string]interface{}, *http.Response, error)
+	LocalstatequeryGenesisConfigGetExecute(
+		r LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest,
+	) (map[string]interface{}, *http.Response, error)
 
 	/*
-	LocalstatequeryProtocolParamsGet Query Current Protocol Parameters
+		LocalstatequeryProtocolParamsGet Query Current Protocol Parameters
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest
 	*/
-	LocalstatequeryProtocolParamsGet(ctx context.Context) LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest
+	LocalstatequeryProtocolParamsGet(
+		ctx context.Context,
+	) LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest
 
 	// LocalstatequeryProtocolParamsGetExecute executes the request
 	//  @return map[string]interface{}
-	LocalstatequeryProtocolParamsGetExecute(r LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest) (map[string]interface{}, *http.Response, error)
+	LocalstatequeryProtocolParamsGetExecute(
+		r LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest,
+	) (map[string]interface{}, *http.Response, error)
 
 	/*
-	LocalstatequerySystemStartGet Query System Start
+		LocalstatequerySystemStartGet Query System Start
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return LocalstatequeryAPILocalstatequerySystemStartGetRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return LocalstatequeryAPILocalstatequerySystemStartGetRequest
 	*/
-	LocalstatequerySystemStartGet(ctx context.Context) LocalstatequeryAPILocalstatequerySystemStartGetRequest
+	LocalstatequerySystemStartGet(
+		ctx context.Context,
+	) LocalstatequeryAPILocalstatequerySystemStartGetRequest
 
 	// LocalstatequerySystemStartGetExecute executes the request
 	//  @return ApiResponseLocalStateQuerySystemStart
-	LocalstatequerySystemStartGetExecute(r LocalstatequeryAPILocalstatequerySystemStartGetRequest) (*ApiResponseLocalStateQuerySystemStart, *http.Response, error)
+	LocalstatequerySystemStartGetExecute(
+		r LocalstatequeryAPILocalstatequerySystemStartGetRequest,
+	) (*ApiResponseLocalStateQuerySystemStart, *http.Response, error)
 
 	/*
-	LocalstatequeryTipGet Query Chain Tip
+		LocalstatequeryTipGet Query Chain Tip
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return LocalstatequeryAPILocalstatequeryTipGetRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return LocalstatequeryAPILocalstatequeryTipGetRequest
 	*/
-	LocalstatequeryTipGet(ctx context.Context) LocalstatequeryAPILocalstatequeryTipGetRequest
+	LocalstatequeryTipGet(
+		ctx context.Context,
+	) LocalstatequeryAPILocalstatequeryTipGetRequest
 
 	// LocalstatequeryTipGetExecute executes the request
 	//  @return ApiResponseLocalStateQueryTip
-	LocalstatequeryTipGetExecute(r LocalstatequeryAPILocalstatequeryTipGetRequest) (*ApiResponseLocalStateQueryTip, *http.Response, error)
+	LocalstatequeryTipGetExecute(
+		r LocalstatequeryAPILocalstatequeryTipGetRequest,
+	) (*ApiResponseLocalStateQueryTip, *http.Response, error)
 }
 
 // LocalstatequeryAPIService LocalstatequeryAPI service
 type LocalstatequeryAPIService service
 
 type LocalstatequeryAPILocalstatequeryCurrentEraGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService LocalstatequeryAPI
 }
 
@@ -110,29 +133,39 @@ func (r LocalstatequeryAPILocalstatequeryCurrentEraGetRequest) Execute() (*ApiRe
 /*
 LocalstatequeryCurrentEraGet Query Current Era
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return LocalstatequeryAPILocalstatequeryCurrentEraGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return LocalstatequeryAPILocalstatequeryCurrentEraGetRequest
 */
-func (a *LocalstatequeryAPIService) LocalstatequeryCurrentEraGet(ctx context.Context) LocalstatequeryAPILocalstatequeryCurrentEraGetRequest {
+func (a *LocalstatequeryAPIService) LocalstatequeryCurrentEraGet(
+	ctx context.Context,
+) LocalstatequeryAPILocalstatequeryCurrentEraGetRequest {
 	return LocalstatequeryAPILocalstatequeryCurrentEraGetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ApiResponseLocalStateQueryCurrentEra
-func (a *LocalstatequeryAPIService) LocalstatequeryCurrentEraGetExecute(r LocalstatequeryAPILocalstatequeryCurrentEraGetRequest) (*ApiResponseLocalStateQueryCurrentEra, *http.Response, error) {
+//
+//	@return ApiResponseLocalStateQueryCurrentEra
+func (a *LocalstatequeryAPIService) LocalstatequeryCurrentEraGetExecute(
+	r LocalstatequeryAPILocalstatequeryCurrentEraGetRequest,
+) (*ApiResponseLocalStateQueryCurrentEra, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ApiResponseLocalStateQueryCurrentEra
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ApiResponseLocalStateQueryCurrentEra
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocalstatequeryAPIService.LocalstatequeryCurrentEraGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"LocalstatequeryAPIService.LocalstatequeryCurrentEraGet",
+	)
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{
+			error: err.Error(),
+		}
 	}
 
 	localVarPath := localBasePath + "/localstatequery/current-era"
@@ -158,7 +191,16 @@ func (a *LocalstatequeryAPIService) LocalstatequeryCurrentEraGetExecute(r Locals
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -182,18 +224,26 @@ func (a *LocalstatequeryAPIService) LocalstatequeryCurrentEraGetExecute(r Locals
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiResponseApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -206,7 +256,7 @@ func (a *LocalstatequeryAPIService) LocalstatequeryCurrentEraGetExecute(r Locals
 }
 
 type LocalstatequeryAPILocalstatequeryEraHistoryGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService LocalstatequeryAPI
 }
 
@@ -217,29 +267,39 @@ func (r LocalstatequeryAPILocalstatequeryEraHistoryGetRequest) Execute() (map[st
 /*
 LocalstatequeryEraHistoryGet Query Era History
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return LocalstatequeryAPILocalstatequeryEraHistoryGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return LocalstatequeryAPILocalstatequeryEraHistoryGetRequest
 */
-func (a *LocalstatequeryAPIService) LocalstatequeryEraHistoryGet(ctx context.Context) LocalstatequeryAPILocalstatequeryEraHistoryGetRequest {
+func (a *LocalstatequeryAPIService) LocalstatequeryEraHistoryGet(
+	ctx context.Context,
+) LocalstatequeryAPILocalstatequeryEraHistoryGetRequest {
 	return LocalstatequeryAPILocalstatequeryEraHistoryGetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
-func (a *LocalstatequeryAPIService) LocalstatequeryEraHistoryGetExecute(r LocalstatequeryAPILocalstatequeryEraHistoryGetRequest) (map[string]interface{}, *http.Response, error) {
+//
+//	@return map[string]interface{}
+func (a *LocalstatequeryAPIService) LocalstatequeryEraHistoryGetExecute(
+	r LocalstatequeryAPILocalstatequeryEraHistoryGetRequest,
+) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocalstatequeryAPIService.LocalstatequeryEraHistoryGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"LocalstatequeryAPIService.LocalstatequeryEraHistoryGet",
+	)
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{
+			error: err.Error(),
+		}
 	}
 
 	localVarPath := localBasePath + "/localstatequery/era-history"
@@ -265,7 +325,16 @@ func (a *LocalstatequeryAPIService) LocalstatequeryEraHistoryGetExecute(r Locals
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -289,18 +358,26 @@ func (a *LocalstatequeryAPIService) LocalstatequeryEraHistoryGetExecute(r Locals
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiResponseApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -313,7 +390,7 @@ func (a *LocalstatequeryAPIService) LocalstatequeryEraHistoryGetExecute(r Locals
 }
 
 type LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService LocalstatequeryAPI
 }
 
@@ -324,29 +401,39 @@ func (r LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest) Execute() (map
 /*
 LocalstatequeryGenesisConfigGet Query Genesis Config
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest
 */
-func (a *LocalstatequeryAPIService) LocalstatequeryGenesisConfigGet(ctx context.Context) LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest {
+func (a *LocalstatequeryAPIService) LocalstatequeryGenesisConfigGet(
+	ctx context.Context,
+) LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest {
 	return LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
-func (a *LocalstatequeryAPIService) LocalstatequeryGenesisConfigGetExecute(r LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest) (map[string]interface{}, *http.Response, error) {
+//
+//	@return map[string]interface{}
+func (a *LocalstatequeryAPIService) LocalstatequeryGenesisConfigGetExecute(
+	r LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest,
+) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocalstatequeryAPIService.LocalstatequeryGenesisConfigGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"LocalstatequeryAPIService.LocalstatequeryGenesisConfigGet",
+	)
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{
+			error: err.Error(),
+		}
 	}
 
 	localVarPath := localBasePath + "/localstatequery/genesis-config"
@@ -372,7 +459,16 @@ func (a *LocalstatequeryAPIService) LocalstatequeryGenesisConfigGetExecute(r Loc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -396,18 +492,26 @@ func (a *LocalstatequeryAPIService) LocalstatequeryGenesisConfigGetExecute(r Loc
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiResponseApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -420,7 +524,7 @@ func (a *LocalstatequeryAPIService) LocalstatequeryGenesisConfigGetExecute(r Loc
 }
 
 type LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService LocalstatequeryAPI
 }
 
@@ -431,29 +535,39 @@ func (r LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest) Execute() (ma
 /*
 LocalstatequeryProtocolParamsGet Query Current Protocol Parameters
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest
 */
-func (a *LocalstatequeryAPIService) LocalstatequeryProtocolParamsGet(ctx context.Context) LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest {
+func (a *LocalstatequeryAPIService) LocalstatequeryProtocolParamsGet(
+	ctx context.Context,
+) LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest {
 	return LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
-func (a *LocalstatequeryAPIService) LocalstatequeryProtocolParamsGetExecute(r LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest) (map[string]interface{}, *http.Response, error) {
+//
+//	@return map[string]interface{}
+func (a *LocalstatequeryAPIService) LocalstatequeryProtocolParamsGetExecute(
+	r LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest,
+) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocalstatequeryAPIService.LocalstatequeryProtocolParamsGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"LocalstatequeryAPIService.LocalstatequeryProtocolParamsGet",
+	)
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{
+			error: err.Error(),
+		}
 	}
 
 	localVarPath := localBasePath + "/localstatequery/protocol-params"
@@ -479,7 +593,16 @@ func (a *LocalstatequeryAPIService) LocalstatequeryProtocolParamsGetExecute(r Lo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -503,18 +626,26 @@ func (a *LocalstatequeryAPIService) LocalstatequeryProtocolParamsGetExecute(r Lo
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiResponseApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -527,7 +658,7 @@ func (a *LocalstatequeryAPIService) LocalstatequeryProtocolParamsGetExecute(r Lo
 }
 
 type LocalstatequeryAPILocalstatequerySystemStartGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService LocalstatequeryAPI
 }
 
@@ -538,29 +669,39 @@ func (r LocalstatequeryAPILocalstatequerySystemStartGetRequest) Execute() (*ApiR
 /*
 LocalstatequerySystemStartGet Query System Start
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return LocalstatequeryAPILocalstatequerySystemStartGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return LocalstatequeryAPILocalstatequerySystemStartGetRequest
 */
-func (a *LocalstatequeryAPIService) LocalstatequerySystemStartGet(ctx context.Context) LocalstatequeryAPILocalstatequerySystemStartGetRequest {
+func (a *LocalstatequeryAPIService) LocalstatequerySystemStartGet(
+	ctx context.Context,
+) LocalstatequeryAPILocalstatequerySystemStartGetRequest {
 	return LocalstatequeryAPILocalstatequerySystemStartGetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ApiResponseLocalStateQuerySystemStart
-func (a *LocalstatequeryAPIService) LocalstatequerySystemStartGetExecute(r LocalstatequeryAPILocalstatequerySystemStartGetRequest) (*ApiResponseLocalStateQuerySystemStart, *http.Response, error) {
+//
+//	@return ApiResponseLocalStateQuerySystemStart
+func (a *LocalstatequeryAPIService) LocalstatequerySystemStartGetExecute(
+	r LocalstatequeryAPILocalstatequerySystemStartGetRequest,
+) (*ApiResponseLocalStateQuerySystemStart, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ApiResponseLocalStateQuerySystemStart
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ApiResponseLocalStateQuerySystemStart
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocalstatequeryAPIService.LocalstatequerySystemStartGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"LocalstatequeryAPIService.LocalstatequerySystemStartGet",
+	)
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{
+			error: err.Error(),
+		}
 	}
 
 	localVarPath := localBasePath + "/localstatequery/system-start"
@@ -586,7 +727,16 @@ func (a *LocalstatequeryAPIService) LocalstatequerySystemStartGetExecute(r Local
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -610,18 +760,26 @@ func (a *LocalstatequeryAPIService) LocalstatequerySystemStartGetExecute(r Local
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiResponseApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -634,7 +792,7 @@ func (a *LocalstatequeryAPIService) LocalstatequerySystemStartGetExecute(r Local
 }
 
 type LocalstatequeryAPILocalstatequeryTipGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService LocalstatequeryAPI
 }
 
@@ -645,29 +803,39 @@ func (r LocalstatequeryAPILocalstatequeryTipGetRequest) Execute() (*ApiResponseL
 /*
 LocalstatequeryTipGet Query Chain Tip
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return LocalstatequeryAPILocalstatequeryTipGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return LocalstatequeryAPILocalstatequeryTipGetRequest
 */
-func (a *LocalstatequeryAPIService) LocalstatequeryTipGet(ctx context.Context) LocalstatequeryAPILocalstatequeryTipGetRequest {
+func (a *LocalstatequeryAPIService) LocalstatequeryTipGet(
+	ctx context.Context,
+) LocalstatequeryAPILocalstatequeryTipGetRequest {
 	return LocalstatequeryAPILocalstatequeryTipGetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ApiResponseLocalStateQueryTip
-func (a *LocalstatequeryAPIService) LocalstatequeryTipGetExecute(r LocalstatequeryAPILocalstatequeryTipGetRequest) (*ApiResponseLocalStateQueryTip, *http.Response, error) {
+//
+//	@return ApiResponseLocalStateQueryTip
+func (a *LocalstatequeryAPIService) LocalstatequeryTipGetExecute(
+	r LocalstatequeryAPILocalstatequeryTipGetRequest,
+) (*ApiResponseLocalStateQueryTip, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ApiResponseLocalStateQueryTip
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ApiResponseLocalStateQueryTip
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocalstatequeryAPIService.LocalstatequeryTipGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"LocalstatequeryAPIService.LocalstatequeryTipGet",
+	)
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{
+			error: err.Error(),
+		}
 	}
 
 	localVarPath := localBasePath + "/localstatequery/tip"
@@ -693,7 +861,16 @@ func (a *LocalstatequeryAPIService) LocalstatequeryTipGetExecute(r Localstateque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -717,18 +894,26 @@ func (a *LocalstatequeryAPIService) LocalstatequeryTipGetExecute(r Localstateque
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiResponseApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

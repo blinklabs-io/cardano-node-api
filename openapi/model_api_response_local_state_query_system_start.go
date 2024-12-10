@@ -20,9 +20,9 @@ var _ MappedNullable = &ApiResponseLocalStateQuerySystemStart{}
 
 // ApiResponseLocalStateQuerySystemStart struct for ApiResponseLocalStateQuerySystemStart
 type ApiResponseLocalStateQuerySystemStart struct {
-	Day *int32 `json:"day,omitempty"`
+	Day         *int32 `json:"day,omitempty"`
 	Picoseconds *int32 `json:"picoseconds,omitempty"`
-	Year *int32 `json:"year,omitempty"`
+	Year        *int32 `json:"year,omitempty"`
 }
 
 // NewApiResponseLocalStateQuerySystemStart instantiates a new ApiResponseLocalStateQuerySystemStart object
@@ -139,7 +139,7 @@ func (o *ApiResponseLocalStateQuerySystemStart) SetYear(v int32) {
 }
 
 func (o ApiResponseLocalStateQuerySystemStart) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,7 +169,9 @@ func (v NullableApiResponseLocalStateQuerySystemStart) Get() *ApiResponseLocalSt
 	return v.value
 }
 
-func (v *NullableApiResponseLocalStateQuerySystemStart) Set(val *ApiResponseLocalStateQuerySystemStart) {
+func (v *NullableApiResponseLocalStateQuerySystemStart) Set(
+	val *ApiResponseLocalStateQuerySystemStart,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -183,17 +185,22 @@ func (v *NullableApiResponseLocalStateQuerySystemStart) Unset() {
 	v.isSet = false
 }
 
-func NewNullableApiResponseLocalStateQuerySystemStart(val *ApiResponseLocalStateQuerySystemStart) *NullableApiResponseLocalStateQuerySystemStart {
-	return &NullableApiResponseLocalStateQuerySystemStart{value: val, isSet: true}
+func NewNullableApiResponseLocalStateQuerySystemStart(
+	val *ApiResponseLocalStateQuerySystemStart,
+) *NullableApiResponseLocalStateQuerySystemStart {
+	return &NullableApiResponseLocalStateQuerySystemStart{
+		value: val,
+		isSet: true,
+	}
 }
 
 func (v NullableApiResponseLocalStateQuerySystemStart) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableApiResponseLocalStateQuerySystemStart) UnmarshalJSON(src []byte) error {
+func (v *NullableApiResponseLocalStateQuerySystemStart) UnmarshalJSON(
+	src []byte,
+) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
