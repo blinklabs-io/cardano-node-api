@@ -11,10 +11,10 @@ package openapi
 
 import (
 	"context"
+	openapiclient "github.com/blinklabs-io/cardano-node-api/openapi"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/blinklabs-io/cardano-node-api/openapi"
 )
 
 func Test_openapi_LocaltxmonitorAPIService(t *testing.T) {
@@ -22,42 +22,54 @@ func Test_openapi_LocaltxmonitorAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test LocaltxmonitorAPIService LocaltxmonitorHasTxTxHashGet", func(t *testing.T) {
+	t.Run(
+		"Test LocaltxmonitorAPIService LocaltxmonitorHasTxTxHashGet",
+		func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+			t.Skip("skip test") // remove to run test
 
-		var txHash string
+			var txHash string
 
-		resp, httpRes, err := apiClient.LocaltxmonitorAPI.LocaltxmonitorHasTxTxHashGet(context.Background(), txHash).Execute()
+			resp, httpRes, err := apiClient.LocaltxmonitorAPI.LocaltxmonitorHasTxTxHashGet(context.Background(), txHash).
+				Execute()
 
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
+			require.Nil(t, err)
+			require.NotNil(t, resp)
+			assert.Equal(t, 200, httpRes.StatusCode)
 
-	})
+		},
+	)
 
-	t.Run("Test LocaltxmonitorAPIService LocaltxmonitorSizesGet", func(t *testing.T) {
+	t.Run(
+		"Test LocaltxmonitorAPIService LocaltxmonitorSizesGet",
+		func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+			t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.LocaltxmonitorAPI.LocaltxmonitorSizesGet(context.Background()).Execute()
+			resp, httpRes, err := apiClient.LocaltxmonitorAPI.LocaltxmonitorSizesGet(context.Background()).
+				Execute()
 
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
+			require.Nil(t, err)
+			require.NotNil(t, resp)
+			assert.Equal(t, 200, httpRes.StatusCode)
 
-	})
+		},
+	)
 
-	t.Run("Test LocaltxmonitorAPIService LocaltxmonitorTxsGet", func(t *testing.T) {
+	t.Run(
+		"Test LocaltxmonitorAPIService LocaltxmonitorTxsGet",
+		func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+			t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.LocaltxmonitorAPI.LocaltxmonitorTxsGet(context.Background()).Execute()
+			resp, httpRes, err := apiClient.LocaltxmonitorAPI.LocaltxmonitorTxsGet(context.Background()).
+				Execute()
 
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
+			require.Nil(t, err)
+			require.NotNil(t, resp)
+			assert.Equal(t, 200, httpRes.StatusCode)
 
-	})
+		},
+	)
 
 }

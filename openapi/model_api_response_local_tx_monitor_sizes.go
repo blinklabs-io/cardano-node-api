@@ -21,8 +21,8 @@ var _ MappedNullable = &ApiResponseLocalTxMonitorSizes{}
 // ApiResponseLocalTxMonitorSizes struct for ApiResponseLocalTxMonitorSizes
 type ApiResponseLocalTxMonitorSizes struct {
 	Capacity *int32 `json:"capacity,omitempty"`
-	Size *int32 `json:"size,omitempty"`
-	TxCount *int32 `json:"tx_count,omitempty"`
+	Size     *int32 `json:"size,omitempty"`
+	TxCount  *int32 `json:"tx_count,omitempty"`
 }
 
 // NewApiResponseLocalTxMonitorSizes instantiates a new ApiResponseLocalTxMonitorSizes object
@@ -139,7 +139,7 @@ func (o *ApiResponseLocalTxMonitorSizes) SetTxCount(v int32) {
 }
 
 func (o ApiResponseLocalTxMonitorSizes) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,7 +169,9 @@ func (v NullableApiResponseLocalTxMonitorSizes) Get() *ApiResponseLocalTxMonitor
 	return v.value
 }
 
-func (v *NullableApiResponseLocalTxMonitorSizes) Set(val *ApiResponseLocalTxMonitorSizes) {
+func (v *NullableApiResponseLocalTxMonitorSizes) Set(
+	val *ApiResponseLocalTxMonitorSizes,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -183,7 +185,9 @@ func (v *NullableApiResponseLocalTxMonitorSizes) Unset() {
 	v.isSet = false
 }
 
-func NewNullableApiResponseLocalTxMonitorSizes(val *ApiResponseLocalTxMonitorSizes) *NullableApiResponseLocalTxMonitorSizes {
+func NewNullableApiResponseLocalTxMonitorSizes(
+	val *ApiResponseLocalTxMonitorSizes,
+) *NullableApiResponseLocalTxMonitorSizes {
 	return &NullableApiResponseLocalTxMonitorSizes{value: val, isSet: true}
 }
 
@@ -191,9 +195,9 @@ func (v NullableApiResponseLocalTxMonitorSizes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableApiResponseLocalTxMonitorSizes) UnmarshalJSON(src []byte) error {
+func (v *NullableApiResponseLocalTxMonitorSizes) UnmarshalJSON(
+	src []byte,
+) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

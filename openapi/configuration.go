@@ -63,9 +63,9 @@ type ServerVariable struct {
 
 // ServerConfiguration stores the information about a server
 type ServerConfiguration struct {
-	URL string
+	URL         string
 	Description string
-	Variables map[string]ServerVariable
+	Variables   map[string]ServerVariable
 }
 
 // ServerConfigurations stores multiple ServerConfiguration items
@@ -86,17 +86,16 @@ type Configuration struct {
 // NewConfiguration returns a new Configuration object
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
-		DefaultHeader:    make(map[string]string),
-		UserAgent:        "OpenAPI-Generator/1.0.0/go",
-		Debug:            false,
-		Servers:          ServerConfigurations{
+		DefaultHeader: make(map[string]string),
+		UserAgent:     "OpenAPI-Generator/1.0.0/go",
+		Debug:         false,
+		Servers: ServerConfigurations{
 			{
-				URL: "http://localhost/api",
+				URL:         "/api",
 				Description: "No description provided",
 			},
 		},
-		OperationServers: map[string]ServerConfigurations{
-		},
+		OperationServers: map[string]ServerConfigurations{},
 	}
 	return cfg
 }
@@ -107,7 +106,10 @@ func (c *Configuration) AddDefaultHeader(key string, value string) {
 }
 
 // URL formats template on a index using given variables
-func (sc ServerConfigurations) URL(index int, variables map[string]string) (string, error) {
+func (sc ServerConfigurations) URL(
+	index int,
+	variables map[string]string,
+) (string, error) {
 	if index < 0 || len(sc) <= index {
 		return "", fmt.Errorf("index %v out of range %v", index, len(sc)-1)
 	}
@@ -124,7 +126,12 @@ func (sc ServerConfigurations) URL(index int, variables map[string]string) (stri
 				}
 			}
 			if !found {
-				return "", fmt.Errorf("the variable %s in the server URL has invalid value %v. Must be %v", name, value, variable.EnumValues)
+				return "", fmt.Errorf(
+					"the variable %s in the server URL has invalid value %v. Must be %v",
+					name,
+					value,
+					variable.EnumValues,
+				)
 			}
 			url = strings.Replace(url, "{"+name+"}", value, -1)
 		} else {
@@ -135,7 +142,10 @@ func (sc ServerConfigurations) URL(index int, variables map[string]string) (stri
 }
 
 // ServerURL returns URL based on server settings
-func (c *Configuration) ServerURL(index int, variables map[string]string) (string, error) {
+func (c *Configuration) ServerURL(
+	index int,
+	variables map[string]string,
+) (string, error) {
 	return c.Servers.URL(index, variables)
 }
 
@@ -150,11 +160,17 @@ func getServerIndex(ctx context.Context) (int, error) {
 	return 0, nil
 }
 
-func getServerOperationIndex(ctx context.Context, endpoint string) (int, error) {
+func getServerOperationIndex(
+	ctx context.Context,
+	endpoint string,
+) (int, error) {
 	osi := ctx.Value(ContextOperationServerIndices)
 	if osi != nil {
 		if operationIndices, ok := osi.(map[string]int); !ok {
-			return 0, reportError("Invalid type %T should be map[string]int", osi)
+			return 0, reportError(
+				"Invalid type %T should be map[string]int",
+				osi,
+			)
 		} else {
 			index, ok := operationIndices[endpoint]
 			if ok {
@@ -171,16 +187,25 @@ func getServerVariables(ctx context.Context) (map[string]string, error) {
 		if variables, ok := sv.(map[string]string); ok {
 			return variables, nil
 		}
-		return nil, reportError("ctx value of ContextServerVariables has invalid type %T should be map[string]string", sv)
+		return nil, reportError(
+			"ctx value of ContextServerVariables has invalid type %T should be map[string]string",
+			sv,
+		)
 	}
 	return nil, nil
 }
 
-func getServerOperationVariables(ctx context.Context, endpoint string) (map[string]string, error) {
+func getServerOperationVariables(
+	ctx context.Context,
+	endpoint string,
+) (map[string]string, error) {
 	osv := ctx.Value(ContextOperationServerVariables)
 	if osv != nil {
 		if operationVariables, ok := osv.(map[string]map[string]string); !ok {
-			return nil, reportError("ctx value of ContextOperationServerVariables has invalid type %T should be map[string]map[string]string", osv)
+			return nil, reportError(
+				"ctx value of ContextOperationServerVariables has invalid type %T should be map[string]map[string]string",
+				osv,
+			)
 		} else {
 			variables, ok := operationVariables[endpoint]
 			if ok {
@@ -192,7 +217,10 @@ func getServerOperationVariables(ctx context.Context, endpoint string) (map[stri
 }
 
 // ServerURLWithContext returns a new server URL given an endpoint
-func (c *Configuration) ServerURLWithContext(ctx context.Context, endpoint string) (string, error) {
+func (c *Configuration) ServerURLWithContext(
+	ctx context.Context,
+	endpoint string,
+) (string, error) {
 	sc, ok := c.OperationServers[endpoint]
 	if !ok {
 		sc = c.Servers
