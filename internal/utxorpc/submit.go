@@ -116,11 +116,20 @@ func (s *submitServiceServer) WaitForTx(
 
 	// Log the transaction references at debug level
 	for i, r := range ref {
-		logger.Debug("Transaction reference", "index", i, "ref", hex.EncodeToString(r))
+		logger.Debug(
+			"Transaction reference",
+			"index",
+			i,
+			"ref",
+			hex.EncodeToString(r),
+		)
 	}
 
 	// Setup event channel
-	eventChan := make(chan event.Event, 100) // Increased buffer size for high-throughput
+	eventChan := make(
+		chan event.Event,
+		100,
+	) // Increased buffer size for high-throughput
 	connCfg := node.ConnectionConfig{
 		ChainSyncEventChan: eventChan,
 	}

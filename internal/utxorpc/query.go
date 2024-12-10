@@ -153,7 +153,9 @@ func (s *queryServiceServer) ReadUtxos(
 					if isAllZeroes {
 						// No actual datum; set Datum to nil to omit it
 						audc.Cardano.Datum = nil
-						log.Print("Datum Hash is all zeroes; setting Datum to nil")
+						log.Print(
+							"Datum Hash is all zeroes; setting Datum to nil",
+						)
 					} else {
 						log.Printf("Datum Hash present: %x", audc.Cardano.Datum.Hash)
 					}
@@ -167,7 +169,11 @@ func (s *queryServiceServer) ReadUtxos(
 		Slot: point.Slot,
 		Hash: point.Hash,
 	}
-	log.Printf("Prepared response with LedgerTip: Slot=%v, Hash=%v", resp.LedgerTip.Slot, resp.LedgerTip.Hash)
+	log.Printf(
+		"Prepared response with LedgerTip: Slot=%v, Hash=%v",
+		resp.LedgerTip.Slot,
+		resp.LedgerTip.Hash,
+	)
 	log.Printf("Final response: %v", resp)
 	return connect.NewResponse(resp), nil
 }
@@ -195,7 +201,10 @@ func (s *queryServiceServer) SearchUtxos(
 			var addr common.Address
 			err := addr.UnmarshalCBOR(exactAddressBytes)
 			if err != nil {
-				return nil, fmt.Errorf("failed to decode exact address: %w", err)
+				return nil, fmt.Errorf(
+					"failed to decode exact address: %w",
+					err,
+				)
 			}
 			addresses = append(addresses, addr)
 		}
@@ -219,7 +228,10 @@ func (s *queryServiceServer) SearchUtxos(
 			var delegationAddr common.Address
 			err := delegationAddr.UnmarshalCBOR(delegationPart)
 			if err != nil {
-				return nil, fmt.Errorf("failed to decode delegation part: %w", err)
+				return nil, fmt.Errorf(
+					"failed to decode delegation part: %w",
+					err,
+				)
 			}
 			addresses = append(addresses, delegationAddr)
 		}

@@ -34,7 +34,7 @@ type DefaultAPI interface {
 	) DefaultAPILocaltxsubmissionTxPostRequest
 
 	// LocaltxsubmissionTxPostExecute executes the request
-	//  @return string
+	//	@return	string
 	LocaltxsubmissionTxPostExecute(
 		r DefaultAPILocaltxsubmissionTxPostRequest,
 	) (string, *http.Response, error)
@@ -80,7 +80,7 @@ func (a *DefaultAPIService) LocaltxsubmissionTxPost(
 
 // Execute executes the request
 //
-//	@return string
+//	@return	string
 func (a *DefaultAPIService) LocaltxsubmissionTxPostExecute(
 	r DefaultAPILocaltxsubmissionTxPostRequest,
 ) (string, *http.Response, error) {
