@@ -20,7 +20,7 @@ var _ MappedNullable = &ApiResponseLocalStateQueryCurrentEra{}
 
 // ApiResponseLocalStateQueryCurrentEra struct for ApiResponseLocalStateQueryCurrentEra
 type ApiResponseLocalStateQueryCurrentEra struct {
-	Id *int32 `json:"id,omitempty"`
+	Id   *int32  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
@@ -106,7 +106,7 @@ func (o *ApiResponseLocalStateQueryCurrentEra) SetName(v string) {
 }
 
 func (o ApiResponseLocalStateQueryCurrentEra) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -133,7 +133,9 @@ func (v NullableApiResponseLocalStateQueryCurrentEra) Get() *ApiResponseLocalSta
 	return v.value
 }
 
-func (v *NullableApiResponseLocalStateQueryCurrentEra) Set(val *ApiResponseLocalStateQueryCurrentEra) {
+func (v *NullableApiResponseLocalStateQueryCurrentEra) Set(
+	val *ApiResponseLocalStateQueryCurrentEra,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -147,17 +149,22 @@ func (v *NullableApiResponseLocalStateQueryCurrentEra) Unset() {
 	v.isSet = false
 }
 
-func NewNullableApiResponseLocalStateQueryCurrentEra(val *ApiResponseLocalStateQueryCurrentEra) *NullableApiResponseLocalStateQueryCurrentEra {
-	return &NullableApiResponseLocalStateQueryCurrentEra{value: val, isSet: true}
+func NewNullableApiResponseLocalStateQueryCurrentEra(
+	val *ApiResponseLocalStateQueryCurrentEra,
+) *NullableApiResponseLocalStateQueryCurrentEra {
+	return &NullableApiResponseLocalStateQueryCurrentEra{
+		value: val,
+		isSet: true,
+	}
 }
 
 func (v NullableApiResponseLocalStateQueryCurrentEra) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableApiResponseLocalStateQueryCurrentEra) UnmarshalJSON(src []byte) error {
+func (v *NullableApiResponseLocalStateQueryCurrentEra) UnmarshalJSON(
+	src []byte,
+) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

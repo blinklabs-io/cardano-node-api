@@ -21,7 +21,7 @@ var _ MappedNullable = &ApiResponseLocalTxMonitorTxs{}
 // ApiResponseLocalTxMonitorTxs struct for ApiResponseLocalTxMonitorTxs
 type ApiResponseLocalTxMonitorTxs struct {
 	TxBytes *string `json:"tx_bytes,omitempty"`
-	TxHash *string `json:"tx_hash,omitempty"`
+	TxHash  *string `json:"tx_hash,omitempty"`
 }
 
 // NewApiResponseLocalTxMonitorTxs instantiates a new ApiResponseLocalTxMonitorTxs object
@@ -106,7 +106,7 @@ func (o *ApiResponseLocalTxMonitorTxs) SetTxHash(v string) {
 }
 
 func (o ApiResponseLocalTxMonitorTxs) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -133,7 +133,9 @@ func (v NullableApiResponseLocalTxMonitorTxs) Get() *ApiResponseLocalTxMonitorTx
 	return v.value
 }
 
-func (v *NullableApiResponseLocalTxMonitorTxs) Set(val *ApiResponseLocalTxMonitorTxs) {
+func (v *NullableApiResponseLocalTxMonitorTxs) Set(
+	val *ApiResponseLocalTxMonitorTxs,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -147,7 +149,9 @@ func (v *NullableApiResponseLocalTxMonitorTxs) Unset() {
 	v.isSet = false
 }
 
-func NewNullableApiResponseLocalTxMonitorTxs(val *ApiResponseLocalTxMonitorTxs) *NullableApiResponseLocalTxMonitorTxs {
+func NewNullableApiResponseLocalTxMonitorTxs(
+	val *ApiResponseLocalTxMonitorTxs,
+) *NullableApiResponseLocalTxMonitorTxs {
 	return &NullableApiResponseLocalTxMonitorTxs{value: val, isSet: true}
 }
 
@@ -159,5 +163,3 @@ func (v *NullableApiResponseLocalTxMonitorTxs) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

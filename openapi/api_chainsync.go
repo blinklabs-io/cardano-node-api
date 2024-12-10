@@ -19,46 +19,53 @@ import (
 	"net/url"
 )
 
-
 type ChainsyncAPI interface {
 
 	/*
-	ChainsyncSyncGet Start a chain-sync using a websocket for events
+		ChainsyncSyncGet Start a chain-sync using a websocket for events
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ChainsyncAPIChainsyncSyncGetRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ChainsyncAPIChainsyncSyncGetRequest
 	*/
 	ChainsyncSyncGet(ctx context.Context) ChainsyncAPIChainsyncSyncGetRequest
 
 	// ChainsyncSyncGetExecute executes the request
-	ChainsyncSyncGetExecute(r ChainsyncAPIChainsyncSyncGetRequest) (*http.Response, error)
+	ChainsyncSyncGetExecute(
+		r ChainsyncAPIChainsyncSyncGetRequest,
+	) (*http.Response, error)
 }
 
 // ChainsyncAPIService ChainsyncAPI service
 type ChainsyncAPIService service
 
 type ChainsyncAPIChainsyncSyncGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService ChainsyncAPI
-	tip *bool
-	slot *int32
-	hash *string
+	tip        *bool
+	slot       *int32
+	hash       *string
 }
 
 // whether to start from the current tip
-func (r ChainsyncAPIChainsyncSyncGetRequest) Tip(tip bool) ChainsyncAPIChainsyncSyncGetRequest {
+func (r ChainsyncAPIChainsyncSyncGetRequest) Tip(
+	tip bool,
+) ChainsyncAPIChainsyncSyncGetRequest {
 	r.tip = &tip
 	return r
 }
 
 // slot to start sync at, should match hash
-func (r ChainsyncAPIChainsyncSyncGetRequest) Slot(slot int32) ChainsyncAPIChainsyncSyncGetRequest {
+func (r ChainsyncAPIChainsyncSyncGetRequest) Slot(
+	slot int32,
+) ChainsyncAPIChainsyncSyncGetRequest {
 	r.slot = &slot
 	return r
 }
 
 // block hash to start sync at, should match slot
-func (r ChainsyncAPIChainsyncSyncGetRequest) Hash(hash string) ChainsyncAPIChainsyncSyncGetRequest {
+func (r ChainsyncAPIChainsyncSyncGetRequest) Hash(
+	hash string,
+) ChainsyncAPIChainsyncSyncGetRequest {
 	r.hash = &hash
 	return r
 }
@@ -70,25 +77,32 @@ func (r ChainsyncAPIChainsyncSyncGetRequest) Execute() (*http.Response, error) {
 /*
 ChainsyncSyncGet Start a chain-sync using a websocket for events
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ChainsyncAPIChainsyncSyncGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ChainsyncAPIChainsyncSyncGetRequest
 */
-func (a *ChainsyncAPIService) ChainsyncSyncGet(ctx context.Context) ChainsyncAPIChainsyncSyncGetRequest {
+func (a *ChainsyncAPIService) ChainsyncSyncGet(
+	ctx context.Context,
+) ChainsyncAPIChainsyncSyncGetRequest {
 	return ChainsyncAPIChainsyncSyncGetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-func (a *ChainsyncAPIService) ChainsyncSyncGetExecute(r ChainsyncAPIChainsyncSyncGetRequest) (*http.Response, error) {
+func (a *ChainsyncAPIService) ChainsyncSyncGetExecute(
+	r ChainsyncAPIChainsyncSyncGetRequest,
+) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodGet
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChainsyncAPIService.ChainsyncSyncGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"ChainsyncAPIService.ChainsyncSyncGet",
+	)
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -100,13 +114,13 @@ func (a *ChainsyncAPIService) ChainsyncSyncGetExecute(r ChainsyncAPIChainsyncSyn
 	localVarFormParams := url.Values{}
 
 	if r.tip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tip", r.tip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tip", r.tip, "", "")
 	}
 	if r.slot != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "slot", r.slot, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "slot", r.slot, "", "")
 	}
 	if r.hash != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "hash", r.hash, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "hash", r.hash, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -125,7 +139,16 @@ func (a *ChainsyncAPIService) ChainsyncSyncGetExecute(r ChainsyncAPIChainsyncSyn
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -149,24 +172,32 @@ func (a *ChainsyncAPIService) ChainsyncSyncGetExecute(r ChainsyncAPIChainsyncSyn
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ApiResponseApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiResponseApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}

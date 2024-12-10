@@ -11,7 +11,7 @@ info:
   title: cardano-node-api
   version: "1.0"
 servers:
-- url: http://localhost/api
+- url: /api
 paths:
   /chainsync/sync:
     get:
@@ -259,6 +259,8 @@ paths:
                 type: string
           description: Server Error
       summary: Submit Tx
+      tags:
+      - localtxsubmission
 components:
   schemas:
     api.responseApiError:

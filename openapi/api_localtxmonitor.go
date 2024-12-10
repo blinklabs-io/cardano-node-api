@@ -20,54 +20,66 @@ import (
 	"strings"
 )
 
-
 type LocaltxmonitorAPI interface {
 
 	/*
-	LocaltxmonitorHasTxTxHashGet Check if a particular TX exists in the mempool
+		LocaltxmonitorHasTxTxHashGet Check if a particular TX exists in the mempool
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param txHash Transaction hash (hex string)
-	@return LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param txHash Transaction hash (hex string)
+		@return LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest
 	*/
-	LocaltxmonitorHasTxTxHashGet(ctx context.Context, txHash string) LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest
+	LocaltxmonitorHasTxTxHashGet(
+		ctx context.Context,
+		txHash string,
+	) LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest
 
 	// LocaltxmonitorHasTxTxHashGetExecute executes the request
 	//  @return ApiResponseLocalTxMonitorHasTx
-	LocaltxmonitorHasTxTxHashGetExecute(r LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest) (*ApiResponseLocalTxMonitorHasTx, *http.Response, error)
+	LocaltxmonitorHasTxTxHashGetExecute(
+		r LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest,
+	) (*ApiResponseLocalTxMonitorHasTx, *http.Response, error)
 
 	/*
-	LocaltxmonitorSizesGet Get mempool capacity, size, and TX count
+		LocaltxmonitorSizesGet Get mempool capacity, size, and TX count
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return LocaltxmonitorAPILocaltxmonitorSizesGetRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return LocaltxmonitorAPILocaltxmonitorSizesGetRequest
 	*/
-	LocaltxmonitorSizesGet(ctx context.Context) LocaltxmonitorAPILocaltxmonitorSizesGetRequest
+	LocaltxmonitorSizesGet(
+		ctx context.Context,
+	) LocaltxmonitorAPILocaltxmonitorSizesGetRequest
 
 	// LocaltxmonitorSizesGetExecute executes the request
 	//  @return ApiResponseLocalTxMonitorSizes
-	LocaltxmonitorSizesGetExecute(r LocaltxmonitorAPILocaltxmonitorSizesGetRequest) (*ApiResponseLocalTxMonitorSizes, *http.Response, error)
+	LocaltxmonitorSizesGetExecute(
+		r LocaltxmonitorAPILocaltxmonitorSizesGetRequest,
+	) (*ApiResponseLocalTxMonitorSizes, *http.Response, error)
 
 	/*
-	LocaltxmonitorTxsGet List all transactions in the mempool
+		LocaltxmonitorTxsGet List all transactions in the mempool
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return LocaltxmonitorAPILocaltxmonitorTxsGetRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return LocaltxmonitorAPILocaltxmonitorTxsGetRequest
 	*/
-	LocaltxmonitorTxsGet(ctx context.Context) LocaltxmonitorAPILocaltxmonitorTxsGetRequest
+	LocaltxmonitorTxsGet(
+		ctx context.Context,
+	) LocaltxmonitorAPILocaltxmonitorTxsGetRequest
 
 	// LocaltxmonitorTxsGetExecute executes the request
 	//  @return []ApiResponseLocalTxMonitorTxs
-	LocaltxmonitorTxsGetExecute(r LocaltxmonitorAPILocaltxmonitorTxsGetRequest) ([]ApiResponseLocalTxMonitorTxs, *http.Response, error)
+	LocaltxmonitorTxsGetExecute(
+		r LocaltxmonitorAPILocaltxmonitorTxsGetRequest,
+	) ([]ApiResponseLocalTxMonitorTxs, *http.Response, error)
 }
 
 // LocaltxmonitorAPIService LocaltxmonitorAPI service
 type LocaltxmonitorAPIService service
 
 type LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService LocaltxmonitorAPI
-	txHash string
+	txHash     string
 }
 
 func (r LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest) Execute() (*ApiResponseLocalTxMonitorHasTx, *http.Response, error) {
@@ -77,35 +89,51 @@ func (r LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest) Execute() (*ApiRes
 /*
 LocaltxmonitorHasTxTxHashGet Check if a particular TX exists in the mempool
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param txHash Transaction hash (hex string)
- @return LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param txHash Transaction hash (hex string)
+	@return LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest
 */
-func (a *LocaltxmonitorAPIService) LocaltxmonitorHasTxTxHashGet(ctx context.Context, txHash string) LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest {
+func (a *LocaltxmonitorAPIService) LocaltxmonitorHasTxTxHashGet(
+	ctx context.Context,
+	txHash string,
+) LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest {
 	return LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest{
 		ApiService: a,
-		ctx: ctx,
-		txHash: txHash,
+		ctx:        ctx,
+		txHash:     txHash,
 	}
 }
 
 // Execute executes the request
-//  @return ApiResponseLocalTxMonitorHasTx
-func (a *LocaltxmonitorAPIService) LocaltxmonitorHasTxTxHashGetExecute(r LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest) (*ApiResponseLocalTxMonitorHasTx, *http.Response, error) {
+//
+//	@return ApiResponseLocalTxMonitorHasTx
+func (a *LocaltxmonitorAPIService) LocaltxmonitorHasTxTxHashGetExecute(
+	r LocaltxmonitorAPILocaltxmonitorHasTxTxHashGetRequest,
+) (*ApiResponseLocalTxMonitorHasTx, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ApiResponseLocalTxMonitorHasTx
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ApiResponseLocalTxMonitorHasTx
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocaltxmonitorAPIService.LocaltxmonitorHasTxTxHashGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"LocaltxmonitorAPIService.LocaltxmonitorHasTxTxHashGet",
+	)
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{
+			error: err.Error(),
+		}
 	}
 
 	localVarPath := localBasePath + "/localtxmonitor/has_tx/{tx_hash}"
-	localVarPath = strings.Replace(localVarPath, "{"+"tx_hash"+"}", url.PathEscape(parameterValueToString(r.txHash, "txHash")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"tx_hash"+"}",
+		url.PathEscape(parameterValueToString(r.txHash, "txHash")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -128,7 +156,16 @@ func (a *LocaltxmonitorAPIService) LocaltxmonitorHasTxTxHashGetExecute(r Localtx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -152,18 +189,26 @@ func (a *LocaltxmonitorAPIService) LocaltxmonitorHasTxTxHashGetExecute(r Localtx
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiResponseApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -176,7 +221,7 @@ func (a *LocaltxmonitorAPIService) LocaltxmonitorHasTxTxHashGetExecute(r Localtx
 }
 
 type LocaltxmonitorAPILocaltxmonitorSizesGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService LocaltxmonitorAPI
 }
 
@@ -187,29 +232,39 @@ func (r LocaltxmonitorAPILocaltxmonitorSizesGetRequest) Execute() (*ApiResponseL
 /*
 LocaltxmonitorSizesGet Get mempool capacity, size, and TX count
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return LocaltxmonitorAPILocaltxmonitorSizesGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return LocaltxmonitorAPILocaltxmonitorSizesGetRequest
 */
-func (a *LocaltxmonitorAPIService) LocaltxmonitorSizesGet(ctx context.Context) LocaltxmonitorAPILocaltxmonitorSizesGetRequest {
+func (a *LocaltxmonitorAPIService) LocaltxmonitorSizesGet(
+	ctx context.Context,
+) LocaltxmonitorAPILocaltxmonitorSizesGetRequest {
 	return LocaltxmonitorAPILocaltxmonitorSizesGetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ApiResponseLocalTxMonitorSizes
-func (a *LocaltxmonitorAPIService) LocaltxmonitorSizesGetExecute(r LocaltxmonitorAPILocaltxmonitorSizesGetRequest) (*ApiResponseLocalTxMonitorSizes, *http.Response, error) {
+//
+//	@return ApiResponseLocalTxMonitorSizes
+func (a *LocaltxmonitorAPIService) LocaltxmonitorSizesGetExecute(
+	r LocaltxmonitorAPILocaltxmonitorSizesGetRequest,
+) (*ApiResponseLocalTxMonitorSizes, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ApiResponseLocalTxMonitorSizes
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ApiResponseLocalTxMonitorSizes
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocaltxmonitorAPIService.LocaltxmonitorSizesGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"LocaltxmonitorAPIService.LocaltxmonitorSizesGet",
+	)
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{
+			error: err.Error(),
+		}
 	}
 
 	localVarPath := localBasePath + "/localtxmonitor/sizes"
@@ -235,7 +290,16 @@ func (a *LocaltxmonitorAPIService) LocaltxmonitorSizesGetExecute(r Localtxmonito
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -259,18 +323,26 @@ func (a *LocaltxmonitorAPIService) LocaltxmonitorSizesGetExecute(r Localtxmonito
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiResponseApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -283,7 +355,7 @@ func (a *LocaltxmonitorAPIService) LocaltxmonitorSizesGetExecute(r Localtxmonito
 }
 
 type LocaltxmonitorAPILocaltxmonitorTxsGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService LocaltxmonitorAPI
 }
 
@@ -294,29 +366,39 @@ func (r LocaltxmonitorAPILocaltxmonitorTxsGetRequest) Execute() ([]ApiResponseLo
 /*
 LocaltxmonitorTxsGet List all transactions in the mempool
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return LocaltxmonitorAPILocaltxmonitorTxsGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return LocaltxmonitorAPILocaltxmonitorTxsGetRequest
 */
-func (a *LocaltxmonitorAPIService) LocaltxmonitorTxsGet(ctx context.Context) LocaltxmonitorAPILocaltxmonitorTxsGetRequest {
+func (a *LocaltxmonitorAPIService) LocaltxmonitorTxsGet(
+	ctx context.Context,
+) LocaltxmonitorAPILocaltxmonitorTxsGetRequest {
 	return LocaltxmonitorAPILocaltxmonitorTxsGetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []ApiResponseLocalTxMonitorTxs
-func (a *LocaltxmonitorAPIService) LocaltxmonitorTxsGetExecute(r LocaltxmonitorAPILocaltxmonitorTxsGetRequest) ([]ApiResponseLocalTxMonitorTxs, *http.Response, error) {
+//
+//	@return []ApiResponseLocalTxMonitorTxs
+func (a *LocaltxmonitorAPIService) LocaltxmonitorTxsGetExecute(
+	r LocaltxmonitorAPILocaltxmonitorTxsGetRequest,
+) ([]ApiResponseLocalTxMonitorTxs, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ApiResponseLocalTxMonitorTxs
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ApiResponseLocalTxMonitorTxs
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocaltxmonitorAPIService.LocaltxmonitorTxsGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"LocaltxmonitorAPIService.LocaltxmonitorTxsGet",
+	)
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{
+			error: err.Error(),
+		}
 	}
 
 	localVarPath := localBasePath + "/localtxmonitor/txs"
@@ -342,7 +424,16 @@ func (a *LocaltxmonitorAPIService) LocaltxmonitorTxsGetExecute(r LocaltxmonitorA
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -366,18 +457,26 @@ func (a *LocaltxmonitorAPIService) LocaltxmonitorTxsGetExecute(r LocaltxmonitorA
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiResponseApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

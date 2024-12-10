@@ -11,10 +11,10 @@ package openapi
 
 import (
 	"context"
+	openapiclient "github.com/blinklabs-io/cardano-node-api/openapi"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/blinklabs-io/cardano-node-api/openapi"
 )
 
 func Test_openapi_LocalstatequeryAPIService(t *testing.T) {
@@ -22,76 +22,100 @@ func Test_openapi_LocalstatequeryAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test LocalstatequeryAPIService LocalstatequeryCurrentEraGet", func(t *testing.T) {
+	t.Run(
+		"Test LocalstatequeryAPIService LocalstatequeryCurrentEraGet",
+		func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+			t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequeryCurrentEraGet(context.Background()).Execute()
+			resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequeryCurrentEraGet(context.Background()).
+				Execute()
 
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
+			require.Nil(t, err)
+			require.NotNil(t, resp)
+			assert.Equal(t, 200, httpRes.StatusCode)
 
-	})
+		},
+	)
 
-	t.Run("Test LocalstatequeryAPIService LocalstatequeryEraHistoryGet", func(t *testing.T) {
+	t.Run(
+		"Test LocalstatequeryAPIService LocalstatequeryEraHistoryGet",
+		func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+			t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequeryEraHistoryGet(context.Background()).Execute()
+			resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequeryEraHistoryGet(context.Background()).
+				Execute()
 
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
+			require.Nil(t, err)
+			require.NotNil(t, resp)
+			assert.Equal(t, 200, httpRes.StatusCode)
 
-	})
+		},
+	)
 
-	t.Run("Test LocalstatequeryAPIService LocalstatequeryGenesisConfigGet", func(t *testing.T) {
+	t.Run(
+		"Test LocalstatequeryAPIService LocalstatequeryGenesisConfigGet",
+		func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+			t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequeryGenesisConfigGet(context.Background()).Execute()
+			resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequeryGenesisConfigGet(context.Background()).
+				Execute()
 
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
+			require.Nil(t, err)
+			require.NotNil(t, resp)
+			assert.Equal(t, 200, httpRes.StatusCode)
 
-	})
+		},
+	)
 
-	t.Run("Test LocalstatequeryAPIService LocalstatequeryProtocolParamsGet", func(t *testing.T) {
+	t.Run(
+		"Test LocalstatequeryAPIService LocalstatequeryProtocolParamsGet",
+		func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+			t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequeryProtocolParamsGet(context.Background()).Execute()
+			resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequeryProtocolParamsGet(context.Background()).
+				Execute()
 
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
+			require.Nil(t, err)
+			require.NotNil(t, resp)
+			assert.Equal(t, 200, httpRes.StatusCode)
 
-	})
+		},
+	)
 
-	t.Run("Test LocalstatequeryAPIService LocalstatequerySystemStartGet", func(t *testing.T) {
+	t.Run(
+		"Test LocalstatequeryAPIService LocalstatequerySystemStartGet",
+		func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+			t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequerySystemStartGet(context.Background()).Execute()
+			resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequerySystemStartGet(context.Background()).
+				Execute()
 
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
+			require.Nil(t, err)
+			require.NotNil(t, resp)
+			assert.Equal(t, 200, httpRes.StatusCode)
 
-	})
+		},
+	)
 
-	t.Run("Test LocalstatequeryAPIService LocalstatequeryTipGet", func(t *testing.T) {
+	t.Run(
+		"Test LocalstatequeryAPIService LocalstatequeryTipGet",
+		func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+			t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequeryTipGet(context.Background()).Execute()
+			resp, httpRes, err := apiClient.LocalstatequeryAPI.LocalstatequeryTipGet(context.Background()).
+				Execute()
 
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
+			require.Nil(t, err)
+			require.NotNil(t, resp)
+			assert.Equal(t, 200, httpRes.StatusCode)
 
-	})
+		},
+	)
 
 }

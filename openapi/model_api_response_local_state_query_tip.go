@@ -20,11 +20,11 @@ var _ MappedNullable = &ApiResponseLocalStateQueryTip{}
 
 // ApiResponseLocalStateQueryTip struct for ApiResponseLocalStateQueryTip
 type ApiResponseLocalStateQueryTip struct {
-	BlockNo *int32 `json:"block_no,omitempty"`
-	EpochNo *int32 `json:"epoch_no,omitempty"`
-	Era *string `json:"era,omitempty"`
-	Hash *string `json:"hash,omitempty"`
-	SlotNo *int32 `json:"slot_no,omitempty"`
+	BlockNo *int32  `json:"block_no,omitempty"`
+	EpochNo *int32  `json:"epoch_no,omitempty"`
+	Era     *string `json:"era,omitempty"`
+	Hash    *string `json:"hash,omitempty"`
+	SlotNo  *int32  `json:"slot_no,omitempty"`
 }
 
 // NewApiResponseLocalStateQueryTip instantiates a new ApiResponseLocalStateQueryTip object
@@ -205,7 +205,7 @@ func (o *ApiResponseLocalStateQueryTip) SetSlotNo(v int32) {
 }
 
 func (o ApiResponseLocalStateQueryTip) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -241,7 +241,9 @@ func (v NullableApiResponseLocalStateQueryTip) Get() *ApiResponseLocalStateQuery
 	return v.value
 }
 
-func (v *NullableApiResponseLocalStateQueryTip) Set(val *ApiResponseLocalStateQueryTip) {
+func (v *NullableApiResponseLocalStateQueryTip) Set(
+	val *ApiResponseLocalStateQueryTip,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -255,7 +257,9 @@ func (v *NullableApiResponseLocalStateQueryTip) Unset() {
 	v.isSet = false
 }
 
-func NewNullableApiResponseLocalStateQueryTip(val *ApiResponseLocalStateQueryTip) *NullableApiResponseLocalStateQueryTip {
+func NewNullableApiResponseLocalStateQueryTip(
+	val *ApiResponseLocalStateQueryTip,
+) *NullableApiResponseLocalStateQueryTip {
 	return &NullableApiResponseLocalStateQueryTip{value: val, isSet: true}
 }
 
@@ -263,9 +267,9 @@ func (v NullableApiResponseLocalStateQueryTip) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableApiResponseLocalStateQueryTip) UnmarshalJSON(src []byte) error {
+func (v *NullableApiResponseLocalStateQueryTip) UnmarshalJSON(
+	src []byte,
+) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
