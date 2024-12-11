@@ -45,6 +45,8 @@ jobs:
         arch: [amd64, arm64]
     runs-on: ubuntu-latest
     needs: [create-draft-release]
+    permissions:
+      id-token: write
     steps:
       - run: "echo \"RELEASE_TAG=${GITHUB_REF#refs/tags/}\" >> $GITHUB_ENV"
       - uses: actions/checkout@v4
@@ -76,6 +78,8 @@ jobs:
   build-images:
     runs-on: ubuntu-latest
     needs: [create-draft-release]
+    permissions:
+      id-token: write
     steps:
       - run: "echo \"RELEASE_TAG=${GITHUB_REF#refs/tags/}\" >> $GITHUB_ENV"
       - uses: actions/checkout@v4
