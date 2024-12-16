@@ -15,6 +15,7 @@
 package utxorpc
 
 import (
+	"bytes"
 	"context"
 	"encoding/hex"
 	"fmt"
@@ -192,8 +193,10 @@ func (s *queryServiceServer) SearchUtxos(
 		return nil, fmt.Errorf("ERROR: empty predicate: %v", predicate)
 	}
 
-	var addresses []common.Address
 	addressPattern := predicate.GetMatch().GetCardano().GetAddress()
+	assetPattern := predicate.GetMatch().GetCardano().GetAsset()
+
+	var addresses []common.Address
 	if addressPattern != nil {
 		// Handle Exact Address
 		exactAddressBytes := addressPattern.GetExactAddress()
@@ -263,6 +266,7 @@ func (s *queryServiceServer) SearchUtxos(
 		return nil, err
 	}
 
+	// Proceed to include the UTxO in the response
 	for utxoId, utxo := range utxos.Results {
 		var aud query.AnyUtxoData
 		var audc query.AnyUtxoData_Cardano
@@ -273,8 +277,32 @@ func (s *queryServiceServer) SearchUtxos(
 		aud.NativeBytes = utxo.Cbor()
 		audc.Cardano = utxo.Utxorpc()
 		aud.ParsedState = &audc
+
+		// If AssetPattern is specified, filter based on it
+		if assetPattern != nil {
+			assetFound := false
+			for _, multiasset := range audc.Cardano.Assets {
+				if bytes.Equal(multiasset.PolicyId, assetPattern.PolicyId) {
+					for _, asset := range multiasset.Assets {
+						if bytes.Equal(asset.Name, assetPattern.AssetName) {
+							assetFound = true
+							break
+						}
+					}
+				}
+				if assetFound {
+					break
+				}
+			}
+
+			// Asset not found; skip this UTxO
+			if !assetFound {
+				continue
+			}
+		}
 		resp.Items = append(resp.Items, &aud)
 	}
+
 	resp.LedgerTip = &query.ChainPoint{
 		Slot: point.Slot,
 		Hash: point.Hash,
