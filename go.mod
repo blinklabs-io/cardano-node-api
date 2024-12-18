@@ -8,7 +8,7 @@ require (
 	connectrpc.com/connect v1.17.0
 	connectrpc.com/grpchealth v1.3.0
 	connectrpc.com/grpcreflect v1.2.0
-	github.com/blinklabs-io/adder v0.25.1
+	github.com/blinklabs-io/adder v0.25.2
 	github.com/blinklabs-io/gouroboros v0.105.0
 	github.com/blinklabs-io/tx-submit-api v0.20.4
 	github.com/gin-contrib/zap v1.1.4
@@ -72,7 +72,7 @@ require (
 	github.com/x448/float16 v0.8.4 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.9.0 // indirect
-	golang.org/x/crypto v0.30.0 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
