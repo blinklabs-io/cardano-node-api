@@ -24,8 +24,8 @@ github.com/blinklabs-io/gouroboros v0.105.1 h1:if1FBgjEPX2JVKMPwXecfP55hXBNJCzMy
 github.com/blinklabs-io/gouroboros v0.105.1/go.mod h1:W7ENnAVntdrUg5c7SIfEhADTKgeXFNankI5Rfeyb5k4=
 github.com/blinklabs-io/ouroboros-mock v0.3.5 h1:/KWbSoH8Pjrd9uxOH7mVbI7XFsDCNW/O9FtLlvJDUpQ=
 github.com/blinklabs-io/ouroboros-mock v0.3.5/go.mod h1:JtUQ3Luo22hCnGBxuxNp6JaUx63VxidxWwmcaVMremw=
-github.com/blinklabs-io/tx-submit-api v0.20.4 h1:8Xx2+wMQhO01RLau9NKKRKfL4ybHiJ9Fb5riwY3gCyQ=
-github.com/blinklabs-io/tx-submit-api v0.20.4/go.mod h1:7OpNh8LnvlHYIx46Q+cdo00otKrqfPzo2JbtrRp9k8s=
+github.com/blinklabs-io/tx-submit-api v0.20.5 h1:e3V7sDs91V28Iy1OfLr94lMAb4OtInsBUXJVbbcBNC8=
+github.com/blinklabs-io/tx-submit-api v0.20.5/go.mod h1:+Iyzb4HH4I9B+chC8qGy7k4Klf5jWpy7vBqEFvv26jk=
 github.com/buger/jsonparser v1.1.1 h1:2PnMjfWD7wBILjqQbt530v576A/cAbQvEW9gGIpYMUs=
 github.com/buger/jsonparser v1.1.1/go.mod h1:6RYKKt7H4d4+iWqouImQ9R2FZql3VbhNgx27UK13J/0=
 github.com/bytedance/sonic v1.12.1 h1:jWl5Qz1fy7X1ioY74WqO0KjAMtAGQs4sYnjiEBiyX24=
