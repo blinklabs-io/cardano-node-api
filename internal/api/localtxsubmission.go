@@ -50,7 +50,7 @@ func handleLocalSubmitTx(c *gin.Context) {
 	// Check our headers for content-type
 	if c.ContentType() != "application/cbor" {
 		// Log the error, return an error to the user, and increment failed count
-		logger.Errorf("invalid request body, should be application/cbor")
+		logger.Error("invalid request body, should be application/cbor")
 		c.JSON(415, "invalid request body, should be application/cbor")
 		// _ = ginmetrics.GetMonitor().GetMetric("tx_submit_fail_count").Inc(nil)
 		return
@@ -59,7 +59,7 @@ func handleLocalSubmitTx(c *gin.Context) {
 	txRawBytes, err := io.ReadAll(c.Request.Body)
 	if err != nil {
 		// Log the error, return an error to the user, and increment failed count
-		logger.Errorf("failed to read request body: %s", err)
+		logger.Error("failed to read request body:", "error", err)
 		c.JSON(500, "failed to read request body")
 		// _ = ginmetrics.GetMonitor().GetMetric("tx_submit_fail_count").Inc(nil)
 		return
@@ -67,7 +67,7 @@ func handleLocalSubmitTx(c *gin.Context) {
 	// Close request body after read
 	if c.Request.Body != nil {
 		if err = c.Request.Body.Close(); err != nil {
-			logger.Errorf("failed to close request body: %s", err)
+			logger.Error("failed to close request body:", "error", err)
 		}
 	}
 	// Send TX
@@ -99,7 +99,7 @@ func handleLocalSubmitTx(c *gin.Context) {
 	go func() {
 		err, ok := <-errorChan
 		if ok {
-			logger.Errorf("failure communicating with node: %s", err)
+			logger.Error("failure communicating with node:", "error", err)
 			c.JSON(500, "failure communicating with node")
 			// _ = ginmetrics.GetMonitor().GetMetric("tx_submit_fail_count").Inc(nil)
 		}

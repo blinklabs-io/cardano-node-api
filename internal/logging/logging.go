@@ -1,4 +1,4 @@
-// Copyright 2023 Blink Labs Software
+// Copyright 2024 Blink Labs Software
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,56 +15,75 @@
 package logging
 
 import (
-	"github.com/blinklabs-io/cardano-node-api/internal/config"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
-	"log"
+	"log/slog"
+	"os"
 	"time"
+
+	"github.com/blinklabs-io/cardano-node-api/internal/config"
 )
 
-type Logger = zap.SugaredLogger
+var globalLogger *slog.Logger
+var accessLogger *slog.Logger
 
-var globalLogger *Logger
-
-func Setup(cfg *config.LoggingConfig) {
-	// Build our custom logging config
-	loggerConfig := zap.NewProductionConfig()
-	// Change timestamp key name
-	loggerConfig.EncoderConfig.TimeKey = "timestamp"
-	// Use a human readable time format
-	loggerConfig.EncoderConfig.EncodeTime = zapcore.TimeEncoderOfLayout(
-		time.RFC3339,
-	)
-
-	// Set level
-	if cfg.Level != "" {
-		level, err := zapcore.ParseLevel(cfg.Level)
-		if err != nil {
-			log.Fatalf("error configuring logger: %s", err)
-		}
-		loggerConfig.Level.SetLevel(level)
+// Configure initializes the global logger.
+func Configure() {
+	cfg := config.GetConfig()
+	var level slog.Level
+	switch cfg.Logging.Level {
+	case "debug":
+		level = slog.LevelDebug
+	case "info":
+		level = slog.LevelInfo
+	case "warn":
+		level = slog.LevelWarn
+	case "error":
+		level = slog.LevelError
+	default:
+		level = slog.LevelInfo
 	}
 
-	// Create the logger
-	l, err := loggerConfig.Build()
-	if err != nil {
-		log.Fatal(err)
-	}
+	handler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+		ReplaceAttr: func(groups []string, a slog.Attr) slog.Attr {
+			if a.Key == slog.TimeKey {
+				return slog.String(
+					"timestamp",
+					a.Value.Time().Format(time.RFC3339),
+				)
+			}
+			return a
+		},
+		Level: level,
+	})
+	globalLogger = slog.New(handler).With("component", "main")
 
-	// Store the "sugared" version of the logger
-	globalLogger = l.Sugar()
+	// Configure access logger
+	accessHandler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+		ReplaceAttr: func(groups []string, a slog.Attr) slog.Attr {
+			if a.Key == slog.TimeKey {
+				return slog.String(
+					"timestamp",
+					a.Value.Time().Format(time.RFC3339),
+				)
+			}
+			return a
+		},
+		Level: slog.LevelInfo,
+	})
+	accessLogger = slog.New(accessHandler).With("component", "access")
 }
 
-func GetLogger() *zap.SugaredLogger {
+// GetLogger returns the global application logger.
+func GetLogger() *slog.Logger {
+	if globalLogger == nil {
+		Configure()
+	}
 	return globalLogger
 }
 
-func GetDesugaredLogger() *zap.Logger {
-	return globalLogger.Desugar()
-}
-
-func GetAccessLogger() *zap.Logger {
-	return globalLogger.Desugar().
-		With(zap.String("type", "access")).
-		WithOptions(zap.WithCaller(false))
+// GetAccessLogger returns the access logger.
+func GetAccessLogger() *slog.Logger {
+	if accessLogger == nil {
+		Configure()
+	}
+	return accessLogger
 }

@@ -16,12 +16,11 @@ package api
 
 import (
 	"fmt"
-	"time"
+	"os"
 
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
 	"github.com/blinklabs-io/cardano-node-api/internal/logging"
 
-	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
 	"github.com/penglongli/gin-metrics/ginmetrics"
 
@@ -44,17 +43,17 @@ func Start(cfg *config.Config) error {
 	// Standard logging
 	logger := logging.GetLogger()
 	if cfg.Tls.CertFilePath != "" && cfg.Tls.KeyFilePath != "" {
-		logger.Infof(
+		logger.Info(fmt.Sprintf(
 			"starting API TLS listener on %s:%d",
 			cfg.Api.ListenAddress,
 			cfg.Api.ListenPort,
-		)
+		))
 	} else {
-		logger.Infof(
+		logger.Info(fmt.Sprintf(
 			"starting API listener on %s:%d",
 			cfg.Api.ListenAddress,
 			cfg.Api.ListenPort,
-		)
+		))
 	}
 	// Disable gin debug and color output
 	gin.SetMode(gin.ReleaseMode)
@@ -69,14 +68,15 @@ func Start(cfg *config.Config) error {
 	skipPaths := []string{}
 	if cfg.Logging.Healthchecks {
 		skipPaths = append(skipPaths, "/healthcheck")
-		logger.Infof("disabling access logs for /healthcheck")
+		logger.Info("disabling access logs for /healthcheck")
 	}
-	router.Use(ginzap.GinzapWithConfig(accessLogger, &ginzap.Config{
-		TimeFormat: time.RFC3339,
-		UTC:        true,
-		SkipPaths:  skipPaths,
-	}))
-	router.Use(ginzap.RecoveryWithZap(accessLogger, true))
+	accessMiddleware := func(c *gin.Context) {
+		accessLogger.Info("request received", "method", c.Request.Method, "path", c.Request.URL.Path, "remote_addr", c.ClientIP())
+		c.Next()
+		statusCode := c.Writer.Status()
+		accessLogger.Info("response sent", "status", statusCode, "method", c.Request.Method, "path", c.Request.URL.Path, "remote_addr", c.ClientIP())
+	}
+	router.Use(accessMiddleware)
 
 	// Create a healthcheck
 	router.GET("/healthcheck", handleHealthcheck)
@@ -104,14 +104,15 @@ func Start(cfg *config.Config) error {
 	// Start metrics listener
 	go func() {
 		// TODO: return error if we cannot initialize metrics
-		logger.Infof("starting metrics listener on %s:%d",
+		logger.Info(fmt.Sprintf("starting metrics listener on %s:%d",
 			cfg.Metrics.ListenAddress,
-			cfg.Metrics.ListenPort)
+			cfg.Metrics.ListenPort))
 		err := metricsRouter.Run(fmt.Sprintf("%s:%d",
 			cfg.Metrics.ListenAddress,
 			cfg.Metrics.ListenPort))
 		if err != nil {
-			logger.Fatalf("failed to start metrics listener: %s", err)
+			logger.Error("failed to start metrics listener:", "error", err)
+			os.Exit(1)
 		}
 	}()
 
