@@ -71,6 +71,11 @@ func Start(cfg *config.Config) error {
 		logger.Info("disabling access logs for /healthcheck")
 	}
 	accessMiddleware := func(c *gin.Context) {
+		for _, p := range skipPaths {
+			if c.Request.URL.Path == p {
+				return
+			}
+		}
 		accessLogger.Info("request received", "method", c.Request.Method, "path", c.Request.URL.Path, "remote_addr", c.ClientIP())
 		c.Next()
 		statusCode := c.Writer.Status()
