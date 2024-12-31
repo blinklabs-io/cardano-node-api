@@ -52,40 +52,29 @@ func main() {
 	}
 
 	// Configure logging
-	logging.Setup(&cfg.Logging)
+	logging.Configure()
 	logger := logging.GetLogger()
-	// Sync logger on exit
-	defer func() {
-		if err := logger.Sync(); err != nil {
-			// We don't actually care about the error here, but we have to do something
-			// to appease the linter
-			return
-		}
-	}()
 
 	// Test node connection
 	if cfg.Node.SkipCheck {
-		logger.Debugf("skipping node check")
+		logger.Debug("skipping node check")
 	} else {
 		if oConn, err := node.GetConnection(nil); err != nil {
-			logger.Fatalf("failed to connect to node: %s", err)
+			logger.Error("failed to connect to node:", "error", err)
 		} else {
 			oConn.Close()
 		}
 	}
 
-	logger.Infof(
-		"starting cardano-node-api version %s",
-		version.GetVersionString(),
-	)
+	logger.Info("starting cardano-node-api version", "version", version.GetVersionString())
 
 	// Start debug listener
 	if cfg.Debug.ListenPort > 0 {
-		logger.Infof(
+		logger.Info(fmt.Sprintf(
 			"starting debug listener on %s:%d",
 			cfg.Debug.ListenAddress,
 			cfg.Debug.ListenPort,
-		)
+		))
 		go func() {
 			err := http.ListenAndServe(
 				fmt.Sprintf(
@@ -96,7 +85,8 @@ func main() {
 				nil,
 			)
 			if err != nil {
-				logger.Fatalf("failed to start debug listener: %s", err)
+				logger.Error("failed to start debug listener:", "error", err)
+				os.Exit(1)
 			}
 		}()
 	}
@@ -104,13 +94,15 @@ func main() {
 	// Start API listener
 	go func() {
 		if err := api.Start(cfg); err != nil {
-			logger.Fatalf("failed to start API: %s", err)
+			logger.Error("failed to start API:", "error", err)
+			os.Exit(1)
 		}
 	}()
 
 	// Start UTxO RPC gRPC listener
 	if err := utxorpc.Start(cfg); err != nil {
-		logger.Fatalf("failed to start gRPC: %s", err)
+		logger.Error("failed to start gRPC:", "error", err)
+		os.Exit(1)
 	}
 
 	// Wait forever
