@@ -7,7 +7,7 @@ require (
 	connectrpc.com/grpchealth v1.3.0
 	connectrpc.com/grpcreflect v1.3.0
 	github.com/blinklabs-io/adder v0.25.4
-	github.com/blinklabs-io/gouroboros v0.108.1
+	github.com/blinklabs-io/gouroboros v0.108.2
 	github.com/blinklabs-io/tx-submit-api v0.20.6
 	github.com/gin-gonic/gin v1.10.0
 	github.com/gorilla/websocket v1.5.3
@@ -30,7 +30,7 @@ require (
 	github.com/aws/aws-sdk-go v1.55.5 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.8.0 // indirect
-	github.com/btcsuite/btcd/btcutil v1.1.3 // indirect
+	github.com/btcsuite/btcd/btcutil v1.1.6 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/bytedance/sonic v1.12.6 // indirect
 	github.com/bytedance/sonic/loader v0.2.1 // indirect
