@@ -6,7 +6,7 @@ require (
 	connectrpc.com/connect v1.18.1
 	connectrpc.com/grpchealth v1.3.0
 	connectrpc.com/grpcreflect v1.3.0
-	github.com/blinklabs-io/adder v0.25.4
+	github.com/blinklabs-io/adder v0.26.0
 	github.com/blinklabs-io/gouroboros v0.108.2
 	github.com/blinklabs-io/tx-submit-api v0.20.6
 	github.com/gin-gonic/gin v1.10.0
@@ -25,9 +25,9 @@ require (
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
-	github.com/SundaeSwap-finance/kugo v1.0.6-0.20250116035512-6686234216f0 // indirect
-	github.com/SundaeSwap-finance/ogmigo v0.8.2-0.20250113211512-19cbb328b538 // indirect
-	github.com/aws/aws-sdk-go v1.55.5 // indirect
+	github.com/SundaeSwap-finance/kugo v1.1.0 // indirect
+	github.com/SundaeSwap-finance/ogmigo v0.9.0 // indirect
+	github.com/aws/aws-sdk-go v1.55.6 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.8.0 // indirect
 	github.com/btcsuite/btcd/btcutil v1.1.6 // indirect
