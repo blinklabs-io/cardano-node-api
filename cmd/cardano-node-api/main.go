@@ -1,4 +1,4 @@
-// Copyright 2023 Blink Labs Software
+// Copyright 2025 Blink Labs Software
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,9 +18,11 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
-	_ "net/http/pprof"
 	"os"
+	"time"
 
+	// #nosec G108
+	_ "net/http/pprof"
 	_ "go.uber.org/automaxprocs"
 
 	"github.com/blinklabs-io/cardano-node-api/internal/api"
@@ -66,7 +68,11 @@ func main() {
 		}
 	}
 
-	logger.Info("starting cardano-node-api version", "version", version.GetVersionString())
+	logger.Info(
+		"starting cardano-node-api version",
+		"version",
+		version.GetVersionString(),
+	)
 
 	// Start debug listener
 	if cfg.Debug.ListenPort > 0 {
@@ -76,14 +82,15 @@ func main() {
 			cfg.Debug.ListenPort,
 		))
 		go func() {
-			err := http.ListenAndServe(
-				fmt.Sprintf(
+			debugger := &http.Server{
+				Addr: fmt.Sprintf(
 					"%s:%d",
 					cfg.Debug.ListenAddress,
 					cfg.Debug.ListenPort,
 				),
-				nil,
-			)
+				ReadHeaderTimeout: 60 * time.Second,
+			}
+			err := debugger.ListenAndServe()
 			if err != nil {
 				logger.Error("failed to start debug listener:", "error", err)
 				os.Exit(1)
