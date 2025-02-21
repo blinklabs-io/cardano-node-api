@@ -1,4 +1,4 @@
-// Copyright 2024 Blink Labs Software
+// Copyright 2025 Blink Labs Software
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ package api
 
 import (
 	"encoding/hex"
+	"math"
 
 	"github.com/blinklabs-io/gouroboros/ledger"
 	"github.com/gin-gonic/gin"
@@ -77,8 +78,13 @@ func handleLocalStateQueryCurrentEra(c *gin.Context) {
 		return
 	}
 
-	// Create response
+	if eraNum < 0 || eraNum > math.MaxUint8 {
+		c.JSON(500, apiError("era number int overflow"))
+		return
+	}
 	era := ledger.GetEraById(uint8(eraNum))
+
+	// Create response
 	resp := responseLocalStateQueryCurrentEra{
 		Id:   era.Id,
 		Name: era.Name,
@@ -180,6 +186,10 @@ func handleLocalStateQueryTip(c *gin.Context) {
 	eraNum, err := oConn.LocalStateQuery().Client.GetCurrentEra()
 	if err != nil {
 		c.JSON(500, apiError(err.Error()))
+		return
+	}
+	if eraNum < 0 || eraNum > math.MaxUint8 {
+		c.JSON(500, apiError("era number int overflow"))
 		return
 	}
 	era := ledger.GetEraById(uint8(eraNum))
