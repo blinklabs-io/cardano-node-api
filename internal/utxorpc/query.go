@@ -139,6 +139,7 @@ func (s *queryServiceServer) ReadUtxos(
 			aud.TxoRef = txo
 			txHash := hex.EncodeToString(txo.Hash)
 			if utxoId.Hash.String() == txHash &&
+				// #nosec G115
 				uint32(utxoId.Idx) == txo.Index {
 				aud.NativeBytes = utxo.Cbor()
 				audc.Cardano = utxo.Utxorpc()
@@ -272,7 +273,7 @@ func (s *queryServiceServer) SearchUtxos(
 		var audc query.AnyUtxoData_Cardano
 		aud.TxoRef = &query.TxoRef{
 			Hash:  utxoId.Hash.Bytes(),
-			Index: uint32(utxoId.Idx),
+			Index: uint32(utxoId.Idx), // #nosec G115
 		}
 		aud.NativeBytes = utxo.Cbor()
 		audc.Cardano = utxo.Utxorpc()

@@ -480,8 +480,6 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "Cardano Node API",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	LeftDelim:        "{{",
-	RightDelim:       "}}",
 }
 
 func init() {

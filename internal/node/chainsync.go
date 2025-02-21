@@ -1,4 +1,4 @@
-// Copyright 2024 Blink Labs Software
+// Copyright 2025 Blink Labs Software
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import (
 
 func buildChainSyncConfig(connCfg ConnectionConfig) chainsync.Config {
 	cfg := config.GetConfig()
+	// #nosec G115
 	return chainsync.NewConfig(
 		chainsync.WithBlockTimeout(
 			time.Duration(cfg.Node.QueryTimeout)*time.Second,
@@ -102,6 +103,7 @@ func chainSyncRollForwardHandler(
 				txEvt := event.New(
 					"chainsync.transaction",
 					time.Now(),
+					// #nosec G115
 					input_chainsync.NewTransactionContext(v, transaction, uint32(t), cfg.Node.NetworkMagic),
 					input_chainsync.NewTransactionEvent(v, transaction, true, nil),
 				)

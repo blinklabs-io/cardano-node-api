@@ -77,10 +77,28 @@ func Start(cfg *config.Config) error {
 				return
 			}
 		}
-		accessLogger.Info("request received", "method", c.Request.Method, "path", c.Request.URL.Path, "remote_addr", c.ClientIP())
+		accessLogger.Info(
+			"request received",
+			"method",
+			c.Request.Method,
+			"path",
+			c.Request.URL.Path,
+			"remote_addr",
+			c.ClientIP(),
+		)
 		c.Next()
 		statusCode := c.Writer.Status()
-		accessLogger.Info("response sent", "status", statusCode, "method", c.Request.Method, "path", c.Request.URL.Path, "remote_addr", c.ClientIP())
+		accessLogger.Info(
+			"response sent",
+			"status",
+			statusCode,
+			"method",
+			c.Request.Method,
+			"path",
+			c.Request.URL.Path,
+			"remote_addr",
+			c.ClientIP(),
+		)
 	}
 	router.Use(accessMiddleware)
 

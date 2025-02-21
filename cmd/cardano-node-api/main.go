@@ -66,7 +66,11 @@ func main() {
 		}
 	}
 
-	logger.Info("starting cardano-node-api version", "version", version.GetVersionString())
+	logger.Info(
+		"starting cardano-node-api version",
+		"version",
+		version.GetVersionString(),
+	)
 
 	// Start debug listener
 	if cfg.Debug.ListenPort > 0 {
