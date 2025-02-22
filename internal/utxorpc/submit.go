@@ -80,7 +80,7 @@ func (s *submitServiceServer) SubmitTx(
 		}
 		// Submit the transaction
 		err = oConn.LocalTxSubmission().Client.SubmitTx(
-			uint16(txType),
+			uint16(txType), // #nosec G115
 			txRawBytes,
 		)
 		if err != nil {

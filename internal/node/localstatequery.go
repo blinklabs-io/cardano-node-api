@@ -1,4 +1,4 @@
-// Copyright 2024 Blink Labs Software
+// Copyright 2025 Blink Labs Software
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import (
 
 func buildLocalStateQueryConfig() localstatequery.Config {
 	cfg := config.GetConfig()
+	// #nosec G115
 	return localstatequery.NewConfig(
 		localstatequery.WithAcquireTimeout(
 			time.Duration(cfg.Node.Timeout)*time.Second,
