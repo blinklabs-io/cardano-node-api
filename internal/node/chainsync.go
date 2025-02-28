@@ -15,7 +15,7 @@
 package node
 
 import (
-	"fmt"
+	"errors"
 	"time"
 
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
@@ -123,7 +123,7 @@ func chainSyncRollForwardHandler(
 				}
 		*/
 		default:
-			return fmt.Errorf("unknown block data")
+			return errors.New("unknown block data")
 		}
 	}
 	return nil

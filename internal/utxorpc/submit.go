@@ -1,4 +1,4 @@
-// Copyright 2024 Blink Labs Software
+// Copyright 2025 Blink Labs Software
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package utxorpc
 import (
 	"context"
 	"encoding/hex"
+	"errors"
 	"fmt"
 	"log"
 	"log/slog"
@@ -179,7 +180,7 @@ func (s *submitServiceServer) WaitForTx(
 		case evt, ok := <-eventChan:
 			if !ok {
 				logger.Error("Event channel closed unexpectedly.")
-				return fmt.Errorf("event channel closed")
+				return errors.New("event channel closed")
 			}
 
 			// Process the event
