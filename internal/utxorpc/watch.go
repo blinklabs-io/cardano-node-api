@@ -1,4 +1,4 @@
-// Copyright 2024 Blink Labs Software
+// Copyright 2025 Blink Labs Software
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ package utxorpc
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 
@@ -82,7 +83,7 @@ func (s *watchServiceServer) WatchTx(
 		evt, ok := <-eventChan
 		if !ok {
 			log.Printf("ERROR: channel closed")
-			return fmt.Errorf("ERROR: channel closed")
+			return errors.New("ERROR: channel closed")
 		}
 
 		switch evt.Type {
@@ -91,7 +92,7 @@ func (s *watchServiceServer) WatchTx(
 			context := evt.Context
 			if context == nil {
 				log.Printf("ERROR: empty block context")
-				return fmt.Errorf("ERROR: empty block context")
+				return errors.New("ERROR: empty block context")
 			}
 			bc := context.(input_chainsync.BlockContext)
 			// Get event payload to get the block data
