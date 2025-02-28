@@ -110,7 +110,7 @@ func (s *queryServiceServer) ReadUtxos(
 	oConn.LocalStateQuery().Client.Start()
 
 	// Setup our query input
-	var tmpTxIns []ledger.TransactionInput
+	tmpTxIns := []ledger.TransactionInput{}
 	for _, txo := range keys {
 		// txo.Hash, txo.Index
 		tmpTxIn := ledger.ShelleyTransactionInput{
