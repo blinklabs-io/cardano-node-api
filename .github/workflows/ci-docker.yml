@@ -10,7 +10,7 @@ env:
   IMAGE_NAME: blinklabs/cardano-node-api
 
 permissions:
-  content: read
+  contents: read
 
 jobs:
   docker:
