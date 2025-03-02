@@ -1,4 +1,4 @@
-// Copyright 2024 Blink Labs Software
+// Copyright 2025 Blink Labs Software
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 package api
 
 import (
+	"errors"
 	"fmt"
 	"io"
 
@@ -83,8 +84,12 @@ func handleLocalSubmitTx(c *gin.Context) {
 	txHash, err := submit.SubmitTx(submitConfig, txRawBytes)
 	if err != nil {
 		if c.GetHeader("Accept") == "application/cbor" {
-			txRejectErr := err.(localtxsubmission.TransactionRejectedError)
-			c.Data(400, "application/cbor", txRejectErr.ReasonCbor)
+			var txRejectErr *localtxsubmission.TransactionRejectedError
+			if errors.As(err, &txRejectErr) {
+				c.Data(400, "application/cbor", txRejectErr.ReasonCbor)
+			} else {
+				c.Data(500, "application/cbor", []byte{})
+			}
 		} else {
 			if err.Error() != "" {
 				c.JSON(400, err.Error())
