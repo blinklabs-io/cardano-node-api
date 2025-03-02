@@ -46,14 +46,14 @@ func GetConnection(connCfg *ConnectionConfig) (*ouroboros.Connection, error) {
 		ouroboros.WithLocalTxSubmissionConfig(buildLocalTxSubmissionConfig()),
 	)
 	if err != nil {
-		return nil, fmt.Errorf("failure creating Ouroboros connection: %s", err)
+		return nil, fmt.Errorf("failure creating Ouroboros connection: %w", err)
 	}
 
 	if cfg.Node.Address != "" && cfg.Node.Port > 0 {
 		// Connect to TCP port
 		if err := oConn.Dial("tcp", fmt.Sprintf("%s:%d", cfg.Node.Address, cfg.Node.Port)); err != nil {
 			return nil, fmt.Errorf(
-				"failure connecting to node via TCP: %s",
+				"failure connecting to node via TCP: %w",
 				err,
 			)
 		}
@@ -63,11 +63,11 @@ func GetConnection(connCfg *ConnectionConfig) (*ouroboros.Connection, error) {
 			if os.IsNotExist(err) {
 				return nil, fmt.Errorf("node socket path does not exist: %s", cfg.Node.SocketPath)
 			} else {
-				return nil, fmt.Errorf("unknown error checking if node socket path exists: %s", err)
+				return nil, fmt.Errorf("unknown error checking if node socket path exists: %w", err)
 			}
 		}
 		if err := oConn.Dial("unix", cfg.Node.SocketPath); err != nil {
-			return nil, fmt.Errorf("failure connecting to node via UNIX socket: %s", err)
+			return nil, fmt.Errorf("failure connecting to node via UNIX socket: %w", err)
 		}
 	} else {
 		return nil, errors.New("you must specify either the UNIX socket path or the address/port for your cardano-node")
