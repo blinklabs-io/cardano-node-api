@@ -333,7 +333,7 @@ func (s *submitServiceServer) WatchMempool(
 			Stage:       submit.Stage_STAGE_MEMPOOL,
 		}
 		resp.Tx = record
-		if string(record.NativeBytes) == cTx.String() {
+		if string(record.GetNativeBytes()) == cTx.String() {
 			if predicate == nil {
 				err := stream.Send(resp)
 				if err != nil {

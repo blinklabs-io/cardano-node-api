@@ -114,8 +114,8 @@ func (s *queryServiceServer) ReadUtxos(
 	for _, txo := range keys {
 		// txo.Hash, txo.Index
 		tmpTxIn := ledger.ShelleyTransactionInput{
-			TxId:        ledger.Blake2b256(txo.Hash),
-			OutputIndex: uint32(txo.Index),
+			TxId:        ledger.Blake2b256(txo.GetHash()),
+			OutputIndex: uint32(txo.GetIndex()),
 		}
 		tmpTxIns = append(tmpTxIns, tmpTxIn)
 	}
@@ -137,16 +137,16 @@ func (s *queryServiceServer) ReadUtxos(
 			var aud query.AnyUtxoData
 			var audc query.AnyUtxoData_Cardano
 			aud.TxoRef = txo
-			txHash := hex.EncodeToString(txo.Hash)
+			txHash := hex.EncodeToString(txo.GetHash())
 			if utxoId.Hash.String() == txHash &&
 				// #nosec G115
-				uint32(utxoId.Idx) == txo.Index {
+				uint32(utxoId.Idx) == txo.GetIndex() {
 				aud.NativeBytes = utxo.Cbor()
 				audc.Cardano = utxo.Utxorpc()
-				if audc.Cardano.Datum != nil {
+				if audc.Cardano.GetDatum() != nil {
 					// Check if Datum.Hash is all zeroes
 					isAllZeroes := true
-					for _, b := range audc.Cardano.Datum.Hash {
+					for _, b := range audc.Cardano.GetDatum().GetHash() {
 						if b != 0 {
 							isAllZeroes = false
 							break
@@ -159,7 +159,7 @@ func (s *queryServiceServer) ReadUtxos(
 							"Datum Hash is all zeroes; setting Datum to nil",
 						)
 					} else {
-						log.Printf("Datum Hash present: %x", audc.Cardano.Datum.Hash)
+						log.Printf("Datum Hash present: %x", audc.Cardano.GetDatum().GetHash())
 					}
 				}
 				aud.ParsedState = &audc
@@ -173,8 +173,8 @@ func (s *queryServiceServer) ReadUtxos(
 	}
 	log.Printf(
 		"Prepared response with LedgerTip: Slot=%v, Hash=%v",
-		resp.LedgerTip.Slot,
-		resp.LedgerTip.Hash,
+		resp.GetLedgerTip().GetSlot(),
+		resp.GetLedgerTip().GetHash(),
 	)
 	log.Printf("Final response: %v", resp)
 	return connect.NewResponse(resp), nil
@@ -282,10 +282,10 @@ func (s *queryServiceServer) SearchUtxos(
 		// If AssetPattern is specified, filter based on it
 		if assetPattern != nil {
 			assetFound := false
-			for _, multiasset := range audc.Cardano.Assets {
-				if bytes.Equal(multiasset.PolicyId, assetPattern.PolicyId) {
-					for _, asset := range multiasset.Assets {
-						if bytes.Equal(asset.Name, assetPattern.AssetName) {
+			for _, multiasset := range audc.Cardano.GetAssets() {
+				if bytes.Equal(multiasset.GetPolicyId(), assetPattern.GetPolicyId()) {
+					for _, asset := range multiasset.GetAssets() {
+						if bytes.Equal(asset.GetName(), assetPattern.GetAssetName()) {
 							assetFound = true
 							break
 						}
