@@ -197,7 +197,7 @@ func (s *chainSyncServiceServer) FollowTip(
 	} else {
 		tip, err := oConn.ChainSync().Client.GetCurrentTip()
 		if err != nil {
-			return fmt.Errorf("failed to get tip: %s", err)
+			return fmt.Errorf("failed to get tip: %w", err)
 		}
 		if tip != nil {
 			point = tip.Point
