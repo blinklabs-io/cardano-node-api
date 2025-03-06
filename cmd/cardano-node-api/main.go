@@ -17,13 +17,15 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"os"
 	"time"
 
 	// #nosec G108
 	_ "net/http/pprof"
-	_ "go.uber.org/automaxprocs"
+
+	"go.uber.org/automaxprocs/maxprocs"
 
 	"github.com/blinklabs-io/cardano-node-api/internal/api"
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
@@ -35,6 +37,10 @@ import (
 
 var cmdlineFlags struct {
 	configFile string
+}
+
+func slogPrintf(format string, v ...any) {
+	slog.Info(fmt.Sprintf(format, v...))
 }
 
 func main() {
@@ -73,6 +79,14 @@ func main() {
 		"version",
 		version.GetVersionString(),
 	)
+
+	// Configure max processes with our logger wrapper, toss undo func
+	_, err = maxprocs.Set(maxprocs.Logger(slogPrintf))
+	if err != nil {
+		// If we hit this, something really wrong happened
+		slog.Error(err.Error())
+		os.Exit(1)
+	}
 
 	// Start debug listener
 	if cfg.Debug.ListenPort > 0 {
