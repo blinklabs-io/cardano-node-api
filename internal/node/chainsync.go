@@ -18,10 +18,9 @@ import (
 	"errors"
 	"time"
 
-	"github.com/blinklabs-io/cardano-node-api/internal/config"
-
 	"github.com/blinklabs-io/adder/event"
 	input_chainsync "github.com/blinklabs-io/adder/input/chainsync"
+	"github.com/blinklabs-io/cardano-node-api/internal/config"
 	"github.com/blinklabs-io/gouroboros/ledger"
 	"github.com/blinklabs-io/gouroboros/protocol/chainsync"
 	"github.com/blinklabs-io/gouroboros/protocol/common"
@@ -57,10 +56,10 @@ func buildChainSyncConfig(connCfg ConnectionConfig) chainsync.Config {
 }
 
 func chainSyncRollBackwardHandler(
-	ctx chainsync.CallbackContext,
+	_ctx chainsync.CallbackContext,
 	connCfg ConnectionConfig,
 	point common.Point,
-	tip chainsync.Tip,
+	_tip chainsync.Tip,
 ) error {
 	if connCfg.ChainSyncEventChan != nil {
 		evt := event.New(
@@ -75,11 +74,11 @@ func chainSyncRollBackwardHandler(
 }
 
 func chainSyncRollForwardHandler(
-	ctx chainsync.CallbackContext,
+	_ctx chainsync.CallbackContext,
 	connCfg ConnectionConfig,
-	blockType uint,
+	_blockType uint,
 	blockData interface{},
-	tip chainsync.Tip,
+	_tip chainsync.Tip,
 ) error {
 	cfg := config.GetConfig()
 	if connCfg.ChainSyncEventChan != nil {

@@ -18,9 +18,8 @@ import (
 	"encoding/hex"
 	"net/http"
 
-	"github.com/blinklabs-io/cardano-node-api/internal/node"
-
 	"github.com/blinklabs-io/adder/event"
+	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	ocommon "github.com/blinklabs-io/gouroboros/protocol/common"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"

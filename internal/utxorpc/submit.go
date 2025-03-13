@@ -25,12 +25,11 @@ import (
 	connect "connectrpc.com/connect"
 	"github.com/blinklabs-io/adder/event"
 	input_chainsync "github.com/blinklabs-io/adder/input/chainsync"
+	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	"github.com/blinklabs-io/gouroboros/ledger"
 	ocommon "github.com/blinklabs-io/gouroboros/protocol/common"
 	submit "github.com/utxorpc/go-codegen/utxorpc/v1alpha/submit"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/submit/submitconnect"
-
-	"github.com/blinklabs-io/cardano-node-api/internal/node"
 )
 
 // submitServiceServer implements the SubmitService API
@@ -43,7 +42,6 @@ func (s *submitServiceServer) SubmitTx(
 	ctx context.Context,
 	req *connect.Request[submit.SubmitTxRequest],
 ) (*connect.Response[submit.SubmitTxResponse], error) {
-
 	// txRawList
 	txRawList := req.Msg.GetTx() // []*AnyChainTx
 	log.Printf("Got a SubmitTx request with %d transactions", len(txRawList))
@@ -110,7 +108,6 @@ func (s *submitServiceServer) WaitForTx(
 	req *connect.Request[submit.WaitForTxRequest],
 	stream *connect.ServerStream[submit.WaitForTxResponse],
 ) error {
-
 	logger := slog.With("component", "WaitForTx")
 	ref := req.Msg.GetRef() // [][]byte
 	logger.Info("Received WaitForTx request", "transaction_count", len(ref))
@@ -270,7 +267,6 @@ func (s *submitServiceServer) WatchMempool(
 	req *connect.Request[submit.WatchMempoolRequest],
 	stream *connect.ServerStream[submit.WatchMempoolResponse],
 ) error {
-
 	predicate := req.Msg.GetPredicate() // Predicate
 	fieldMask := req.Msg.GetFieldMask()
 	log.Printf(

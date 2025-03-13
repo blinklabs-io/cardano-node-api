@@ -19,13 +19,10 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
-	"os"
-	"time"
-
 	// #nosec G108
 	_ "net/http/pprof"
-
-	"go.uber.org/automaxprocs/maxprocs"
+	"os"
+	"time"
 
 	"github.com/blinklabs-io/cardano-node-api/internal/api"
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
@@ -33,6 +30,7 @@ import (
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	"github.com/blinklabs-io/cardano-node-api/internal/utxorpc"
 	"github.com/blinklabs-io/cardano-node-api/internal/version"
+	"go.uber.org/automaxprocs/maxprocs"
 )
 
 var cmdlineFlags struct {

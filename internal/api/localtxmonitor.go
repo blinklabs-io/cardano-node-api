@@ -18,10 +18,9 @@ import (
 	"encoding/hex"
 	"net/http"
 
+	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	"github.com/blinklabs-io/gouroboros/ledger"
 	"github.com/gin-gonic/gin"
-
-	"github.com/blinklabs-io/cardano-node-api/internal/node"
 )
 
 func configureLocalTxMonitorRoutes(apiGroup *gin.RouterGroup) {

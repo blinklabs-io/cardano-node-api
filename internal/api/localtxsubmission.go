@@ -19,12 +19,11 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/blinklabs-io/cardano-node-api/internal/config"
+	"github.com/blinklabs-io/cardano-node-api/internal/logging"
 	"github.com/blinklabs-io/gouroboros/protocol/localtxsubmission"
 	"github.com/blinklabs-io/tx-submit-api/submit"
 	"github.com/gin-gonic/gin"
-
-	"github.com/blinklabs-io/cardano-node-api/internal/config"
-	"github.com/blinklabs-io/cardano-node-api/internal/logging"
 )
 
 func configureLocalTxSubmissionRoutes(apiGroup *gin.RouterGroup) {
