@@ -19,9 +19,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/blinklabs-io/cardano-node-api/internal/config"
-
 	"github.com/blinklabs-io/adder/event"
+	"github.com/blinklabs-io/cardano-node-api/internal/config"
 	ouroboros "github.com/blinklabs-io/gouroboros"
 )
 

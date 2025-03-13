@@ -23,11 +23,10 @@ import (
 	connect "connectrpc.com/connect"
 	"github.com/blinklabs-io/adder/event"
 	input_chainsync "github.com/blinklabs-io/adder/input/chainsync"
+	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	ocommon "github.com/blinklabs-io/gouroboros/protocol/common"
 	sync "github.com/utxorpc/go-codegen/utxorpc/v1alpha/sync"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/sync/syncconnect"
-
-	"github.com/blinklabs-io/cardano-node-api/internal/node"
 )
 
 // chainSyncServiceServer implements the ChainSyncService API

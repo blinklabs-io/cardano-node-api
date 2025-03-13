@@ -17,9 +17,8 @@ package node
 import (
 	"time"
 
-	"github.com/blinklabs-io/gouroboros/protocol/localtxsubmission"
-
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
+	"github.com/blinklabs-io/gouroboros/protocol/localtxsubmission"
 )
 
 func buildLocalTxSubmissionConfig() localtxsubmission.Config {

@@ -18,10 +18,9 @@ import (
 	"encoding/hex"
 	"math"
 
+	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	"github.com/blinklabs-io/gouroboros/ledger"
 	"github.com/gin-gonic/gin"
-
-	"github.com/blinklabs-io/cardano-node-api/internal/node"
 )
 
 func configureLocalStateQueryRoutes(apiGroup *gin.RouterGroup) {
@@ -229,8 +228,7 @@ func handleLocalStateQueryTip(c *gin.Context) {
 // TODO: fill this in
 //
 //nolint:unused
-type responseLocalStateQueryEraHistory struct {
-}
+type responseLocalStateQueryEraHistory struct{}
 
 // handleLocalStateQueryEraHistory godoc
 //
@@ -278,8 +276,7 @@ func handleLocalStateQueryEraHistory(c *gin.Context) {
 // TODO: fill this in
 //
 //nolint:unused
-type responseLocalStateQueryProtocolParams struct {
-}
+type responseLocalStateQueryProtocolParams struct{}
 
 // handleLocalStateQueryProtocolParams godoc
 //
@@ -327,8 +324,7 @@ func handleLocalStateQueryProtocolParams(c *gin.Context) {
 // TODO: fill this in
 //
 //nolint:unused
-type responseLocalStateQueryGenesisConfig struct {
-}
+type responseLocalStateQueryGenesisConfig struct{}
 
 // handleLocalStateQueryGenesisConfig godoc
 //

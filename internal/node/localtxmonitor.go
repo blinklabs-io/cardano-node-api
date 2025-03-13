@@ -17,9 +17,8 @@ package node
 import (
 	"time"
 
-	"github.com/blinklabs-io/gouroboros/protocol/localtxmonitor"
-
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
+	"github.com/blinklabs-io/gouroboros/protocol/localtxmonitor"
 )
 
 func buildLocalTxMonitorConfig() localtxmonitor.Config {

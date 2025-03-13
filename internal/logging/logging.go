@@ -22,8 +22,10 @@ import (
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
 )
 
-var globalLogger *slog.Logger
-var accessLogger *slog.Logger
+var (
+	globalLogger *slog.Logger
+	accessLogger *slog.Logger
+)
 
 // Configure initializes the global logger.
 func Configure() {

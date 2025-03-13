@@ -22,15 +22,11 @@ import (
 	"log"
 
 	connect "connectrpc.com/connect"
+	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	"github.com/blinklabs-io/gouroboros/ledger"
 	"github.com/blinklabs-io/gouroboros/ledger/common"
-
-	// ocommon "github.com/blinklabs-io/gouroboros/protocol/common"
-
 	query "github.com/utxorpc/go-codegen/utxorpc/v1alpha/query"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/query/queryconnect"
-
-	"github.com/blinklabs-io/cardano-node-api/internal/node"
 )
 
 // queryServiceServer implements the WatchService API
@@ -43,7 +39,6 @@ func (s *queryServiceServer) ReadParams(
 	ctx context.Context,
 	req *connect.Request[query.ReadParamsRequest],
 ) (*connect.Response[query.ReadParamsResponse], error) {
-
 	fieldMask := req.Msg.GetFieldMask()
 	log.Printf("Got a ReadParams request with fieldMask %v", fieldMask)
 	resp := &query.ReadParamsResponse{}
@@ -185,7 +180,6 @@ func (s *queryServiceServer) SearchUtxos(
 	ctx context.Context,
 	req *connect.Request[query.SearchUtxosRequest],
 ) (*connect.Response[query.SearchUtxosResponse], error) {
-
 	predicate := req.Msg.GetPredicate() // UtxoPredicate
 	log.Printf("Got a SearchUtxos request with predicate %v", predicate)
 	resp := &query.SearchUtxosResponse{}
