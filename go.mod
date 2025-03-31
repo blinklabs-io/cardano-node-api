@@ -2,6 +2,8 @@ module github.com/blinklabs-io/cardano-node-api
 
 go 1.23.6
 
+toolchain go1.24.1
+
 require (
 	connectrpc.com/connect v1.18.1
 	connectrpc.com/grpchealth v1.3.0
@@ -18,7 +20,7 @@ require (
 	github.com/swaggo/swag v1.16.4
 	github.com/utxorpc/go-codegen v0.16.0
 	go.uber.org/automaxprocs v1.6.0
-	golang.org/x/net v0.37.0
+	golang.org/x/net v0.38.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
