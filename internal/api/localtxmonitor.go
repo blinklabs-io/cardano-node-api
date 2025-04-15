@@ -1,4 +1,4 @@
-// Copyright 2023 Blink Labs Software
+// Copyright 2025 Blink Labs Software
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -205,7 +205,7 @@ func handleLocalTxMonitorTxs(c *gin.Context) {
 		resp = append(
 			resp,
 			responseLocalTxMonitorTxs{
-				TxHash:  tx.Hash(),
+				TxHash:  tx.Hash().String(),
 				TxBytes: txRawBytes,
 			},
 		)
