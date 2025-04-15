@@ -88,14 +88,7 @@ func (s *submitServiceServer) SubmitTx(
 			hasError = true
 			continue
 		}
-		txHexBytes, err := hex.DecodeString(tx.Hash())
-		if err != nil {
-			resp.Ref = append(resp.Ref, placeholderRef)
-			errorList[i] = err
-			hasError = true
-			continue
-		}
-		resp.Ref = append(resp.Ref, txHexBytes)
+		resp.Ref = append(resp.Ref, tx.Hash().Bytes())
 	}
 	if hasError {
 		return connect.NewResponse(resp), fmt.Errorf("%v", errorList)
@@ -183,10 +176,10 @@ func (s *submitServiceServer) WaitForTx(
 			// Process the event
 			switch v := evt.Payload.(type) {
 			case input_chainsync.TransactionEvent:
-				logger.Debug("Received TransactionEvent", "hash", v.Transaction.Hash())
+				logger.Debug("Received TransactionEvent", "hash", v.Transaction.Hash().String())
 				for _, r := range ref {
 					refHash := hex.EncodeToString(r)
-					eventHash := v.Transaction.Hash()
+					eventHash := v.Transaction.Hash().String()
 
 					logger.Debug("Comparing TransactionEvent with reference", "event_hash", eventHash, "reference_hash", refHash)
 					if refHash == eventHash {
