@@ -6,7 +6,7 @@ toolchain go1.24.1
 
 require (
 	connectrpc.com/connect v1.18.1
-	connectrpc.com/grpchealth v1.3.0
+	connectrpc.com/grpchealth v1.4.0
 	connectrpc.com/grpcreflect v1.3.0
 	github.com/blinklabs-io/adder v0.28.0
 	github.com/blinklabs-io/gouroboros v0.117.0
