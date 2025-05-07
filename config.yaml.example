@@ -1,0 +1,123 @@
+---
+# Example config file for cardano-node-api
+# The values shown below correspond to the in-code defaults
+
+logging:
+  # Logging level
+  #
+  # This can also be set via the LOGGING_LEVEL environment variable
+  level: info
+
+  # Health checks
+  #
+  # This can also be set via the LOGGING_HEALTHCHECKS environment variable
+  healthchecks: false
+
+api:
+  # Listen address for the API
+  #
+  # This can also be set via the API_LISTEN_ADDRESS environment variable
+  address:
+
+  # Listen port for the API
+  #
+  # This can also be set via the API_LISTEN_PORT environment variable
+  port: 8080
+
+metrics:
+  # Listen address for the metrics endpoint
+  #
+  # This can also be set via the METRICS_LISTEN_ADDRESS environment variable
+  address:
+
+  # Listen port for the metrics endpoint
+  #
+  # This can also be set via the METRICS_LISTEN_PORT environment variable
+  port: 8081
+
+# The debug endpoint provides access to pprof for debugging purposes. This is
+# disabled by default, but it can be enabled by setting the port to a non-zero
+# value
+debug:
+  # Listen address for the debug endpoint
+  #
+  # This can also be set via the DEBUG_ADDRESS environment variable
+  address: localhost
+
+  # Listen port for the debug endpoint
+  #
+  # This can also be set via the DEBUG_PORT environment variable
+  port: 0
+
+node:
+  # Named Cardano network for cardano-node
+  #
+  # This is a short-cut to select the NetworkMagic and can be used to
+  # select mainnet, preprod, or preview networks.
+  #
+  # This can also be set via the CARDANO_NETWORK environment variable
+  network: mainnet
+
+  # NetworkMagic for network for cardano-node
+  #
+  # This selects the correct network for operation and can be configured to
+  # any network, not just the named networks.
+  #
+  # This can also be set via the CARDANO_NODE_NETWORK_MAGIC environment variable
+  networkMagic:
+
+  # Path to UNIX socket file for cardano-node
+  #
+  # This can also be set via the CARDANO_NODE_SOCKET_PATH environment variable
+  socketPath:
+
+  # Address/port for cardano-node
+  #
+  # This requires that you be running socat or similar to create a bridge
+  # between TCP and the UNIX socket.
+  #
+  # These can also be set via the CARDANO_NODE_SOCKET_TCP_HOST and
+  # CARDANO_NODE_SOCKET_TCP_PORT environment variables
+  address:
+  port:
+
+  # Query Timeout
+  # 
+  # 
+  # This can also be set via the CARDANO_NODE_SOCKET_QUERY_TIMEOUT environment variable
+  queryTimeout: 180
+
+  # Skip checking connection to cardano-node
+  #
+  # On startup, we connect to the configured cardano-node and exit on failure.
+  #
+  # Setting this to true will skip this check.
+  skipCheck:
+
+  # Timeout for connections to cardano-node
+  #
+  # This can also be set via the CARDANO_NODE_SOCKET_TIMEOUT environment
+  # variable
+  timeout:
+
+Utxorpc:
+  # Listen address for Utxo RPC
+  #
+  # This can also be set via the GRPC_LISTEN_ADDRESS environment variable
+  address:
+
+  # Listen port for Utxo RPC
+  #
+  # This can also be set via the GRPC_LISTEN_PORT environment variable
+  port: 9090
+
+tls:
+ # Cert file path
+ #
+ # This can also be set via the TLS_CERT_FILE_PATH environment variable
+ certFilePath:
+
+ # key file path
+ #
+ # This can also be set via the TLS_KEY_FILE_PATH environment variable
+ keyFilePath:
