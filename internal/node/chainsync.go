@@ -77,7 +77,7 @@ func chainSyncRollForwardHandler(
 	_ctx chainsync.CallbackContext,
 	connCfg ConnectionConfig,
 	_blockType uint,
-	blockData interface{},
+	blockData any,
 	_tip chainsync.Tip,
 ) error {
 	cfg := config.GetConfig()
