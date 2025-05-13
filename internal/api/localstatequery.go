@@ -133,12 +133,16 @@ func handleLocalStateQuerySystemStart(c *gin.Context) {
 		c.JSON(500, apiError(err.Error()))
 		return
 	}
-
+	// Validate data before conversion
+	if result.Year.Int64() > math.MaxInt {
+		c.JSON(500, apiError("invalid date conversion"))
+		return
+	}
 	// Create response
 	resp := responseLocalStateQuerySystemStart{
-		Year:        result.Year,
+		Year:        int(result.Year.Int64()),
 		Day:         result.Day,
-		Picoseconds: result.Picoseconds,
+		Picoseconds: result.Picoseconds.Uint64(),
 	}
 	c.JSON(200, resp)
 }
