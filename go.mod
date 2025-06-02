@@ -11,7 +11,7 @@ require (
 	github.com/blinklabs-io/adder v0.30.0
 	github.com/blinklabs-io/gouroboros v0.121.0
 	github.com/blinklabs-io/tx-submit-api v0.20.8
-	github.com/gin-gonic/gin v1.10.0
+	github.com/gin-gonic/gin v1.10.1
 	github.com/gorilla/websocket v1.5.3
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/penglongli/gin-metrics v0.1.13
