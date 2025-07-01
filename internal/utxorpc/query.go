@@ -137,7 +137,11 @@ func (s *queryServiceServer) ReadUtxos(
 				// #nosec G115
 				uint32(utxoId.Idx) == txo.GetIndex() {
 				aud.NativeBytes = utxo.Cbor()
-				audc.Cardano = utxo.Utxorpc()
+				utxoRpc, err := utxo.Utxorpc()
+				if err != nil {
+					return nil, err
+				}
+				audc.Cardano = utxoRpc
 				if audc.Cardano.GetDatum() != nil {
 					// Check if Datum.Hash is all zeroes
 					isAllZeroes := true
@@ -270,7 +274,11 @@ func (s *queryServiceServer) SearchUtxos(
 			Index: uint32(utxoId.Idx), // #nosec G115
 		}
 		aud.NativeBytes = utxo.Cbor()
-		audc.Cardano = utxo.Utxorpc()
+		utxoRpc, err := utxo.Utxorpc()
+		if err != nil {
+			return nil, err
+		}
+		audc.Cardano = utxoRpc
 		aud.ParsedState = &audc
 
 		// If AssetPattern is specified, filter based on it
