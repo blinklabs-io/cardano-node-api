@@ -246,8 +246,13 @@ func (s *chainSyncServiceServer) FollowTip(
 			block := be.Block // gOuroboros Block
 
 			var acb sync.AnyChainBlock
-			var acbc sync.AnyChainBlock_Cardano
-			acbc.Cardano = block.Utxorpc()
+			tmpBlock, err := block.Utxorpc()
+			if err != nil {
+				return fmt.Errorf("convert block: %w", err)
+			}
+			acbc := sync.AnyChainBlock_Cardano{
+				Cardano: tmpBlock,
+			}
 			acb.Chain = &acbc
 			var ftra sync.FollowTipResponse_Apply
 			ftra.Apply = &acb
