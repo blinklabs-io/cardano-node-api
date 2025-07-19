@@ -229,8 +229,8 @@ github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
 github.com/ugorji/go/codec v1.2.12 h1:9LC83zGrHhuUA9l16C9AHXAqEV/2wBQ4nkvumAE65EE=
 github.com/ugorji/go/codec v1.2.12/go.mod h1:UNopzCgEMSXjBc6AOMqYvWC1ktqTAfzJZUZgYf6w6lg=
-github.com/utxorpc/go-codegen v0.16.0 h1:jPTyKtv2OI6Ms7U/goAYbaP6axAZ39vRmoWdjO/rkeM=
-github.com/utxorpc/go-codegen v0.16.0/go.mod h1:2Nwq1md4HEcO2guvTpH45slGHO2aGRbiXKx73FM65ow=
+github.com/utxorpc/go-codegen v0.17.0 h1:cJ7Df9r8Az39lveIcmzcRciIDc3UJFdMSmXg8IAtBPM=
+github.com/utxorpc/go-codegen v0.17.0/go.mod h1:LBVGFns4YAHMhy+Pc8tF5ExkU+N8Wm3srst4omKZy4g=
 github.com/x448/float16 v0.8.4 h1:qLwI1I70+NjRFUR3zs1JPUCgaCXSh3SW62uAKT1mSBM=
 github.com/x448/float16 v0.8.4/go.mod h1:14CWIYCyZA/cWjXOioeEpHeN/83MdbZDRQHoFcYsOfg=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
