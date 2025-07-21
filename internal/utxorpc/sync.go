@@ -62,7 +62,7 @@ func (s *chainSyncServiceServer) FetchBlock(
 	var points []ocommon.Point
 	if len(ref) > 0 {
 		for _, blockRef := range ref {
-			blockIdx := blockRef.GetIndex()
+			blockIdx := blockRef.GetSlot()
 			blockHash := blockRef.GetHash()
 			slot := uint64(blockIdx)
 			point := ocommon.NewPoint(slot, blockHash)
@@ -129,7 +129,7 @@ func (s *chainSyncServiceServer) DumpHistory(
 	if startToken != nil {
 		log.Printf("startToken != nil\n")
 		blockRef := startToken
-		blockIdx := blockRef.GetIndex()
+		blockIdx := blockRef.GetSlot()
 		blockHash := blockRef.GetHash()
 		slot := uint64(blockIdx)
 		startPoint = ocommon.NewPoint(slot, blockHash)
@@ -187,7 +187,7 @@ func (s *chainSyncServiceServer) FollowTip(
 	var point ocommon.Point
 	if len(intersect) > 0 {
 		for _, blockRef := range intersect {
-			blockIdx := blockRef.GetIndex()
+			blockIdx := blockRef.GetSlot()
 			blockHash := blockRef.GetHash()
 			log.Printf("BlockRef: idx: %d, hash: %x", blockIdx, blockHash)
 			slot := uint64(blockIdx)
