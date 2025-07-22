@@ -36,8 +36,8 @@ test:
 	go test -v -race ./...
 
 swagger:
-	swag f -g internal/api/api.go
-	swag i -g internal/api/api.go
+	swag f -g api.go -d internal/api/
+	swag i -g api.go -d internal/api/
 
 # Build our program binaries
 # Depends on GO_FILES to determine when rebuild is needed
