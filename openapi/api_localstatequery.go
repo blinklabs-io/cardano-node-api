@@ -32,7 +32,7 @@ type LocalstatequeryAPI interface {
 	) LocalstatequeryAPILocalstatequeryCurrentEraGetRequest
 
 	// LocalstatequeryCurrentEraGetExecute executes the request
-	//	@return	ApiResponseLocalStateQueryCurrentEra
+	//  @return ApiResponseLocalStateQueryCurrentEra
 	LocalstatequeryCurrentEraGetExecute(
 		r LocalstatequeryAPILocalstatequeryCurrentEraGetRequest,
 	) (*ApiResponseLocalStateQueryCurrentEra, *http.Response, error)
@@ -48,7 +48,7 @@ type LocalstatequeryAPI interface {
 	) LocalstatequeryAPILocalstatequeryEraHistoryGetRequest
 
 	// LocalstatequeryEraHistoryGetExecute executes the request
-	//	@return	map[string]interface{}
+	//  @return map[string]interface{}
 	LocalstatequeryEraHistoryGetExecute(
 		r LocalstatequeryAPILocalstatequeryEraHistoryGetRequest,
 	) (map[string]interface{}, *http.Response, error)
@@ -64,7 +64,7 @@ type LocalstatequeryAPI interface {
 	) LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest
 
 	// LocalstatequeryGenesisConfigGetExecute executes the request
-	//	@return	map[string]interface{}
+	//  @return map[string]interface{}
 	LocalstatequeryGenesisConfigGetExecute(
 		r LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest,
 	) (map[string]interface{}, *http.Response, error)
@@ -80,7 +80,7 @@ type LocalstatequeryAPI interface {
 	) LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest
 
 	// LocalstatequeryProtocolParamsGetExecute executes the request
-	//	@return	map[string]interface{}
+	//  @return map[string]interface{}
 	LocalstatequeryProtocolParamsGetExecute(
 		r LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest,
 	) (map[string]interface{}, *http.Response, error)
@@ -96,7 +96,7 @@ type LocalstatequeryAPI interface {
 	) LocalstatequeryAPILocalstatequerySystemStartGetRequest
 
 	// LocalstatequerySystemStartGetExecute executes the request
-	//	@return	ApiResponseLocalStateQuerySystemStart
+	//  @return ApiResponseLocalStateQuerySystemStart
 	LocalstatequerySystemStartGetExecute(
 		r LocalstatequeryAPILocalstatequerySystemStartGetRequest,
 	) (*ApiResponseLocalStateQuerySystemStart, *http.Response, error)
@@ -112,7 +112,7 @@ type LocalstatequeryAPI interface {
 	) LocalstatequeryAPILocalstatequeryTipGetRequest
 
 	// LocalstatequeryTipGetExecute executes the request
-	//	@return	ApiResponseLocalStateQueryTip
+	//  @return ApiResponseLocalStateQueryTip
 	LocalstatequeryTipGetExecute(
 		r LocalstatequeryAPILocalstatequeryTipGetRequest,
 	) (*ApiResponseLocalStateQueryTip, *http.Response, error)
@@ -147,7 +147,7 @@ func (a *LocalstatequeryAPIService) LocalstatequeryCurrentEraGet(
 
 // Execute executes the request
 //
-//	@return	ApiResponseLocalStateQueryCurrentEra
+//	@return ApiResponseLocalStateQueryCurrentEra
 func (a *LocalstatequeryAPIService) LocalstatequeryCurrentEraGetExecute(
 	r LocalstatequeryAPILocalstatequeryCurrentEraGetRequest,
 ) (*ApiResponseLocalStateQueryCurrentEra, *http.Response, error) {
@@ -281,7 +281,7 @@ func (a *LocalstatequeryAPIService) LocalstatequeryEraHistoryGet(
 
 // Execute executes the request
 //
-//	@return	map[string]interface{}
+//	@return map[string]interface{}
 func (a *LocalstatequeryAPIService) LocalstatequeryEraHistoryGetExecute(
 	r LocalstatequeryAPILocalstatequeryEraHistoryGetRequest,
 ) (map[string]interface{}, *http.Response, error) {
@@ -415,7 +415,7 @@ func (a *LocalstatequeryAPIService) LocalstatequeryGenesisConfigGet(
 
 // Execute executes the request
 //
-//	@return	map[string]interface{}
+//	@return map[string]interface{}
 func (a *LocalstatequeryAPIService) LocalstatequeryGenesisConfigGetExecute(
 	r LocalstatequeryAPILocalstatequeryGenesisConfigGetRequest,
 ) (map[string]interface{}, *http.Response, error) {
@@ -549,7 +549,7 @@ func (a *LocalstatequeryAPIService) LocalstatequeryProtocolParamsGet(
 
 // Execute executes the request
 //
-//	@return	map[string]interface{}
+//	@return map[string]interface{}
 func (a *LocalstatequeryAPIService) LocalstatequeryProtocolParamsGetExecute(
 	r LocalstatequeryAPILocalstatequeryProtocolParamsGetRequest,
 ) (map[string]interface{}, *http.Response, error) {
@@ -683,7 +683,7 @@ func (a *LocalstatequeryAPIService) LocalstatequerySystemStartGet(
 
 // Execute executes the request
 //
-//	@return	ApiResponseLocalStateQuerySystemStart
+//	@return ApiResponseLocalStateQuerySystemStart
 func (a *LocalstatequeryAPIService) LocalstatequerySystemStartGetExecute(
 	r LocalstatequeryAPILocalstatequerySystemStartGetRequest,
 ) (*ApiResponseLocalStateQuerySystemStart, *http.Response, error) {
@@ -817,7 +817,7 @@ func (a *LocalstatequeryAPIService) LocalstatequeryTipGet(
 
 // Execute executes the request
 //
-//	@return	ApiResponseLocalStateQueryTip
+//	@return ApiResponseLocalStateQueryTip
 func (a *LocalstatequeryAPIService) LocalstatequeryTipGetExecute(
 	r LocalstatequeryAPILocalstatequeryTipGetRequest,
 ) (*ApiResponseLocalStateQueryTip, *http.Response, error) {

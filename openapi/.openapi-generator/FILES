@@ -3,9 +3,9 @@
 README.md
 api/openapi.yaml
 api_chainsync.go
-api_default.go
 api_localstatequery.go
 api_localtxmonitor.go
+api_localtxsubmission.go
 client.go
 configuration.go
 docs/ApiResponseApiError.md
@@ -16,9 +16,9 @@ docs/ApiResponseLocalTxMonitorHasTx.md
 docs/ApiResponseLocalTxMonitorSizes.md
 docs/ApiResponseLocalTxMonitorTxs.md
 docs/ChainsyncAPI.md
-docs/DefaultAPI.md
 docs/LocalstatequeryAPI.md
 docs/LocaltxmonitorAPI.md
+docs/LocaltxsubmissionAPI.md
 git_push.sh
 go.mod
 go.sum
