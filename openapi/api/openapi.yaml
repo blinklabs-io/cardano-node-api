@@ -39,13 +39,13 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/api.responseApiError'
+                $ref: "#/components/schemas/api.responseApiError"
           description: Bad Request
         "500":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/api.responseApiError'
+                $ref: "#/components/schemas/api.responseApiError"
           description: Internal Server Error
       summary: Start a chain-sync using a websocket for events
       tags:
@@ -57,13 +57,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseLocalStateQueryCurrentEra'
+                $ref: "#/components/schemas/api.responseLocalStateQueryCurrentEra"
           description: OK
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseApiError'
+                $ref: "#/components/schemas/api.responseApiError"
           description: Internal Server Error
       summary: Query Current Era
       tags:
@@ -75,13 +75,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseLocalStateQueryEraHistory'
+                $ref: "#/components/schemas/api.responseLocalStateQueryEraHistory"
           description: OK
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseApiError'
+                $ref: "#/components/schemas/api.responseApiError"
           description: Internal Server Error
       summary: Query Era History
       tags:
@@ -93,13 +93,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseLocalStateQueryGenesisConfig'
+                $ref: "#/components/schemas/api.responseLocalStateQueryGenesisConfig"
           description: OK
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseApiError'
+                $ref: "#/components/schemas/api.responseApiError"
           description: Internal Server Error
       summary: Query Genesis Config
       tags:
@@ -111,13 +111,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseLocalStateQueryProtocolParams'
+                $ref: "#/components/schemas/api.responseLocalStateQueryProtocolParams"
           description: OK
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseApiError'
+                $ref: "#/components/schemas/api.responseApiError"
           description: Internal Server Error
       summary: Query Current Protocol Parameters
       tags:
@@ -129,13 +129,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseLocalStateQuerySystemStart'
+                $ref: "#/components/schemas/api.responseLocalStateQuerySystemStart"
           description: OK
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseApiError'
+                $ref: "#/components/schemas/api.responseApiError"
           description: Internal Server Error
       summary: Query System Start
       tags:
@@ -147,13 +147,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseLocalStateQueryTip'
+                $ref: "#/components/schemas/api.responseLocalStateQueryTip"
           description: OK
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseApiError'
+                $ref: "#/components/schemas/api.responseApiError"
           description: Internal Server Error
       summary: Query Chain Tip
       tags:
@@ -172,13 +172,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseLocalTxMonitorHasTx'
+                $ref: "#/components/schemas/api.responseLocalTxMonitorHasTx"
           description: OK
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseApiError'
+                $ref: "#/components/schemas/api.responseApiError"
           description: Internal Server Error
       summary: Check if a particular TX exists in the mempool
       tags:
@@ -190,13 +190,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseLocalTxMonitorSizes'
+                $ref: "#/components/schemas/api.responseLocalTxMonitorSizes"
           description: OK
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseApiError'
+                $ref: "#/components/schemas/api.responseApiError"
           description: Internal Server Error
       summary: "Get mempool capacity, size, and TX count"
       tags:
@@ -209,14 +209,14 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/api.responseLocalTxMonitorTxs'
+                  $ref: "#/components/schemas/api.responseLocalTxMonitorTxs"
                 type: array
           description: OK
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api.responseApiError'
+                $ref: "#/components/schemas/api.responseApiError"
           description: Internal Server Error
       summary: List all transactions in the mempool
       tags:
