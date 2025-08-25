@@ -21,12 +21,12 @@ github.com/bits-and-blooms/bitset v1.20.0 h1:2F+rfL86jE2d/bmw7OhqUg2Sj/1rURkBn3M
 github.com/bits-and-blooms/bitset v1.20.0/go.mod h1:7hO7Gc7Pp1vODcmWvKMRA9BNmbv6a/7QIWpPxHddWR8=
 github.com/blinklabs-io/adder v0.31.0 h1:LnJwkp7B7E/Nb2KCx8e6gFA/qFU1BP6N3NdDQsXbCqg=
 github.com/blinklabs-io/adder v0.31.0/go.mod h1:BbJreNXRwEenRb3wP0HVjlL8aB1zzTJN7hNQY1/+s6c=
-github.com/blinklabs-io/gouroboros v0.130.1 h1:OrNxV1z/YIqAYBkAJZcVi2lDg16rZ3RJCk9YxsJvp6M=
-github.com/blinklabs-io/gouroboros v0.130.1/go.mod h1:+tBHYgbI9TsFs31WQrLXItWLVQhcahXS5YzthS0bwfQ=
+github.com/blinklabs-io/gouroboros v0.132.0 h1:zaFL7NHEml0VmM0p1ihZXQTEnSIjis/nj5jsVpDJTz8=
+github.com/blinklabs-io/gouroboros v0.132.0/go.mod h1:gjBwd6uK8fzJBeteKWq6y6x82RC13GfpswFgrmqlRsc=
 github.com/blinklabs-io/ouroboros-mock v0.3.8 h1:+DAt2rx0ouZUxee5DBMgZq3I1+ZdxFSHG9g3tYl/FKU=
 github.com/blinklabs-io/ouroboros-mock v0.3.8/go.mod h1:UwQIf4KqZwO13P9d90fbi3UL/X7JaJfeEbqk+bEeFQA=
-github.com/blinklabs-io/plutigo v0.0.3 h1:t5ujYD+1uCFy/JPu04dZEyN5Wfzhp4KsOTQabkRSPng=
-github.com/blinklabs-io/plutigo v0.0.3/go.mod h1:49P8jixVWblHzdYdiFmnPPCTDd8SxZ6IvlfRBQRIldQ=
+github.com/blinklabs-io/plutigo v0.0.6 h1:malkUZ9K1mPMnqWKQLQSS8lX0ott+N7GCdAjRhMIV1M=
+github.com/blinklabs-io/plutigo v0.0.6/go.mod h1:gxTWAu9n7+4SgQ+zAoO91LYU+5WanUNdRkl9mLdm8f8=
 github.com/blinklabs-io/tx-submit-api v0.20.8 h1:SYe5jviJ2LCqICdKeSvY29IL0d00iwUytM54P/GBCUk=
 github.com/blinklabs-io/tx-submit-api v0.20.8/go.mod h1:zKBPUavIzeVhRZHmqOcHxC6jvFbnJoxD6+pbUXES28o=
 github.com/btcsuite/btcd v0.20.1-beta/go.mod h1:wVuoA8VJLEcwgqHBwHmzLRazpKxTv13Px/pDuV7OomQ=
