@@ -8,8 +8,8 @@ require (
 	connectrpc.com/connect v1.18.1
 	connectrpc.com/grpchealth v1.4.0
 	connectrpc.com/grpcreflect v1.3.0
-	github.com/blinklabs-io/adder v0.31.0
-	github.com/blinklabs-io/gouroboros v0.130.1
+	github.com/blinklabs-io/adder v0.32.1
+	github.com/blinklabs-io/gouroboros v0.133.0
 	github.com/blinklabs-io/tx-submit-api v0.20.8
 	github.com/gin-gonic/gin v1.10.1
 	github.com/gorilla/websocket v1.5.3
@@ -28,18 +28,23 @@ require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/SundaeSwap-finance/kugo v1.3.0 // indirect
-	github.com/SundaeSwap-finance/ogmigo/v6 v6.0.2 // indirect
+	github.com/SundaeSwap-finance/ogmigo/v6 v6.1.0 // indirect
 	github.com/aws/aws-sdk-go v1.55.6 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.20.0 // indirect
-	github.com/blinklabs-io/plutigo v0.0.3 // indirect
+	github.com/blinklabs-io/plutigo v0.0.7 // indirect
+	github.com/btcsuite/btcd/btcec/v2 v2.3.5 // indirect
 	github.com/btcsuite/btcd/btcutil v1.1.6 // indirect
+	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0 // indirect
 	github.com/btcsuite/btcutil v1.0.2 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/bytedance/sonic v1.13.2 // indirect
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
+	github.com/consensys/gnark-crypto v0.18.0 // indirect
+	github.com/decred/dcrd/crypto/blake256 v1.1.0 // indirect
+	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
 	github.com/gin-contrib/sse v1.0.0 // indirect
