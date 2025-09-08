@@ -21,12 +21,12 @@ github.com/bits-and-blooms/bitset v1.20.0 h1:2F+rfL86jE2d/bmw7OhqUg2Sj/1rURkBn3M
 github.com/bits-and-blooms/bitset v1.20.0/go.mod h1:7hO7Gc7Pp1vODcmWvKMRA9BNmbv6a/7QIWpPxHddWR8=
 github.com/blinklabs-io/adder v0.32.1 h1:Fr4L4z+eoU0fDfHrNntVzjFJsiGuOwjcBXtUIVgAd8w=
 github.com/blinklabs-io/adder v0.32.1/go.mod h1:RhX11giSXYM4c4iK+OiF2V6L7FaDUDRQaebypS+UEj0=
-github.com/blinklabs-io/gouroboros v0.133.0 h1:/ts+A6YWS+10WgYORKT9UGqCfuCDnMUAWVR+cFwv92E=
-github.com/blinklabs-io/gouroboros v0.133.0/go.mod h1:A/vuCLJDIEqjTqzXkfY4HGUmLc+aGR03tjJ8qmTAxcA=
+github.com/blinklabs-io/gouroboros v0.134.2 h1:ADkkZTYOvocbjO6IL6c/4I+ZTX6/LDLBuPTLiDQ/2KE=
+github.com/blinklabs-io/gouroboros v0.134.2/go.mod h1:N4smrM9nmuSkYV92D7IL4z00/iAkbXysT1Ld7saVWeI=
 github.com/blinklabs-io/ouroboros-mock v0.3.8 h1:+DAt2rx0ouZUxee5DBMgZq3I1+ZdxFSHG9g3tYl/FKU=
 github.com/blinklabs-io/ouroboros-mock v0.3.8/go.mod h1:UwQIf4KqZwO13P9d90fbi3UL/X7JaJfeEbqk+bEeFQA=
-github.com/blinklabs-io/plutigo v0.0.7 h1:wgb7v47FggrZEfikolV12WhPsWEXzFyzLtak5IrAOEk=
-github.com/blinklabs-io/plutigo v0.0.7/go.mod h1:gxTWAu9n7+4SgQ+zAoO91LYU+5WanUNdRkl9mLdm8f8=
+github.com/blinklabs-io/plutigo v0.0.11 h1:6a4EURP+Gq5jhP5N/C4lTxPFAdR6wF89pDiKvOV2OLg=
+github.com/blinklabs-io/plutigo v0.0.11/go.mod h1:L639Q8i2cSRuBhjgCHttPR0nnYwwsYVT4Btz7KpQjSw=
 github.com/blinklabs-io/tx-submit-api v0.20.9 h1:Hr1aifZ6ENW+ZMH9J5ZcmnuOG2dyrSHhX3dbGPfQ4hQ=
 github.com/blinklabs-io/tx-submit-api v0.20.9/go.mod h1:yNTnuJxlfdxME4kQWOgJFGFk0pg1U/p0tC50tzHiuio=
 github.com/btcsuite/btcd v0.20.1-beta/go.mod h1:wVuoA8VJLEcwgqHBwHmzLRazpKxTv13Px/pDuV7OomQ=
@@ -69,8 +69,8 @@ github.com/cespare/xxhash/v2 v2.3.0/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XL
 github.com/cloudwego/base64x v0.1.5 h1:XPciSp1xaq2VCSt6lF0phncD4koWyULpl5bUxbfCyP4=
 github.com/cloudwego/base64x v0.1.5/go.mod h1:0zlkT4Wn5C6NdauXdJRhSKRlJvmclQ1hhJgA0rcu/8w=
 github.com/cloudwego/iasm v0.2.0/go.mod h1:8rXZaNYT2n95jn+zTI1sDr+IgcD2GVs0nlbbQPiEFhY=
-github.com/consensys/gnark-crypto v0.18.0 h1:vIye/FqI50VeAr0B3dx+YjeIvmc3LWz4yEfbWBpTUf0=
-github.com/consensys/gnark-crypto v0.18.0/go.mod h1:L3mXGFTe1ZN+RSJ+CLjUt9x7PNdx8ubaYfDROyp2Z8c=
+github.com/consensys/gnark-crypto v0.19.0 h1:zXCqeY2txSaMl6G5wFpZzMWJU9HPNh8qxPnYJ1BL9vA=
+github.com/consensys/gnark-crypto v0.19.0/go.mod h1:rT23F0XSZqE0mUA0+pRtnL56IbPxs6gp4CeRsBk4XS0=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v0.0.0-20171005155431-ecdeabc65495/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
