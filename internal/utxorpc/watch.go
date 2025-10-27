@@ -22,7 +22,6 @@ import (
 
 	connect "connectrpc.com/connect"
 	"github.com/blinklabs-io/adder/event"
-	input_chainsync "github.com/blinklabs-io/adder/input/chainsync"
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	ocommon "github.com/blinklabs-io/gouroboros/protocol/common"
 	watch "github.com/utxorpc/go-codegen/utxorpc/v1alpha/watch"
@@ -93,7 +92,7 @@ func (s *watchServiceServer) WatchTx(
 				log.Printf("ERROR: empty block context")
 				return errors.New("ERROR: empty block context")
 			}
-			bc := context.(input_chainsync.BlockContext)
+			bc := context.(event.BlockContext)
 			// Get event payload to get the block data
 			payload := evt.Payload
 			if payload == nil {
@@ -108,7 +107,7 @@ func (s *watchServiceServer) WatchTx(
 					bc.SlotNumber,
 				)
 			}
-			be := payload.(input_chainsync.BlockEvent)
+			be := payload.(event.BlockEvent)
 			block := be.Block // gOuorboros Block
 
 			// Loop through transactions

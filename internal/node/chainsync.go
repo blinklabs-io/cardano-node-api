@@ -19,7 +19,6 @@ import (
 	"time"
 
 	"github.com/blinklabs-io/adder/event"
-	input_chainsync "github.com/blinklabs-io/adder/input/chainsync"
 	"github.com/blinklabs-io/cardano-node-api/internal/config"
 	"github.com/blinklabs-io/gouroboros/ledger"
 	"github.com/blinklabs-io/gouroboros/protocol/chainsync"
@@ -66,7 +65,7 @@ func chainSyncRollBackwardHandler(
 			"chainsync.rollback",
 			time.Now(),
 			nil,
-			input_chainsync.NewRollbackEvent(point),
+			event.NewRollbackEvent(point),
 		)
 		connCfg.ChainSyncEventChan <- evt
 	}
@@ -88,8 +87,8 @@ func chainSyncRollForwardHandler(
 			blockEvt := event.New(
 				"chainsync.block",
 				time.Now(),
-				input_chainsync.NewBlockContext(v, cfg.Node.NetworkMagic),
-				input_chainsync.NewBlockEvent(v, true),
+				event.NewBlockContext(v, cfg.Node.NetworkMagic),
+				event.NewBlockEvent(v, true),
 			)
 			connCfg.ChainSyncEventChan <- blockEvt
 			// Emit transaction-level events
@@ -103,8 +102,8 @@ func chainSyncRollForwardHandler(
 					"chainsync.transaction",
 					time.Now(),
 					// #nosec G115
-					input_chainsync.NewTransactionContext(v, transaction, uint32(t), cfg.Node.NetworkMagic),
-					input_chainsync.NewTransactionEvent(v, transaction, true, nil),
+					event.NewTransactionContext(v, transaction, uint32(t), cfg.Node.NetworkMagic),
+					event.NewTransactionEvent(v, transaction, true, nil),
 				)
 				connCfg.ChainSyncEventChan <- txEvt
 			}

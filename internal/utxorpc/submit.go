@@ -24,7 +24,6 @@ import (
 
 	connect "connectrpc.com/connect"
 	"github.com/blinklabs-io/adder/event"
-	input_chainsync "github.com/blinklabs-io/adder/input/chainsync"
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	"github.com/blinklabs-io/gouroboros/ledger"
 	ocommon "github.com/blinklabs-io/gouroboros/protocol/common"
@@ -175,7 +174,7 @@ func (s *submitServiceServer) WaitForTx(
 
 			// Process the event
 			switch v := evt.Payload.(type) {
-			case input_chainsync.TransactionEvent:
+			case event.TransactionEvent:
 				logger.Debug("Received TransactionEvent", "hash", v.Transaction.Hash().String())
 				for _, r := range ref {
 					refHash := hex.EncodeToString(r)
