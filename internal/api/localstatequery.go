@@ -36,8 +36,8 @@ func configureLocalStateQueryRoutes(apiGroup *gin.RouterGroup) {
 }
 
 type responseLocalStateQueryCurrentEra struct {
-	Id   uint8  `json:"id"`
 	Name string `json:"name"`
+	Id   uint8  `json:"id"`
 }
 
 // handleLocalStateQueryCurrentEra godoc
@@ -149,10 +149,10 @@ func handleLocalStateQuerySystemStart(c *gin.Context) {
 
 type responseLocalStateQueryTip struct {
 	Era     string `json:"era"`
+	Hash    string `json:"hash"`
 	EpochNo int    `json:"epoch_no"`
 	BlockNo int64  `json:"block_no"`
 	Slot    uint64 `json:"slot_no"`
-	Hash    string `json:"hash"`
 }
 
 // handleLocalStateQueryTip godoc

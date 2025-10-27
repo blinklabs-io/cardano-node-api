@@ -36,8 +36,8 @@ func configureChainSyncRoutes(apiGroup *gin.RouterGroup) {
 }
 
 type requestChainSyncSync struct {
-	Slot uint64 `form:"slot"`
 	Hash string `form:"hash"`
+	Slot uint64 `form:"slot"`
 	Tip  bool   `form:"tip"`
 }
 

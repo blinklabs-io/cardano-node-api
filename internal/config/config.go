@@ -34,8 +34,8 @@ type Config struct {
 }
 
 type LoggingConfig struct {
-	Healthchecks bool   `yaml:"healthchecks" envconfig:"LOGGING_HEALTHCHECKS"`
 	Level        string `yaml:"level"        envconfig:"LOGGING_LEVEL"`
+	Healthchecks bool   `yaml:"healthchecks" envconfig:"LOGGING_HEALTHCHECKS"`
 }
 
 type ApiConfig struct {
@@ -55,13 +55,13 @@ type MetricsConfig struct {
 
 type NodeConfig struct {
 	Network      string `yaml:"network"      envconfig:"CARDANO_NETWORK"`
-	NetworkMagic uint32 `yaml:"networkMagic" envconfig:"CARDANO_NODE_NETWORK_MAGIC"`
 	Address      string `yaml:"address"      envconfig:"CARDANO_NODE_SOCKET_TCP_HOST"`
+	SocketPath   string `yaml:"socketPath"   envconfig:"CARDANO_NODE_SOCKET_PATH"`
 	Port         uint   `yaml:"port"         envconfig:"CARDANO_NODE_SOCKET_TCP_PORT"`
 	QueryTimeout uint   `yaml:"queryTimeout" envconfig:"CARDANO_NODE_SOCKET_QUERY_TIMEOUT"`
-	SkipCheck    bool   `yaml:"skipCheck"    envconfig:"CARDANO_NODE_SKIP_CHECK"`
-	SocketPath   string `yaml:"socketPath"   envconfig:"CARDANO_NODE_SOCKET_PATH"`
 	Timeout      uint   `yaml:"timeout"      envconfig:"CARDANO_NODE_SOCKET_TIMEOUT"`
+	NetworkMagic uint32 `yaml:"networkMagic" envconfig:"CARDANO_NODE_NETWORK_MAGIC"`
+	SkipCheck    bool   `yaml:"skipCheck"    envconfig:"CARDANO_NODE_SKIP_CHECK"`
 }
 
 type UtxorpcConfig struct {
