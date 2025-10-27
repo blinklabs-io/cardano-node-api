@@ -8,7 +8,7 @@ require (
 	connectrpc.com/connect v1.19.1
 	connectrpc.com/grpchealth v1.4.0
 	connectrpc.com/grpcreflect v1.3.0
-	github.com/blinklabs-io/adder v0.32.6
+	github.com/blinklabs-io/adder v0.33.0
 	github.com/blinklabs-io/gouroboros v0.137.0
 	github.com/blinklabs-io/tx-submit-api v0.20.9
 	github.com/gin-gonic/gin v1.11.0
@@ -27,17 +27,12 @@ require (
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
-	github.com/SundaeSwap-finance/kugo v1.3.0 // indirect
-	github.com/SundaeSwap-finance/ogmigo/v6 v6.1.0 // indirect
-	github.com/aws/aws-sdk-go v1.55.6 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.20.0 // indirect
 	github.com/blinklabs-io/plutigo v0.0.13 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.3.5 // indirect
 	github.com/btcsuite/btcd/btcutil v1.1.6 // indirect
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0 // indirect
-	github.com/btcsuite/btcutil v1.0.2 // indirect
-	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/bytedance/sonic v1.14.0 // indirect
 	github.com/bytedance/sonic/loader v0.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -58,7 +53,6 @@ require (
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/goccy/go-yaml v1.18.0 // indirect
 	github.com/jinzhu/copier v0.4.0 // indirect
-	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
