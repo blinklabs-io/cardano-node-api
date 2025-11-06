@@ -24,13 +24,13 @@ import (
 )
 
 type Config struct {
+	Tls     TlsConfig     `yaml:"tls"`
 	Logging LoggingConfig `yaml:"logging"`
 	Api     ApiConfig     `yaml:"api"`
 	Metrics MetricsConfig `yaml:"metrics"`
 	Debug   DebugConfig   `yaml:"debug"`
-	Node    NodeConfig    `yaml:"node"`
-	Tls     TlsConfig     `yaml:"tls"`
 	Utxorpc UtxorpcConfig `yaml:"utxorpc"`
+	Node    NodeConfig    `yaml:"node"`
 }
 
 type LoggingConfig struct {
