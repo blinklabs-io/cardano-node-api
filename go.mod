@@ -10,7 +10,7 @@ require (
 	connectrpc.com/grpcreflect v1.3.0
 	github.com/blinklabs-io/adder v0.33.0
 	github.com/blinklabs-io/gouroboros v0.137.1
-	github.com/blinklabs-io/tx-submit-api v0.20.9
+	github.com/blinklabs-io/tx-submit-api v0.20.10
 	github.com/gin-gonic/gin v1.11.0
 	github.com/gorilla/websocket v1.5.3
 	github.com/kelseyhightower/envconfig v1.4.0
