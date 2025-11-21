@@ -18,7 +18,7 @@ require (
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.1
 	github.com/swaggo/swag v1.16.6
-	github.com/utxorpc/go-codegen v0.17.0
+	github.com/utxorpc/go-codegen v0.18.1
 	go.uber.org/automaxprocs v1.6.0
 	golang.org/x/net v0.47.0
 	gopkg.in/yaml.v2 v2.4.0
@@ -80,6 +80,6 @@ require (
 	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.31.0 // indirect
 	golang.org/x/tools v0.38.0 // indirect
-	google.golang.org/protobuf v1.36.9 // indirect
+	google.golang.org/protobuf v1.36.10 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
