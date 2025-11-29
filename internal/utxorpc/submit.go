@@ -43,6 +43,9 @@ func (s *submitServiceServer) SubmitTx(
 ) (*connect.Response[submit.SubmitTxResponse], error) {
 	// txRaw
 	txRaw := req.Msg.GetTx() // *AnyChainTx
+	if txRaw == nil {
+		return nil, errors.New("transaction is required")
+	}
 	log.Printf("Got a SubmitTx request with 1 transaction")
 	resp := &submit.SubmitTxResponse{}
 
