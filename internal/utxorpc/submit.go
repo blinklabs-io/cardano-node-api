@@ -41,9 +41,9 @@ func (s *submitServiceServer) SubmitTx(
 	ctx context.Context,
 	req *connect.Request[submit.SubmitTxRequest],
 ) (*connect.Response[submit.SubmitTxResponse], error) {
-	// txRawList
-	txRawList := req.Msg.GetTx() // []*AnyChainTx
-	log.Printf("Got a SubmitTx request with %d transactions", len(txRawList))
+	// txRaw
+	txRaw := req.Msg.GetTx() // *AnyChainTx
+	log.Printf("Got a SubmitTx request with 1 transaction")
 	resp := &submit.SubmitTxResponse{}
 
 	// Connect to node
@@ -56,42 +56,27 @@ func (s *submitServiceServer) SubmitTx(
 		oConn.Close()
 	}()
 
-	// Loop through the transactions and submit each
-	errorList := make([]error, len(txRawList))
-	hasError := false
-	for i, txi := range txRawList {
-		txRawBytes := txi.GetRaw() // raw bytes
-		txType, err := ledger.DetermineTransactionType(txRawBytes)
-		placeholderRef := []byte{}
-		if err != nil {
-			resp.Ref = append(resp.Ref, placeholderRef)
-			errorList[i] = err
-			hasError = true
-			continue
-		}
-		tx, err := ledger.NewTransactionFromCbor(txType, txRawBytes)
-		if err != nil {
-			resp.Ref = append(resp.Ref, placeholderRef)
-			errorList[i] = err
-			hasError = true
-			continue
-		}
-		// Submit the transaction
-		err = oConn.LocalTxSubmission().Client.SubmitTx(
-			uint16(txType), // #nosec G115
-			txRawBytes,
-		)
-		if err != nil {
-			resp.Ref = append(resp.Ref, placeholderRef)
-			errorList[i] = fmt.Errorf("%s", err.Error())
-			hasError = true
-			continue
-		}
-		resp.Ref = append(resp.Ref, tx.Hash().Bytes())
+	txRawBytes := txRaw.GetRaw() // raw bytes
+	txType, err := ledger.DetermineTransactionType(txRawBytes)
+	if err != nil {
+		resp.Ref = []byte{}
+		return connect.NewResponse(resp), err
 	}
-	if hasError {
-		return connect.NewResponse(resp), fmt.Errorf("%v", errorList)
+	tx, err := ledger.NewTransactionFromCbor(txType, txRawBytes)
+	if err != nil {
+		resp.Ref = []byte{}
+		return connect.NewResponse(resp), err
 	}
+	// Submit the transaction
+	err = oConn.LocalTxSubmission().Client.SubmitTx(
+		uint16(txType), // #nosec G115
+		txRawBytes,
+	)
+	if err != nil {
+		resp.Ref = []byte{}
+		return connect.NewResponse(resp), err
+	}
+	resp.Ref = tx.Hash().Bytes()
 	return connect.NewResponse(resp), nil
 }
 
