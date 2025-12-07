@@ -10,11 +10,13 @@ client.go
 configuration.go
 docs/ApiResponseApiError.md
 docs/ApiResponseLocalStateQueryCurrentEra.md
+docs/ApiResponseLocalStateQuerySearchUTxOsByAsset.md
 docs/ApiResponseLocalStateQuerySystemStart.md
 docs/ApiResponseLocalStateQueryTip.md
 docs/ApiResponseLocalTxMonitorHasTx.md
 docs/ApiResponseLocalTxMonitorSizes.md
 docs/ApiResponseLocalTxMonitorTxs.md
+docs/ApiUtxoItem.md
 docs/ChainsyncAPI.md
 docs/LocalstatequeryAPI.md
 docs/LocaltxmonitorAPI.md
@@ -24,10 +26,12 @@ go.mod
 go.sum
 model_api_response_api_error.go
 model_api_response_local_state_query_current_era.go
+model_api_response_local_state_query_search_utx_os_by_asset.go
 model_api_response_local_state_query_system_start.go
 model_api_response_local_state_query_tip.go
 model_api_response_local_tx_monitor_has_tx.go
 model_api_response_local_tx_monitor_sizes.go
 model_api_response_local_tx_monitor_txs.go
+model_api_utxo_item.go
 response.go
 utils.go

@@ -86,6 +86,7 @@ Class | Method | HTTP request | Description
 *LocalstatequeryAPI* | [**LocalstatequeryProtocolParamsGet**](docs/LocalstatequeryAPI.md#localstatequeryprotocolparamsget) | **Get** /localstatequery/protocol-params | Query Current Protocol Parameters
 *LocalstatequeryAPI* | [**LocalstatequerySystemStartGet**](docs/LocalstatequeryAPI.md#localstatequerysystemstartget) | **Get** /localstatequery/system-start | Query System Start
 *LocalstatequeryAPI* | [**LocalstatequeryTipGet**](docs/LocalstatequeryAPI.md#localstatequerytipget) | **Get** /localstatequery/tip | Query Chain Tip
+*LocalstatequeryAPI* | [**LocalstatequeryUtxosSearchByAssetGet**](docs/LocalstatequeryAPI.md#localstatequeryutxossearchbyassetget) | **Get** /localstatequery/utxos/search-by-asset | Search UTxOs by Asset
 *LocaltxmonitorAPI* | [**LocaltxmonitorHasTxTxHashGet**](docs/LocaltxmonitorAPI.md#localtxmonitorhastxtxhashget) | **Get** /localtxmonitor/has_tx/{tx_hash} | Check if a particular TX exists in the mempool
 *LocaltxmonitorAPI* | [**LocaltxmonitorSizesGet**](docs/LocaltxmonitorAPI.md#localtxmonitorsizesget) | **Get** /localtxmonitor/sizes | Get mempool capacity, size, and TX count
 *LocaltxmonitorAPI* | [**LocaltxmonitorTxsGet**](docs/LocaltxmonitorAPI.md#localtxmonitortxsget) | **Get** /localtxmonitor/txs | List all transactions in the mempool
@@ -96,11 +97,13 @@ Class | Method | HTTP request | Description
 
  - [ApiResponseApiError](docs/ApiResponseApiError.md)
  - [ApiResponseLocalStateQueryCurrentEra](docs/ApiResponseLocalStateQueryCurrentEra.md)
+ - [ApiResponseLocalStateQuerySearchUTxOsByAsset](docs/ApiResponseLocalStateQuerySearchUTxOsByAsset.md)
  - [ApiResponseLocalStateQuerySystemStart](docs/ApiResponseLocalStateQuerySystemStart.md)
  - [ApiResponseLocalStateQueryTip](docs/ApiResponseLocalStateQueryTip.md)
  - [ApiResponseLocalTxMonitorHasTx](docs/ApiResponseLocalTxMonitorHasTx.md)
  - [ApiResponseLocalTxMonitorSizes](docs/ApiResponseLocalTxMonitorSizes.md)
  - [ApiResponseLocalTxMonitorTxs](docs/ApiResponseLocalTxMonitorTxs.md)
+ - [ApiUtxoItem](docs/ApiUtxoItem.md)
 
 
 ## Documentation For Authorization
