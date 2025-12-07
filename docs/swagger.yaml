@@ -80,6 +80,8 @@ definitions:
       address:
         type: string
       amount:
+        example: 1000000
+        format: int64
         type: integer
       assets: {}
       index:

@@ -540,7 +540,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "amount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 1000000
                 },
                 "assets": {},
                 "index": {
