@@ -20,6 +20,7 @@ import (
 
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	"github.com/blinklabs-io/gouroboros/ledger"
+	"github.com/blinklabs-io/gouroboros/protocol/localstatequery"
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,6 +31,7 @@ func configureLocalStateQueryRoutes(apiGroup *gin.RouterGroup) {
 	group.GET("/tip", handleLocalStateQueryTip)
 	group.GET("/era-history", handleLocalStateQueryEraHistory)
 	group.GET("/protocol-params", handleLocalStateQueryProtocolParams)
+	group.GET("/utxos/search-by-asset", handleLocalStateQuerySearchUTxOsByAsset)
 	// TODO: uncomment after this is fixed:
 	// - https://github.com/blinklabs-io/gouroboros/issues/584
 	// group.GET("/genesis-config", handleLocalStateQueryGenesisConfig)
@@ -373,4 +375,140 @@ func handleLocalStateQueryGenesisConfig(c *gin.Context) {
 	//resp := responseLocalStateQueryGenesisConfig{
 	//}
 	c.JSON(200, genesisConfig)
+}
+
+type responseLocalStateQuerySearchUTxOsByAsset struct {
+	UTxOs []utxoItem `json:"utxos"`
+	Count int        `json:"count"`
+}
+
+type utxoItem struct {
+	TxHash  string      `json:"tx_hash"`
+	Index   uint32      `json:"index"`
+	Address string      `json:"address"`
+	Amount  uint64      `json:"amount"`
+	Assets  interface{} `json:"assets,omitempty"`
+}
+
+// handleLocalStateQuerySearchUTxOsByAsset godoc
+//
+//	@Summary	Search UTxOs by Asset
+//	@Tags		localstatequery
+//	@Produce	json
+//	@Param		policy_id	query		string	true	"Policy ID (hex)"
+//	@Param		asset_name	query		string	true	"Asset name (hex)"
+//	@Param		address		query		string	false	"Optional: Filter by address"
+//	@Success	200			{object}	responseLocalStateQuerySearchUTxOsByAsset
+//	@Failure	400			{object}	responseApiError
+//	@Failure	500			{object}	responseApiError
+//	@Router		/localstatequery/utxos/search-by-asset [get]
+func handleLocalStateQuerySearchUTxOsByAsset(c *gin.Context) {
+	// Get query parameters
+	policyIdHex := c.Query("policy_id")
+	assetNameHex := c.Query("asset_name")
+	addressStr := c.Query("address")
+
+	// Validate required parameters
+	if policyIdHex == "" {
+		c.JSON(400, apiError("policy_id parameter is required"))
+		return
+	}
+	if assetNameHex == "" {
+		c.JSON(400, apiError("asset_name parameter is required"))
+		return
+	}
+
+	// Parse policy ID (28 bytes)
+	policyIdBytes, err := hex.DecodeString(policyIdHex)
+	if err != nil {
+		c.JSON(400, apiError("invalid policy_id hex: "+err.Error()))
+		return
+	}
+	if len(policyIdBytes) != 28 {
+		c.JSON(400, apiError("policy_id must be 28 bytes"))
+		return
+	}
+	var policyId ledger.Blake2b224
+	copy(policyId[:], policyIdBytes)
+
+	// Parse asset name
+	assetName, err := hex.DecodeString(assetNameHex)
+	if err != nil {
+		c.JSON(400, apiError("invalid asset_name hex: "+err.Error()))
+		return
+	}
+
+	// Parse optional address
+	var addrs []ledger.Address
+	if addressStr != "" {
+		addr, err := ledger.NewAddress(addressStr)
+		if err != nil {
+			c.JSON(400, apiError("invalid address: "+err.Error()))
+			return
+		}
+		addrs = append(addrs, addr)
+	}
+
+	// Connect to node
+	oConn, err := node.GetConnection(nil)
+	if err != nil {
+		c.JSON(500, apiError(err.Error()))
+		return
+	}
+	// Async error handler
+	go func() {
+		err, ok := <-oConn.ErrorChan()
+		if !ok {
+			return
+		}
+		c.JSON(500, apiError(err.Error()))
+	}()
+	defer func() {
+		// Close Ouroboros connection
+		oConn.Close()
+	}()
+	// Start client
+	oConn.LocalStateQuery().Client.Start()
+
+	// Get UTxOs (either by address or whole set)
+	var utxos *localstatequery.UTxOsResult
+	if len(addrs) > 0 {
+		utxos, err = oConn.LocalStateQuery().Client.GetUTxOByAddress(addrs)
+	} else {
+		utxos, err = oConn.LocalStateQuery().Client.GetUTxOWhole()
+	}
+	if err != nil {
+		c.JSON(500, apiError(err.Error()))
+		return
+	}
+
+	// Filter UTxOs by asset
+	results := make([]utxoItem, 0)
+	for utxoId, output := range utxos.Results {
+		// Check if output has assets
+		assets := output.Assets()
+		if assets == nil {
+			continue
+		}
+
+		// Check if the asset exists in this UTxO
+		amount := assets.Asset(policyId, assetName)
+		if amount > 0 {
+			item := utxoItem{
+				TxHash:  hex.EncodeToString(utxoId.Hash[:]),
+				Index:   uint32(utxoId.Idx),
+				Address: output.Address().String(),
+				Amount:  output.Amount(),
+				Assets:  assets,
+			}
+			results = append(results, item)
+		}
+	}
+
+	// Create response
+	resp := responseLocalStateQuerySearchUTxOsByAsset{
+		UTxOs: results,
+		Count: len(results),
+	}
+	c.JSON(200, resp)
 }
