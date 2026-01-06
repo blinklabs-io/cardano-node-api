@@ -18,6 +18,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/hex"
+	"errors"
 	"fmt"
 	"log"
 
@@ -25,6 +26,7 @@ import (
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	"github.com/blinklabs-io/gouroboros/ledger"
 	"github.com/blinklabs-io/gouroboros/ledger/common"
+	"github.com/blinklabs-io/gouroboros/protocol/localstatequery"
 	query "github.com/utxorpc/go-codegen/utxorpc/v1alpha/query"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/query/queryconnect"
 )
@@ -199,8 +201,29 @@ func (s *queryServiceServer) SearchUtxos(
 	addressPattern := predicate.GetMatch().GetCardano().GetAddress()
 	assetPattern := predicate.GetMatch().GetCardano().GetAsset()
 
-	var addresses []common.Address
+	// A Match can only contain EITHER addressPattern OR assetPattern, not both
+	if addressPattern != nil && assetPattern != nil {
+		return nil, errors.New(
+			"ERROR: Match cannot contain both address and asset patterns. Use AllOf predicate to combine them",
+		)
+	}
+
+	// Connect to node
+	oConn, err := node.GetConnection(nil)
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		oConn.Close()
+	}()
+	oConn.LocalStateQuery().Client.Start()
+
+	var utxos *localstatequery.UTxOsResult
+
+	// Handle address-only search
 	if addressPattern != nil {
+		var addresses []common.Address
+
 		// Handle Exact Address
 		exactAddressBytes := addressPattern.GetExactAddress()
 		if exactAddressBytes != nil {
@@ -241,25 +264,22 @@ func (s *queryServiceServer) SearchUtxos(
 			}
 			addresses = append(addresses, delegationAddr)
 		}
-	}
 
-	// Connect to node
-	oConn, err := node.GetConnection(nil)
-	if err != nil {
-		return nil, err
-	}
-	defer func() {
-		// Close Ouroboros connection
-		oConn.Close()
-	}()
-	// Start client
-	oConn.LocalStateQuery().Client.Start()
-
-	// Get UTxOs
-	utxos, err := oConn.LocalStateQuery().Client.GetUTxOByAddress(addresses)
-	if err != nil {
-		log.Printf("ERROR: %s", err)
-		return nil, err
+		// Get UTxOs by address
+		utxos, err = oConn.LocalStateQuery().Client.GetUTxOByAddress(addresses)
+		if err != nil {
+			log.Printf("ERROR: %s", err)
+			return nil, err
+		}
+	} else if assetPattern != nil {
+		// Handle asset-only search - get all UTxOs and filter by asset
+		utxos, err = oConn.LocalStateQuery().Client.GetUTxOWhole()
+		if err != nil {
+			log.Printf("ERROR: %s", err)
+			return nil, err
+		}
+	} else {
+		return nil, errors.New("ERROR: Match must contain either address or asset pattern")
 	}
 
 	// Get chain point (slot and hash)
