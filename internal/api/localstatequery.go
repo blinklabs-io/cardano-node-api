@@ -496,7 +496,7 @@ func handleLocalStateQuerySearchUTxOsByAsset(c *gin.Context) {
 		if amount > 0 {
 			item := utxoItem{
 				TxHash:  hex.EncodeToString(utxoId.Hash[:]),
-				Index:   uint32(utxoId.Idx),
+				Index:   uint32(utxoId.Idx), // #nosec G115
 				Address: output.Address().String(),
 				Amount:  output.Amount(),
 				Assets:  assets,

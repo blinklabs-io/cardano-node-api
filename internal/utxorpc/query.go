@@ -18,6 +18,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/hex"
+	"errors"
 	"fmt"
 	"log"
 
@@ -202,7 +203,7 @@ func (s *queryServiceServer) SearchUtxos(
 
 	// A Match can only contain EITHER addressPattern OR assetPattern, not both
 	if addressPattern != nil && assetPattern != nil {
-		return nil, fmt.Errorf(
+		return nil, errors.New(
 			"ERROR: Match cannot contain both address and asset patterns. Use AllOf predicate to combine them",
 		)
 	}
@@ -278,7 +279,7 @@ func (s *queryServiceServer) SearchUtxos(
 			return nil, err
 		}
 	} else {
-		return nil, fmt.Errorf("ERROR: Match must contain either address or asset pattern")
+		return nil, errors.New("ERROR: Match must contain either address or asset pattern")
 	}
 
 	// Get chain point (slot and hash)
