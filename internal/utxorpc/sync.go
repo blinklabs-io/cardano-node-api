@@ -158,6 +158,40 @@ func (s *chainSyncServiceServer) DumpHistory(
 	return connect.NewResponse(resp), nil
 }
 
+// ReadTip
+func (s *chainSyncServiceServer) ReadTip(
+	ctx context.Context,
+	req *connect.Request[sync.ReadTipRequest],
+) (*connect.Response[sync.ReadTipResponse], error) {
+	log.Printf("Got a ReadTip request")
+
+	// Connect to node
+	oConn, err := node.GetConnection(nil)
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		// Close Ouroboros connection
+		oConn.Close()
+	}()
+
+	tip, err := oConn.ChainSync().Client.GetCurrentTip()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get tip: %w", err)
+	}
+
+	resp := &sync.ReadTipResponse{}
+	if tip != nil {
+		resp.Tip = &sync.BlockRef{
+			Slot:   tip.Point.Slot,
+			Hash:   tip.Point.Hash,
+			Height: tip.BlockNumber,
+		}
+	}
+
+	return connect.NewResponse(resp), nil
+}
+
 // FollowTip
 func (s *chainSyncServiceServer) FollowTip(
 	ctx context.Context,
