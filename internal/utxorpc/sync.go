@@ -188,7 +188,14 @@ func (s *chainSyncServiceServer) ReadTip(
 			Height: tip.BlockNumber,
 		}
 	}
-
+	if resp.Tip != nil {
+		log.Printf(
+			"ReadTip response: slot: %d, hash: %x, height: %d",
+			resp.Tip.GetSlot(),
+			resp.Tip.GetHash(),
+			resp.Tip.GetHeight(),
+		)
+	}
 	return connect.NewResponse(resp), nil
 }
 
