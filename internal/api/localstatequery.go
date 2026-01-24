@@ -493,12 +493,12 @@ func handleLocalStateQuerySearchUTxOsByAsset(c *gin.Context) {
 
 		// Check if the asset exists in this UTxO
 		amount := assets.Asset(policyId, assetName)
-		if amount > 0 {
+		if amount != nil && amount.Sign() > 0 {
 			item := utxoItem{
 				TxHash:  hex.EncodeToString(utxoId.Hash[:]),
 				Index:   uint32(utxoId.Idx), // #nosec G115
 				Address: output.Address().String(),
-				Amount:  output.Amount(),
+				Amount:  output.Amount().Uint64(),
 				Assets:  assets,
 			}
 			results = append(results, item)
