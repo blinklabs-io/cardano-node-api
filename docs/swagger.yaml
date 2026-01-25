@@ -19,6 +19,15 @@ definitions:
     type: object
   api.responseLocalStateQueryProtocolParams:
     type: object
+  api.responseLocalStateQuerySearchUTxOsByAsset:
+    properties:
+      count:
+        type: integer
+      utxos:
+        items:
+          $ref: '#/definitions/api.utxoItem'
+        type: array
+    type: object
   api.responseLocalStateQuerySystemStart:
     properties:
       day:
@@ -64,6 +73,18 @@ definitions:
       tx_hash:
         example: 96649a8b827a5a4d508cd4e98cd88832482f7b884d507a49466d1fb8c4b14978
         format: base16
+        type: string
+    type: object
+  api.utxoItem:
+    properties:
+      address:
+        type: string
+      amount:
+        type: integer
+      assets: {}
+      index:
+        type: integer
+      tx_hash:
         type: string
     type: object
 info:
@@ -201,6 +222,41 @@ paths:
           schema:
             $ref: '#/definitions/api.responseApiError'
       summary: Query Chain Tip
+      tags:
+      - localstatequery
+  /localstatequery/utxos/search-by-asset:
+    get:
+      parameters:
+      - description: Policy ID (hex)
+        in: query
+        name: policy_id
+        required: true
+        type: string
+      - description: Asset name (hex)
+        in: query
+        name: asset_name
+        required: true
+        type: string
+      - description: 'Optional: Filter by address'
+        in: query
+        name: address
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.responseLocalStateQuerySearchUTxOsByAsset'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.responseApiError'
+      summary: Search UTxOs by Asset
       tags:
       - localstatequery
   /localtxmonitor/has_tx/{tx_hash}:
