@@ -116,6 +116,22 @@ type LocalstatequeryAPI interface {
 	LocalstatequeryTipGetExecute(
 		r LocalstatequeryAPILocalstatequeryTipGetRequest,
 	) (*ApiResponseLocalStateQueryTip, *http.Response, error)
+
+	/*
+		LocalstatequeryUtxosSearchByAssetGet Search UTxOs by Asset
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest
+	*/
+	LocalstatequeryUtxosSearchByAssetGet(
+		ctx context.Context,
+	) LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest
+
+	// LocalstatequeryUtxosSearchByAssetGetExecute executes the request
+	//  @return ApiResponseLocalStateQuerySearchUTxOsByAsset
+	LocalstatequeryUtxosSearchByAssetGetExecute(
+		r LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest,
+	) (*ApiResponseLocalStateQuerySearchUTxOsByAsset, *http.Response, error)
 }
 
 // LocalstatequeryAPIService LocalstatequeryAPI service
@@ -891,6 +907,215 @@ func (a *LocalstatequeryAPIService) LocalstatequeryTipGetExecute(
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiResponseApiError
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest struct {
+	ctx        context.Context
+	ApiService LocalstatequeryAPI
+	policyId   *string
+	assetName  *string
+	address    *string
+}
+
+// Policy ID (hex)
+func (r LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest) PolicyId(
+	policyId string,
+) LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest {
+	r.policyId = &policyId
+	return r
+}
+
+// Asset name (hex)
+func (r LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest) AssetName(
+	assetName string,
+) LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest {
+	r.assetName = &assetName
+	return r
+}
+
+// Optional: Filter by address
+func (r LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest) Address(
+	address string,
+) LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest {
+	r.address = &address
+	return r
+}
+
+func (r LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest) Execute() (*ApiResponseLocalStateQuerySearchUTxOsByAsset, *http.Response, error) {
+	return r.ApiService.LocalstatequeryUtxosSearchByAssetGetExecute(r)
+}
+
+/*
+LocalstatequeryUtxosSearchByAssetGet Search UTxOs by Asset
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest
+*/
+func (a *LocalstatequeryAPIService) LocalstatequeryUtxosSearchByAssetGet(
+	ctx context.Context,
+) LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest {
+	return LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ApiResponseLocalStateQuerySearchUTxOsByAsset
+func (a *LocalstatequeryAPIService) LocalstatequeryUtxosSearchByAssetGetExecute(
+	r LocalstatequeryAPILocalstatequeryUtxosSearchByAssetGetRequest,
+) (*ApiResponseLocalStateQuerySearchUTxOsByAsset, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ApiResponseLocalStateQuerySearchUTxOsByAsset
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"LocalstatequeryAPIService.LocalstatequeryUtxosSearchByAssetGet",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{
+			error: err.Error(),
+		}
+	}
+
+	localVarPath := localBasePath + "/localstatequery/utxos/search-by-asset"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.policyId == nil {
+		return localVarReturnValue, nil, reportError(
+			"policyId is required and must be specified",
+		)
+	}
+	if r.assetName == nil {
+		return localVarReturnValue, nil, reportError(
+			"assetName is required and must be specified",
+		)
+	}
+
+	parameterAddToHeaderOrQuery(
+		localVarQueryParams,
+		"policy_id",
+		r.policyId,
+		"",
+		"",
+	)
+	parameterAddToHeaderOrQuery(
+		localVarQueryParams,
+		"asset_name",
+		r.assetName,
+		"",
+		"",
+	)
+	if r.address != nil {
+		parameterAddToHeaderOrQuery(
+			localVarQueryParams,
+			"address",
+			r.address,
+			"",
+			"",
+		)
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiResponseApiError
+			err = a.client.decode(
+				&v,
+				localVarBody,
+				localVarHTTPResponse.Header.Get("Content-Type"),
+			)
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ApiResponseApiError

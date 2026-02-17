@@ -158,6 +158,48 @@ paths:
       summary: Query Chain Tip
       tags:
       - localstatequery
+  /localstatequery/utxos/search-by-asset:
+    get:
+      parameters:
+      - description: Policy ID (hex)
+        in: query
+        name: policy_id
+        required: true
+        schema:
+          type: string
+      - description: Asset name (hex)
+        in: query
+        name: asset_name
+        required: true
+        schema:
+          type: string
+      - description: "Optional: Filter by address"
+        in: query
+        name: address
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/api.responseLocalStateQuerySearchUTxOsByAsset"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/api.responseApiError"
+          description: Bad Request
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/api.responseApiError"
+          description: Internal Server Error
+      summary: Search UTxOs by Asset
+      tags:
+      - localstatequery
   /localtxmonitor/has_tx/{tx_hash}:
     get:
       parameters:
@@ -287,6 +329,28 @@ components:
       type: object
     api.responseLocalStateQueryProtocolParams:
       type: object
+    api.responseLocalStateQuerySearchUTxOsByAsset:
+      example:
+        count: 0
+        utxos:
+        - amount: 1000000
+          address: address
+          assets: "{}"
+          index: 6
+          tx_hash: tx_hash
+        - amount: 1000000
+          address: address
+          assets: "{}"
+          index: 6
+          tx_hash: tx_hash
+      properties:
+        count:
+          type: integer
+        utxos:
+          items:
+            $ref: "#/components/schemas/api.utxoItem"
+          type: array
+      type: object
     api.responseLocalStateQuerySystemStart:
       example:
         year: 1
@@ -351,6 +415,27 @@ components:
         tx_hash:
           example: 96649a8b827a5a4d508cd4e98cd88832482f7b884d507a49466d1fb8c4b14978
           format: base16
+          type: string
+      type: object
+    api.utxoItem:
+      example:
+        amount: 1000000
+        address: address
+        assets: "{}"
+        index: 6
+        tx_hash: tx_hash
+      properties:
+        address:
+          type: string
+        amount:
+          example: 1000000
+          format: int64
+          type: integer
+        assets:
+          type: object
+        index:
+          type: integer
+        tx_hash:
           type: string
       type: object
 x-original-swagger-version: "2.0"

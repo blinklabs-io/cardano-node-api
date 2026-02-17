@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**LocalstatequeryProtocolParamsGet**](LocalstatequeryAPI.md#LocalstatequeryProtocolParamsGet) | **Get** /localstatequery/protocol-params | Query Current Protocol Parameters
 [**LocalstatequerySystemStartGet**](LocalstatequeryAPI.md#LocalstatequerySystemStartGet) | **Get** /localstatequery/system-start | Query System Start
 [**LocalstatequeryTipGet**](LocalstatequeryAPI.md#LocalstatequeryTipGet) | **Get** /localstatequery/tip | Query Chain Tip
+[**LocalstatequeryUtxosSearchByAssetGet**](LocalstatequeryAPI.md#LocalstatequeryUtxosSearchByAssetGet) | **Get** /localstatequery/utxos/search-by-asset | Search UTxOs by Asset
 
 
 
@@ -352,6 +353,74 @@ Other parameters are passed through a pointer to a apiLocalstatequeryTipGetReque
 ### Return type
 
 [**ApiResponseLocalStateQueryTip**](ApiResponseLocalStateQueryTip.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## LocalstatequeryUtxosSearchByAssetGet
+
+> ApiResponseLocalStateQuerySearchUTxOsByAsset LocalstatequeryUtxosSearchByAssetGet(ctx).PolicyId(policyId).AssetName(assetName).Address(address).Execute()
+
+Search UTxOs by Asset
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/blinklabs-io/cardano-node-api/openapi"
+)
+
+func main() {
+	policyId := "policyId_example" // string | Policy ID (hex)
+	assetName := "assetName_example" // string | Asset name (hex)
+	address := "address_example" // string | Optional: Filter by address (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.LocalstatequeryAPI.LocalstatequeryUtxosSearchByAssetGet(context.Background()).PolicyId(policyId).AssetName(assetName).Address(address).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LocalstatequeryAPI.LocalstatequeryUtxosSearchByAssetGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `LocalstatequeryUtxosSearchByAssetGet`: ApiResponseLocalStateQuerySearchUTxOsByAsset
+	fmt.Fprintf(os.Stdout, "Response from `LocalstatequeryAPI.LocalstatequeryUtxosSearchByAssetGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiLocalstatequeryUtxosSearchByAssetGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **policyId** | **string** | Policy ID (hex) | 
+ **assetName** | **string** | Asset name (hex) | 
+ **address** | **string** | Optional: Filter by address | 
+
+### Return type
+
+[**ApiResponseLocalStateQuerySearchUTxOsByAsset**](ApiResponseLocalStateQuerySearchUTxOsByAsset.md)
 
 ### Authorization
 

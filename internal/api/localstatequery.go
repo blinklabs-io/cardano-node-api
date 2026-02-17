@@ -383,11 +383,11 @@ type responseLocalStateQuerySearchUTxOsByAsset struct {
 }
 
 type utxoItem struct {
-	TxHash  string      `json:"tx_hash"`
-	Index   uint32      `json:"index"`
-	Address string      `json:"address"`
-	Amount  uint64      `json:"amount"`
-	Assets  interface{} `json:"assets,omitempty"`
+	TxHash  string `json:"tx_hash"`
+	Index   uint32 `json:"index"`
+	Address string `json:"address"`
+	Amount  uint64 `json:"amount"           format:"int64" example:"1000000"`
+	Assets  any    `json:"assets,omitempty"`
 }
 
 // handleLocalStateQuerySearchUTxOsByAsset godoc
