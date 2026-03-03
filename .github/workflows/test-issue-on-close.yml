@@ -15,5 +15,9 @@ jobs:
           ISSUE_TITLE: ${{ github.event.issue.title }}
         run: |
           echo "Issue Number: $ISSUE_NUMBER"
+          # Prevent workflow command injection from untrusted issue titles
+          TOKEN=$(uuidgen)
+          echo "::stop-commands::${TOKEN}"
           echo "Title: $ISSUE_TITLE"
+          echo "::${TOKEN}::"
           echo "Workflow triggered successfully when issue was closed."
