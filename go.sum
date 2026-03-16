@@ -17,8 +17,8 @@ github.com/bits-and-blooms/bitset v1.20.0 h1:2F+rfL86jE2d/bmw7OhqUg2Sj/1rURkBn3M
 github.com/bits-and-blooms/bitset v1.20.0/go.mod h1:7hO7Gc7Pp1vODcmWvKMRA9BNmbv6a/7QIWpPxHddWR8=
 github.com/blinklabs-io/adder v0.39.0 h1:JYi6MsVBFX+OuD+8qqhz+TIuEdsQuhT6lC6kb8v0f4c=
 github.com/blinklabs-io/adder v0.39.0/go.mod h1:1gEB4ea2q7xVljZx+N5kmq70t9tjntUJB7YJiG6j1w0=
-github.com/blinklabs-io/gouroboros v0.160.0 h1:E+8y59xcBqEZHLfjxpgCEwOBWOJcQ2ijmJyi8D39sus=
-github.com/blinklabs-io/gouroboros v0.160.0/go.mod h1:ZhQREyLgf8zv63oz2qNj9rEhForAJj/ySTMiXdeH3l8=
+github.com/blinklabs-io/gouroboros v0.160.2 h1:BS5dAhqrVNQyJG+d169Hz+JdT/Ce99ezafOJcIxB7Kk=
+github.com/blinklabs-io/gouroboros v0.160.2/go.mod h1:ZhQREyLgf8zv63oz2qNj9rEhForAJj/ySTMiXdeH3l8=
 github.com/blinklabs-io/ouroboros-mock v0.9.1 h1:88LvCaivQ6j/JSb3j8t99lQvsgnWcjXGaMPdZngbxZo=
 github.com/blinklabs-io/ouroboros-mock v0.9.1/go.mod h1:wLZTHLwKdIC9axVzG7nyAynn2wfLp/ikvX9LjsDh8Xw=
 github.com/blinklabs-io/plutigo v0.0.26 h1:LrEMTtgpiUMjTXwHgBt/PAZeW6l/6UQUbeYK/tbiBkM=
