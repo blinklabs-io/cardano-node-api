@@ -1,6 +1,8 @@
 module github.com/blinklabs-io/cardano-node-api
 
-go 1.25
+go 1.25.0
+
+toolchain go1.25.7
 
 require (
 	connectrpc.com/connect v1.19.2
