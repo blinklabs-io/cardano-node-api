@@ -5,7 +5,7 @@ go 1.25.0
 toolchain go1.25.7
 
 require (
-	connectrpc.com/connect v1.19.2
+	connectrpc.com/connect v1.20.0
 	connectrpc.com/grpchealth v1.4.0
 	connectrpc.com/grpcreflect v1.3.0
 	github.com/blinklabs-io/adder v0.39.1
@@ -18,7 +18,7 @@ require (
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.1
 	github.com/swaggo/swag v1.16.6
-	github.com/utxorpc/go-codegen v0.19.0
+	github.com/utxorpc/go-codegen v0.19.2
 	go.uber.org/automaxprocs v1.6.0
 	golang.org/x/net v0.50.0
 	gopkg.in/yaml.v2 v2.4.0
