@@ -23,6 +23,8 @@ definitions:
     properties:
       count:
         type: integer
+      truncated:
+        type: boolean
       utxos:
         items:
           $ref: '#/definitions/api.utxoItem'
@@ -80,8 +82,14 @@ definitions:
       address:
         type: string
       amount:
+        example: 1000000
+        format: int64
+        minimum: 0
         type: integer
-      assets: {}
+      assets:
+        items:
+          type: object
+        type: array
       index:
         type: integer
       tx_hash:
@@ -226,18 +234,21 @@ paths:
       - localstatequery
   /localstatequery/utxos/search-by-asset:
     get:
+      description: Search UTxOs by asset. The address parameter is required when API_MAX_UTXO_SEARCH_RESULTS
+        is unset or <= 0.
       parameters:
       - description: Policy ID (hex)
         in: query
         name: policy_id
         required: true
         type: string
-      - description: Asset name (hex)
+      - description: Asset name (hex), empty string for unnamed assets
         in: query
         name: asset_name
         required: true
         type: string
-      - description: 'Optional: Filter by address'
+      - description: 'Optional: Filter by address. The address parameter is required
+          when API_MAX_UTXO_SEARCH_RESULTS is unset or <= 0.'
         in: query
         name: address
         type: string

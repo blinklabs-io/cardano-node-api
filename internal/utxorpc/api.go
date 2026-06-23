@@ -28,8 +28,6 @@ import (
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/submit/submitconnect"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/sync/syncconnect"
 	"github.com/utxorpc/go-codegen/utxorpc/v1alpha/watch/watchconnect"
-	"golang.org/x/net/http2"
-	"golang.org/x/net/http2/h2c"
 )
 
 func Start(cfg *config.Config) error {
@@ -118,14 +116,17 @@ func Start(cfg *config.Config) error {
 			cfg.Tls.KeyFilePath,
 		)
 	} else {
+		protocols := new(http.Protocols)
+		protocols.SetHTTP1(true)
+		protocols.SetUnencryptedHTTP2(true)
 		server := &http.Server{
 			Addr: fmt.Sprintf(
 				"%s:%d",
 				cfg.Utxorpc.ListenAddress,
 				cfg.Utxorpc.ListenPort,
 			),
-			// Use h2c so we can serve HTTP/2 without TLS
-			Handler:           h2c.NewHandler(mux, &http2.Server{}),
+			Protocols:         protocols,
+			Handler:           mux,
 			ReadHeaderTimeout: 60 * time.Second,
 		}
 		return server.ListenAndServe()
