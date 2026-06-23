@@ -134,6 +134,7 @@ func (a *DefaultAPIService) LocaltxsubmissionTxPostExecute(
 		"Content-Type",
 		r.contentType,
 		"",
+		"",
 	)
 	req, err := a.client.prepareRequest(
 		r.ctx,

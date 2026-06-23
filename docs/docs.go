@@ -220,6 +220,7 @@ const docTemplate = `{
         },
         "/localstatequery/utxos/search-by-asset": {
             "get": {
+                "description": "Search UTxOs by asset. The address parameter is required when API_MAX_UTXO_SEARCH_RESULTS is unset or \u003c= 0.",
                 "produces": [
                     "application/json"
                 ],
@@ -237,14 +238,14 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "Asset name (hex)",
+                        "description": "Asset name (hex), empty string for unnamed assets",
                         "name": "asset_name",
                         "in": "query",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "Optional: Filter by address",
+                        "description": "Optional: Filter by address. The address parameter is required when API_MAX_UTXO_SEARCH_RESULTS is unset or \u003c= 0.",
                         "name": "address",
                         "in": "query"
                     }
@@ -454,6 +455,9 @@ const docTemplate = `{
                 "count": {
                     "type": "integer"
                 },
+                "truncated": {
+                    "type": "boolean"
+                },
                 "utxos": {
                     "type": "array",
                     "items": {
@@ -540,9 +544,17 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "amount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64",
+                    "minimum": 0,
+                    "example": 1000000
                 },
-                "assets": {},
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
                 "index": {
                     "type": "integer"
                 },
