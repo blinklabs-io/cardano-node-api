@@ -1,25 +1,16 @@
-name: nilaway
+# Generated automatically by org-governance-bot. Do not edit manually.
+name: "nilaway"
+
 on:
+  pull_request:
   push:
-    tags:
-      - v*
     branches:
       - main
-  pull_request:
-
-permissions:
-  contents: read
+    tags:
+      - v*
 
 jobs:
-  nilaway:
-    name: nilaway
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3 https://github.com/actions/checkout/releases/tag/v6.0.3
-      - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0 https://github.com/actions/setup-go/releases/tag/v6.4.0
-        with:
-          go-version: 1.25.x
-      - name: install nilaway
-        run: go install go.uber.org/nilaway/cmd/nilaway@latest
-      - name: run nilaway
-        run: nilaway ./...
+  orchestrate:
+    uses: blinklabs-io/actions/.github/workflows/reuseable-nilaway.yml@main
+    with:
+      include-pkgs: github.com/blinklabs-io/cardano-node-api
