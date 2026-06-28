@@ -24,6 +24,11 @@ api:
   # This can also be set via the API_LISTEN_PORT environment variable
   port: 8080
 
+  # Maximum UTxO search results returned by whole-set asset searches
+  #
+  # This can also be set via the API_MAX_UTXO_SEARCH_RESULTS environment variable
+  maxUtxoSearchResults: 1000
+
 metrics:
   # Listen address for the metrics endpoint
   #

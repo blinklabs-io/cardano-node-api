@@ -39,8 +39,9 @@ type LoggingConfig struct {
 }
 
 type ApiConfig struct {
-	ListenAddress string `yaml:"address" envconfig:"API_LISTEN_ADDRESS"`
-	ListenPort    uint   `yaml:"port"    envconfig:"API_LISTEN_PORT"`
+	ListenAddress        string `yaml:"address"              envconfig:"API_LISTEN_ADDRESS"`
+	ListenPort           uint   `yaml:"port"                 envconfig:"API_LISTEN_PORT"`
+	MaxUTxOSearchResults int    `yaml:"maxUtxoSearchResults" envconfig:"API_MAX_UTXO_SEARCH_RESULTS"`
 }
 
 type DebugConfig struct {
@@ -81,8 +82,9 @@ var globalConfig = &Config{
 		Healthchecks: false,
 	},
 	Api: ApiConfig{
-		ListenAddress: "",
-		ListenPort:    8080,
+		ListenAddress:        "",
+		ListenPort:           8080,
+		MaxUTxOSearchResults: 1000,
 	},
 	Debug: DebugConfig{
 		ListenAddress: "localhost",

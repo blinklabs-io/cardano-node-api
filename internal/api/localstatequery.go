@@ -18,6 +18,7 @@ import (
 	"encoding/hex"
 	"math"
 
+	"github.com/blinklabs-io/cardano-node-api/internal/config"
 	"github.com/blinklabs-io/cardano-node-api/internal/node"
 	"github.com/blinklabs-io/gouroboros/ledger"
 	"github.com/blinklabs-io/gouroboros/protocol/localstatequery"
@@ -378,34 +379,42 @@ func handleLocalStateQueryGenesisConfig(c *gin.Context) {
 }
 
 type responseLocalStateQuerySearchUTxOsByAsset struct {
-	UTxOs []utxoItem `json:"utxos"`
-	Count int        `json:"count"`
+	UTxOs     []utxoItem `json:"utxos"`
+	Count     int        `json:"count"`
+	Truncated bool       `json:"truncated"`
 }
 
 type utxoItem struct {
-	TxHash  string      `json:"tx_hash"`
-	Index   uint32      `json:"index"`
-	Address string      `json:"address"`
-	Amount  uint64      `json:"amount"`
-	Assets  interface{} `json:"assets,omitempty"`
+	TxHash  string `json:"tx_hash"`
+	Index   uint32 `json:"index"`
+	Address string `json:"address"`
+	Amount  uint64 `json:"amount"           format:"int64" minimum:"0" example:"1000000"`
+	Assets  any    `json:"assets,omitempty"                                              swaggertype:"array,object"`
 }
 
 // handleLocalStateQuerySearchUTxOsByAsset godoc
 //
-//	@Summary	Search UTxOs by Asset
-//	@Tags		localstatequery
-//	@Produce	json
-//	@Param		policy_id	query		string	true	"Policy ID (hex)"
-//	@Param		asset_name	query		string	true	"Asset name (hex)"
-//	@Param		address		query		string	false	"Optional: Filter by address"
-//	@Success	200			{object}	responseLocalStateQuerySearchUTxOsByAsset
-//	@Failure	400			{object}	responseApiError
-//	@Failure	500			{object}	responseApiError
-//	@Router		/localstatequery/utxos/search-by-asset [get]
+//	@Summary		Search UTxOs by Asset
+//	@Description	Search UTxOs by asset. The address parameter is required when API_MAX_UTXO_SEARCH_RESULTS is unset or <= 0.
+//	@Tags			localstatequery
+//	@Produce		json
+//	@Param			policy_id	query		string	true	"Policy ID (hex)"
+//	@Param			asset_name	query		string	true	"Asset name (hex), empty string for unnamed assets"
+//	@Param			address		query		string	false	"Optional: Filter by address. The address parameter is required when API_MAX_UTXO_SEARCH_RESULTS is unset or <= 0."
+//	@Success		200			{object}	responseLocalStateQuerySearchUTxOsByAsset
+//	@Failure		400			{object}	responseApiError
+//	@Failure		500			{object}	responseApiError
+//	@Router			/localstatequery/utxos/search-by-asset [get]
 func handleLocalStateQuerySearchUTxOsByAsset(c *gin.Context) {
+	searchUTxOsByAsset(c, config.GetConfig().Api.MaxUTxOSearchResults)
+}
+
+// searchUTxOsByAsset takes maxResults as a parameter so tests can exercise
+// the validation logic without mutating the global config singleton
+func searchUTxOsByAsset(c *gin.Context, maxResults int) {
 	// Get query parameters
 	policyIdHex := c.Query("policy_id")
-	assetNameHex := c.Query("asset_name")
+	assetNameHex, assetNameOk := c.GetQuery("asset_name")
 	addressStr := c.Query("address")
 
 	// Validate required parameters
@@ -413,11 +422,10 @@ func handleLocalStateQuerySearchUTxOsByAsset(c *gin.Context) {
 		c.JSON(400, apiError("policy_id parameter is required"))
 		return
 	}
-	if assetNameHex == "" {
+	if !assetNameOk {
 		c.JSON(400, apiError("asset_name parameter is required"))
 		return
 	}
-
 	// Parse policy ID (28 bytes)
 	policyIdBytes, err := hex.DecodeString(policyIdHex)
 	if err != nil {
@@ -448,6 +456,19 @@ func handleLocalStateQuerySearchUTxOsByAsset(c *gin.Context) {
 		}
 		addrs = append(addrs, addr)
 	}
+	if len(addrs) == 0 && maxResults <= 0 {
+		c.JSON(
+			400,
+			apiError(
+				"address parameter is required when API_MAX_UTXO_SEARCH_RESULTS is unset or <= 0",
+			),
+		)
+		return
+	}
+	// The result cap only applies to whole-set searches, which can scan the
+	// entire UTxO set. Address-filtered searches are naturally bounded by the
+	// requested address(es), so they are always returned in full.
+	limitResults := len(addrs) == 0 && maxResults > 0
 
 	// Connect to node
 	oConn, err := node.GetConnection(nil)
@@ -482,9 +503,32 @@ func handleLocalStateQuerySearchUTxOsByAsset(c *gin.Context) {
 		return
 	}
 
-	// Filter UTxOs by asset
+	results, truncated := filterUTxOsByAssetResults(
+		utxos.Results,
+		policyId,
+		assetName,
+		limitResults,
+		maxResults,
+	)
+
+	// Create response
+	resp := responseLocalStateQuerySearchUTxOsByAsset{
+		UTxOs:     results,
+		Count:     len(results),
+		Truncated: truncated,
+	}
+	c.JSON(200, resp)
+}
+
+func filterUTxOsByAssetResults(
+	utxos map[localstatequery.UtxoId]ledger.BabbageTransactionOutput,
+	policyId ledger.Blake2b224,
+	assetName []byte,
+	limitResults bool,
+	maxResults int,
+) ([]utxoItem, bool) {
 	results := make([]utxoItem, 0)
-	for utxoId, output := range utxos.Results {
+	for utxoId, output := range utxos {
 		// Check if output has assets
 		assets := output.Assets()
 		if assets == nil {
@@ -494,6 +538,9 @@ func handleLocalStateQuerySearchUTxOsByAsset(c *gin.Context) {
 		// Check if the asset exists in this UTxO
 		amount := assets.Asset(policyId, assetName)
 		if amount != nil && amount.Sign() > 0 {
+			if limitResults && len(results) >= maxResults {
+				return results, true
+			}
 			item := utxoItem{
 				TxHash:  hex.EncodeToString(utxoId.Hash[:]),
 				Index:   uint32(utxoId.Idx), // #nosec G115
@@ -504,11 +551,5 @@ func handleLocalStateQuerySearchUTxOsByAsset(c *gin.Context) {
 			results = append(results, item)
 		}
 	}
-
-	// Create response
-	resp := responseLocalStateQuerySearchUTxOsByAsset{
-		UTxOs: results,
-		Count: len(results),
-	}
-	c.JSON(200, resp)
+	return results, false
 }
