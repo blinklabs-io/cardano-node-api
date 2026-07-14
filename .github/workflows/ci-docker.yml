@@ -17,6 +17,6 @@ on:
 
 jobs:
   orchestrate:
-    uses: blinklabs-io/actions/.github/workflows/reuseable-ci-docker.yml@main
+    uses: blinklabs-io/actions/.github/workflows/reuseable-ci-docker-multiarch.yml@main
     with:
       image-name: blinklabs-io/cardano-node-api
