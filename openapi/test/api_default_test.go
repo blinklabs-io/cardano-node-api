@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	openapiclient "github.com/blinklabs-io/cardano-node-api/openapi"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_DefaultAPIService(t *testing.T) {
@@ -26,7 +27,7 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.DefaultAPI.LocaltxsubmissionTxPost(context.Background()).
+		resp, httpRes, err := apiClient.LocaltxsubmissionAPI.LocaltxsubmissionTxPost(context.Background()).
 			Execute()
 
 		require.Nil(t, err)
