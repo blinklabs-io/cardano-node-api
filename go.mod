@@ -4,7 +4,7 @@ go 1.25.8
 
 require (
 	connectrpc.com/connect v1.20.0
-	connectrpc.com/grpchealth v1.4.0
+	connectrpc.com/grpchealth v1.5.0
 	connectrpc.com/grpcreflect v1.3.0
 	github.com/blinklabs-io/adder v0.43.1
 	github.com/blinklabs-io/gouroboros v0.189.1
