@@ -89,7 +89,6 @@ func TestBuildTxInfoErrorsOnUnresolvedInput(t *testing.T) {
 		map[string]ledger.Utxo{},
 		0,
 		nil,
-		0,
 		plutusScriptV2,
 	)
 	if err == nil {
@@ -114,7 +113,6 @@ func TestBuildTxInfoErrorsOnUnresolvedReferenceInput(t *testing.T) {
 		map[string]ledger.Utxo{},
 		0,
 		nil,
-		0,
 		plutusScriptV2,
 	)
 	if err == nil {
@@ -263,7 +261,6 @@ func TestBuildTxInfoWithdrawalUsesStakingCredential(t *testing.T) {
 		map[string]ledger.Utxo{},
 		0,
 		nil,
-		0,
 		plutusScriptV2,
 	)
 	if err != nil {
@@ -323,7 +320,6 @@ func TestBuildTxInfoIncludesCertificates(t *testing.T) {
 		map[string]ledger.Utxo{},
 		0,
 		nil,
-		0,
 		plutusScriptV2,
 	)
 	if err != nil {
@@ -365,7 +361,6 @@ func TestBuildTxInfoRejectsUnsupportedCertificate(t *testing.T) {
 		map[string]ledger.Utxo{},
 		0,
 		nil,
-		0,
 		plutusScriptV2,
 	)
 	if err == nil {
@@ -427,7 +422,6 @@ func TestBuildScriptContextForVersionUsesLanguageSpecificTxInfo(
 				redeemer,
 				0,
 				nil,
-				0,
 				tc.version,
 			)
 			if err != nil {

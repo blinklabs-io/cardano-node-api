@@ -311,7 +311,6 @@ func buildTxInfoForVersion(
 	resolvedUtxos map[string]ledger.Utxo,
 	systemStartMs int64,
 	eraHistory []localstatequery.EraHistoryResult,
-	protocolMajor uint,
 	version plutusScriptVersion,
 ) (script.TxInfo, error) {
 	resolvedInputs, err := resolvedUtxosForScriptContext(tx, resolvedUtxos)
@@ -335,7 +334,6 @@ func buildTxInfoForVersion(
 		if err != nil {
 			return nil, err
 		}
-		txInfo.ProtocolMajor = protocolMajor
 		return txInfo, nil
 	case plutusScriptV2:
 		if err := validateLegacyScriptCertificates(tx.Certificates()); err != nil {
@@ -349,7 +347,6 @@ func buildTxInfoForVersion(
 		if err != nil {
 			return nil, err
 		}
-		txInfo.ProtocolMajor = protocolMajor
 		return txInfo, nil
 	case plutusScriptV3, plutusScriptV4:
 		return script.NewTxInfoV3FromTransaction(
@@ -369,7 +366,6 @@ func buildScriptContextForVersion(
 	redeemer script.Redeemer,
 	systemStartMs int64,
 	eraHistory []localstatequery.EraHistoryResult,
-	protocolMajor uint,
 	version plutusScriptVersion,
 ) (data.PlutusData, error) {
 	txInfo, err := buildTxInfoForVersion(
@@ -377,7 +373,6 @@ func buildScriptContextForVersion(
 		resolvedUtxos,
 		systemStartMs,
 		eraHistory,
-		protocolMajor,
 		version,
 	)
 	if err != nil {
@@ -1097,7 +1092,6 @@ func (s *submitServiceServer) EvalTx(
 				contextRedeemer,
 				systemStartMs,
 				eraHistory,
-				protoVersionMajor,
 				plutusScriptV1,
 			)
 			if err != nil {
@@ -1149,7 +1143,6 @@ func (s *submitServiceServer) EvalTx(
 				contextRedeemer,
 				systemStartMs,
 				eraHistory,
-				protoVersionMajor,
 				plutusScriptV2,
 			)
 			if err != nil {
@@ -1201,7 +1194,6 @@ func (s *submitServiceServer) EvalTx(
 				contextRedeemer,
 				systemStartMs,
 				eraHistory,
-				protoVersionMajor,
 				plutusScriptV3,
 			)
 			if err != nil {
@@ -1251,7 +1243,6 @@ func (s *submitServiceServer) EvalTx(
 				contextRedeemer,
 				systemStartMs,
 				eraHistory,
-				protoVersionMajor,
 				plutusScriptV4,
 			)
 			if err != nil {
