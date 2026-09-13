@@ -330,6 +330,7 @@ func buildTxInfoForVersion(
 			slotState,
 			tx,
 			resolvedInputs,
+			script.StrictValidityUpperBoundForTransaction(tx),
 		)
 		if err != nil {
 			return nil, err
@@ -343,6 +344,7 @@ func buildTxInfoForVersion(
 			slotState,
 			tx,
 			resolvedInputs,
+			script.StrictValidityUpperBoundForTransaction(tx),
 		)
 		if err != nil {
 			return nil, err
@@ -572,6 +574,13 @@ func (s *submitServiceServer) SubmitTx(
 func convertPlutusData(pd data.PlutusData) (*cardano.PlutusData, error) {
 	switch v := pd.(type) {
 	case *data.Constr:
+		tag := uint64(0)
+		if v.Tag != nil && (!v.Tag.IsUint64() || v.Tag.BitLen() > 32) {
+			return nil, fmt.Errorf("constructor tag %v is outside the uint32 range", v.Tag)
+		}
+		if v.Tag != nil {
+			tag = v.Tag.Uint64()
+		}
 		fields := make([]*cardano.PlutusData, len(v.Fields))
 		for i, field := range v.Fields {
 			converted, err := convertPlutusData(field)
@@ -583,7 +592,7 @@ func convertPlutusData(pd data.PlutusData) (*cardano.PlutusData, error) {
 		return &cardano.PlutusData{
 			PlutusData: &cardano.PlutusData_Constr{
 				Constr: &cardano.Constr{
-					Tag:    uint32(v.Tag), //nolint:gosec
+					Tag:    uint32(tag), //nolint:gosec // range checked above
 					Fields: fields,
 				},
 			},
