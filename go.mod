@@ -3,7 +3,7 @@ module github.com/blinklabs-io/cardano-node-api
 go 1.25.8
 
 require (
-	connectrpc.com/connect v1.20.0
+	connectrpc.com/connect v1.21.0
 	connectrpc.com/grpchealth v1.5.0
 	connectrpc.com/grpcreflect v1.3.0
 	github.com/blinklabs-io/adder v0.43.1
