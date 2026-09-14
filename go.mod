@@ -1,12 +1,12 @@
 module github.com/blinklabs-io/cardano-node-api
 
-go 1.25.8
+go 1.26.0
 
 require (
 	connectrpc.com/connect v1.21.0
 	connectrpc.com/grpchealth v1.5.0
 	connectrpc.com/grpcreflect v1.3.0
-	github.com/blinklabs-io/adder v0.43.1
+	github.com/blinklabs-io/adder v0.44.0
 	github.com/blinklabs-io/gouroboros v0.202.7
 	github.com/blinklabs-io/plutigo v0.5.0
 	github.com/blinklabs-io/tx-submit-api v0.22.0
