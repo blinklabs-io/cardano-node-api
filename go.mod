@@ -7,8 +7,8 @@ require (
 	connectrpc.com/grpchealth v1.5.0
 	connectrpc.com/grpcreflect v1.3.0
 	github.com/blinklabs-io/adder v0.43.1
-	github.com/blinklabs-io/gouroboros v0.193.3
-	github.com/blinklabs-io/plutigo v0.3.0
+	github.com/blinklabs-io/gouroboros v0.202.7
+	github.com/blinklabs-io/plutigo v0.5.0
 	github.com/blinklabs-io/tx-submit-api v0.22.0
 	github.com/gin-gonic/gin v1.11.0
 	github.com/gorilla/websocket v1.5.3
@@ -26,7 +26,7 @@ require (
 	filippo.io/edwards25519 v1.2.0 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/bits-and-blooms/bitset v1.24.4 // indirect
+	github.com/bits-and-blooms/bitset v1.24.6 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.5.0 // indirect
 	github.com/btcsuite/btcd/btcutil v1.2.0 // indirect
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.2.0 // indirect
@@ -35,10 +35,10 @@ require (
 	github.com/bytedance/sonic/loader v0.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cloudwego/base64x v0.1.6 // indirect
-	github.com/consensys/gnark-crypto v0.20.1 // indirect
+	github.com/consensys/gnark-crypto v0.21.0 // indirect
 	github.com/decred/dcrd/crypto/blake256 v1.1.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.1 // indirect
-	github.com/fxamacker/cbor/v2 v2.9.2 // indirect
+	github.com/fxamacker/cbor/v2 v2.9.3 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.9 // indirect
 	github.com/gin-contrib/sse v1.1.0 // indirect
 	github.com/go-openapi/jsonpointer v0.23.1 // indirect
@@ -59,6 +59,7 @@ require (
 	github.com/jinzhu/copier v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
+	github.com/kr/text v0.2.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/minio/sha256-simd v1.0.1 // indirect
@@ -77,7 +78,7 @@ require (
 	github.com/ugorji/go/codec v1.3.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
-	go.yaml.in/yaml/v3 v3.0.4 // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/arch v0.20.0 // indirect
 	golang.org/x/crypto v0.55.0 // indirect
 	golang.org/x/mod v0.38.0 // indirect
@@ -86,5 +87,5 @@ require (
 	golang.org/x/sys v0.47.0 // indirect
 	golang.org/x/text v0.41.0 // indirect
 	golang.org/x/tools v0.48.0 // indirect
-	google.golang.org/protobuf v1.36.11 // indirect
+	google.golang.org/protobuf v1.36.12 // indirect
 )

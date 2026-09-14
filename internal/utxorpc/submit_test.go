@@ -208,6 +208,34 @@ func TestConvertPlutusDataMinInt64UsesInt(t *testing.T) {
 	}
 }
 
+func TestConvertPlutusDataRejectsOutOfRangeConstructorTags(t *testing.T) {
+	for name, tc := range map[string]struct {
+		tag     *big.Int
+		want    bool
+		wantTag uint32
+	}{
+		"nil defaults to zero": {want: true},
+		"zero":                 {tag: big.NewInt(0), want: true},
+		"max uint32":           {tag: new(big.Int).SetUint64(math.MaxUint32), want: true, wantTag: math.MaxUint32},
+		"negative":             {tag: big.NewInt(-1)},
+		"too large":            {tag: new(big.Int).Lsh(big.NewInt(1), 32)},
+	} {
+		t.Run(name, func(t *testing.T) {
+			in := data.NewConstrFromBigInt(tc.tag)
+			if tc.tag == nil {
+				in = &data.Constr{}
+			}
+			got, err := convertPlutusData(in)
+			if (err == nil) != tc.want {
+				t.Fatalf("convertPlutusData() error = %v, want accepted = %t", err, tc.want)
+			}
+			if tc.want && got.GetConstr().Tag != tc.wantTag {
+				t.Fatalf("constructor tag = %d, want %d", got.GetConstr().Tag, tc.wantTag)
+			}
+		})
+	}
+}
+
 // TestSlotToPOSIXTimeUsesMillisecondSlotLength guards against double-scaling
 // the slot length. The hard-fork era history query already reports SlotLength
 // in milliseconds, so slotToPOSIXTime must not multiply it by 1000 again.
@@ -280,7 +308,7 @@ func TestBuildTxInfoWithdrawalUsesStakingCredential(t *testing.T) {
 	}
 	// StakingCredential = StakingHash Credential = Constr 0 [ Credential ]
 	outer, ok := wdrl.Pairs[0][0].(*data.Constr)
-	if !ok || outer.Tag != 0 || len(outer.Fields) != 1 {
+	if !ok || outer.Tag.Sign() != 0 || len(outer.Fields) != 1 {
 		t.Fatalf("withdrawal key is not a StakingCredential constr: %#v", wdrl.Pairs[0][0])
 	}
 	// The inner field must itself be a Credential constr, not a raw bytestring.
@@ -291,7 +319,7 @@ func TestBuildTxInfoWithdrawalUsesStakingCredential(t *testing.T) {
 			outer.Fields[0],
 		)
 	}
-	if cred.Tag != 0 || len(cred.Fields) != 1 { // PubKeyCredential = Constr 0 [hash]
+	if cred.Tag.Sign() != 0 || len(cred.Fields) != 1 { // PubKeyCredential = Constr 0 [hash]
 		t.Fatalf("inner credential is not PubKeyCredential: %#v", cred)
 	}
 	hashBytes, ok := cred.Fields[0].(*data.ByteString)
@@ -339,7 +367,7 @@ func TestBuildTxInfoIncludesCertificates(t *testing.T) {
 	}
 	// DCertDelegRegKey = Constr 0 [StakingCredential]
 	item, ok := dcerts.Items[0].(*data.Constr)
-	if !ok || item.Tag != 0 {
+	if !ok || item.Tag.Sign() != 0 {
 		t.Fatalf("expected stake-registration DCert (Constr 0), got %#v", dcerts.Items[0])
 	}
 }
