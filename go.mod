@@ -8,7 +8,7 @@ require (
 	connectrpc.com/grpcreflect v1.3.0
 	github.com/blinklabs-io/adder v0.44.0
 	github.com/blinklabs-io/gouroboros v0.202.7
-	github.com/blinklabs-io/plutigo v0.6.2
+	github.com/blinklabs-io/plutigo v0.7.1
 	github.com/blinklabs-io/tx-submit-api v0.22.0
 	github.com/gin-gonic/gin v1.12.0
 	github.com/gorilla/websocket v1.5.3
