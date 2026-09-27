@@ -18,8 +18,8 @@ github.com/blinklabs-io/gouroboros v0.202.7 h1:XIM5nk5zv/ZQ/ntNIZfQs5JtoDb74IW3C
 github.com/blinklabs-io/gouroboros v0.202.7/go.mod h1:W7P6EkHff/4rbEPdtJVcjxvlbDFfbXWTUGoZqoioh4g=
 github.com/blinklabs-io/ouroboros-mock v0.17.0 h1:rDvBsfz0EEo5UEC/DmskQcTL7JgbABQsuttBbPxVIrk=
 github.com/blinklabs-io/ouroboros-mock v0.17.0/go.mod h1:b62AMGYgh3oFZAi2v9gCEbqy0h+pz8SnY8KyL6tADoM=
-github.com/blinklabs-io/plutigo v0.6.2 h1:d4PWhCUla5poDblSavMtUnCrnRSeNXbF2ltqYp2p95Q=
-github.com/blinklabs-io/plutigo v0.6.2/go.mod h1:0oQicY4/4ttZdlQhDMh7A810vgFgclvXabpDV8tkFqA=
+github.com/blinklabs-io/plutigo v0.7.1 h1:dLjbqeIw8o0/5N6WY3lIM3RDaDuZDbi4x8/L8ekVjAo=
+github.com/blinklabs-io/plutigo v0.7.1/go.mod h1:0oQicY4/4ttZdlQhDMh7A810vgFgclvXabpDV8tkFqA=
 github.com/blinklabs-io/tx-submit-api v0.22.0 h1:Ei1+71qq7NBw6iADhLdbrk4xxOUulo7peSk0sZAZgEc=
 github.com/blinklabs-io/tx-submit-api v0.22.0/go.mod h1:78PMQSGEvXofFKjbM+5TuN0TXvgPcxoNLl5T1ad90qY=
 github.com/btcsuite/btcd/btcec/v2 v2.5.0 h1:KioMXOWa76b86sTZZOmbzv/ldaQCmB8KFAyn5PbB8E8=
