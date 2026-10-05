@@ -6,6 +6,9 @@ GO_FILES=$(shell find $(ROOT_DIR) -name '*.go')
 
 # Gather list of expected binaries
 BINARIES=$(shell cd $(ROOT_DIR)/cmd && ls -1 | grep -v ^common)
+GOOS ?= $(shell go env GOOS)
+BINARY_SUFFIX := $(if $(filter windows,$(GOOS)),.exe,)
+BINARY_OUTPUTS := $(addsuffix $(BINARY_SUFFIX),$(BINARIES))
 
 # Extract Go module name from go.mod
 GOMODULE=$(shell grep ^module $(ROOT_DIR)/go.mod | awk '{ print $$2 }')
@@ -16,14 +19,14 @@ GO_LDFLAGS=-ldflags "-s -w -X '$(GOMODULE)/internal/version.Version=$(shell git 
 .PHONY: build mod-tidy clean test swagger
 
 # Alias for building program binary
-build: $(BINARIES)
+build: $(BINARY_OUTPUTS)
 
 mod-tidy:
 	# Needed to fetch new dependencies and add them to go.mod
 	go mod tidy
 
 clean:
-	rm -f $(BINARIES)
+	rm -f $(BINARY_OUTPUTS)
 
 format: mod-tidy
 	go fmt ./...
@@ -41,11 +44,11 @@ swagger:
 
 # Build our program binaries
 # Depends on GO_FILES to determine when rebuild is needed
-$(BINARIES): mod-tidy $(GO_FILES)
+$(BINARY_OUTPUTS): mod-tidy $(GO_FILES)
 	CGO_ENABLED=0 go build \
 		$(GO_LDFLAGS) \
 		-o $(@) \
-		./cmd/$(@)
+		./cmd/$(patsubst %.exe,%,$(@))
 
 # Build docker image
 image: build
