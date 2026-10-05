@@ -1,5 +1,6 @@
 # Binaries for programs and plugins
 /cardano-node-api
+/cardano-node-api.exe
 
 # Test binary, built with `go test -c`
 *.test
