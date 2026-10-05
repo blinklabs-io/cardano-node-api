@@ -1,6 +1,22 @@
 # cardano-node-api
 
-Cardano Node API
+## Project retired
+
+This project is retired and is no longer actively maintained.
+
+The lessons learned from building cardano-node-api informed
+[Dingo's](https://github.com/blinklabs-io/dingo) Blockfrost, Mesh, and UTxO RPC
+implementations. The Haskell reference implementation of
+[cardano-node](https://github.com/IntersectMBO/cardano-node/releases) now ships
+`cardano-rpc`, providing a gRPC/UTxO RPC interface. With these implementations
+available, this project's original use case as a cardano-node API sidecar no
+longer warrants a separate project.
+
+For new integrations, refer to Dingo's API implementations or `cardano-rpc`
+with the Haskell node. The documentation below is retained for historical
+reference.
+
+## Overview
 
 An HTTP API for interfacing with a local Cardano Node and providing the node
 internal data for HTTP clients. This service communicates with a Cardano
@@ -8,9 +24,9 @@ full node using the Ouroboros network protocol via a UNIX socket and exposes
 the underlying Node-to-Client (NtC) Ouroboros mini-protocols to clients via
 a REST API or UTxO RPC gRPC API.
 
-## Usage
+## Historical usage
 
-The recommended method of using this application is via the published
+The documented method of using this application was via the published
 container images, coupled with Blink Labs container images for the Cardano
 Node.
 
